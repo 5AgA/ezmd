@@ -15,7 +15,8 @@ CREATE TABLE student (
     dept VARCHAR2(50) NOT NULL,
     grade NUMBER NOT NULL,
     deleted CHAR(1) DEFAULT 'N' NOT NULL,
-    CONSTRAINT student_pk PRIMARY KEY (student_id)
+    CONSTRAINT student_pk PRIMARY KEY (student_id),
+    CHECK (deleted IN ('Y', 'N'))
 );
 
 CREATE TABLE professor (
@@ -27,7 +28,8 @@ CREATE TABLE professor (
     dept VARCHAR2(50) NOT NULL,
     professor_office VARCHAR2(100) NOT NULL,
     deleted CHAR(1) DEFAULT 'N' NOT NULL,
-    CONSTRAINT professor_pk PRIMARY KEY (professor_id)
+    CONSTRAINT professor_pk PRIMARY KEY (professor_id),
+    CHECK (deleted IN ('Y', 'N'))
 );
 
 CREATE TABLE schedule_category (
