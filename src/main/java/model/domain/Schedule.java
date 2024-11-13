@@ -1,5 +1,6 @@
 package model.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +8,8 @@ public class Schedule {
     private int scheduleId;
     private int scheduleType;
     private String scheduleTitle;
-    private Date scheduleStart;
-    private Date scheduleEnd;
+    private LocalDateTime scheduleStart;
+    private LocalDateTime scheduleEnd;
     private int scheduleRepeat;
     private String schedulePlace;
     private String scheduleMemo;
@@ -17,7 +18,7 @@ public class Schedule {
     private int studentId;
 
     public Schedule() {}
-    public Schedule(int scheduleId, int scheduleType, String scheduleTitle, Date scheduleStart, Date scheduleEnd, int scheduleRepeat, String schedulePlace, String scheduleMemo, int categoryId, int professorId, int studentId) {
+    public Schedule(int scheduleId, int scheduleType, String scheduleTitle, LocalDateTime scheduleStart, LocalDateTime scheduleEnd, int scheduleRepeat, String schedulePlace, String scheduleMemo, int categoryId, int professorId, int studentId) {
         this.scheduleId = scheduleId;
         this.scheduleType = scheduleType;
         this.scheduleTitle = scheduleTitle;
@@ -117,16 +118,16 @@ public class Schedule {
     public void setScheduleTitle(String scheduleTitle) {
         this.scheduleTitle = scheduleTitle;
     }
-    public Date getScheduleStart() {
+    public LocalDateTime getScheduleStart() {
         return scheduleStart;
     }
-    public void setScheduleStart(Date scheduleStart) {
+    public void setScheduleStart(LocalDateTime scheduleStart) {
         this.scheduleStart = scheduleStart;
     }
-    public Date getScheduleEnd() {
+    public LocalDateTime getScheduleEnd() {
         return scheduleEnd;
     }
-    public void setScheduleEnd(Date scheduleEnd) {
+    public void setScheduleEnd(LocalDateTime scheduleEnd) {
         this.scheduleEnd = scheduleEnd;
     }
     public int getScheduleRepeat() {
