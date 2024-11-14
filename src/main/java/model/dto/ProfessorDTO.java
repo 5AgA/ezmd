@@ -1,36 +1,35 @@
 package model.dto;
 
-public class UserDTO {
-	private int userId;
+public class ProfessorDTO {
+    private int professorId;
     private String name;
     private String email;
     private String password;
     private String phone;
     private String dept;
-    private Integer grade;            // 학생일 경우 학년
-    private String professorOffice;   // 교수일 경우 교수 연구실 위치
-    private char deleted;             // 삭제 여부 (Y or N)	
-    
-    public UserDTO() {}
-    
-    public UserDTO(int userId, String name, String email, String password, 
-            String phone, String dept, Integer grade, String professorOffice, char deleted) {
-    	this.userId = userId;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.phone = phone;
-		this.dept = dept;
-		this.grade = grade;
-		this.professorOffice = professorOffice;
-		this.deleted = deleted;
-	}
+    private String professorOffice;  // 연구실 위치
+    private char deleted;            // 삭제 여부 (Y or N)
 
-    public int getUserId() {
-    	return userId;
+    public ProfessorDTO() {}
+
+    public ProfessorDTO(int professorId, String name, String email, String password, 
+                        String phone, String dept, String professorOffice, char deleted) {
+        this.professorId = professorId;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.dept = dept;
+        this.professorOffice = professorOffice;
+        this.deleted = deleted;
     }
-    public void setUserId(int userId) {
-        this.userId = userId;
+
+    public int getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(int professorId) {
+        this.professorId = professorId;
     }
 
     public String getName() {
@@ -71,14 +70,6 @@ public class UserDTO {
 
     public void setDept(String dept) {
         this.dept = dept;
-    }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
     }
 
     public String getProfessorOffice() {
