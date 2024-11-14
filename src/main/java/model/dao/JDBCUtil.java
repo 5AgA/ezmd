@@ -5,8 +5,12 @@ package model.dao;
 
 import java.sql.*;
 
+<<<<<<< HEAD
 public class JDBCUtil {
 	private static JDBCUtil instance = null;
+=======
+public class JDBCUtil{
+>>>>>>> interview
 	private static ConnectionManager connMan = new ConnectionManager();
 	private String sql = null; // 실행할 query
 	private Object[] parameters = null;; // PreparedStatement 의 매개변수 값을 저장하는 배열
