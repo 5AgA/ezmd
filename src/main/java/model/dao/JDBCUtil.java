@@ -1,11 +1,11 @@
 // Java Project 용 JDBCUtil
 // DBCP2 관련 jar 파일을 프로젝트에 포함해야 동작함
 // commons-dbcp2-X.X.X.jar, commons-pool2-X.X.X.jar, commons-logging-X.X.jar
-package dao;
+package model.dao;
 
 import java.sql.*;
 
-public class JDBCUtil {
+public class JDBCUtil{
 	private static ConnectionManager connMan = new ConnectionManager();
 	private String sql = null; // 실행할 query
 	private Object[] parameters = null;; // PreparedStatement 의 매개변수 값을 저장하는 배열

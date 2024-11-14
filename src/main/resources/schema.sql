@@ -54,14 +54,14 @@ CREATE TABLE schedule (
 
 CREATE TABLE interview (
     interview_id NUMBER NOT NULL,
-    requested_date DATE NOT NULL,
+    requested_date TIMESTAMP NOT NULL,
     interview_category VARCHAR2(50) NOT NULL,
     interview_note VARCHAR2(2000) NULL,
     interview_status VARCHAR2(10) DEFAULT 'pending' NOT NULL,
     interview_notice VARCHAR2(1000) NULL,
     is_completed CHAR(1) DEFAULT 'N' NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NULL,
     student_id NUMBER NOT NULL,
     professor_id NUMBER NOT NULL,
     CONSTRAINT interview_pk PRIMARY KEY (interview_id),
