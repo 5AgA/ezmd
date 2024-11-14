@@ -1,8 +1,8 @@
-package model.dto;
+package model.domain;
 
 import java.sql.Timestamp;
 
-public class InterviewResultDTO {
+public class InterviewResult {
 
     private int interviewId;
     private String interviewTopic;
@@ -11,10 +11,10 @@ public class InterviewResultDTO {
     private Timestamp updatedAt;
 
     // 기본 생성자
-    public InterviewResultDTO() {}
+    public InterviewResult() {}
 
     // 모든 필드를 초기화하는 생성자
-    public InterviewResultDTO(int interviewId, String interviewTopic, String interviewSummary, Timestamp createdAt, Timestamp updatedAt) {
+    public InterviewResult(int interviewId, String interviewTopic, String interviewSummary, Timestamp createdAt, Timestamp updatedAt) {
         this.interviewId = interviewId;
         this.interviewTopic = interviewTopic;
         this.interviewSummary = interviewSummary;

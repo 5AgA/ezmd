@@ -1,9 +1,8 @@
-package model.dto;
+package model.domain;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
-public class ProfessorReviewDTO {
+public class ProfessorReview {
     private int reviewId;
     private String reviewOfInterview;
     private int reviewRating;
@@ -12,10 +11,10 @@ public class ProfessorReviewDTO {
     private int interviewId;
 
     // 기본 생성자
-    public ProfessorReviewDTO() {}
+    public ProfessorReview() {}
 
     // 모든 필드를 초기화하는 생성자
-    public ProfessorReviewDTO(int reviewId, String reviewOfInterview, int reviewRating, Timestamp createdAt, Timestamp updatedAt, int interviewId) {
+    public ProfessorReview(int reviewId, String reviewOfInterview, int reviewRating, Timestamp createdAt, Timestamp updatedAt, int interviewId) {
         this.reviewId = reviewId;
         this.reviewOfInterview = reviewOfInterview;
         this.reviewRating = reviewRating;

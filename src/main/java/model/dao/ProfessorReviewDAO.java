@@ -2,15 +2,14 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.dto.ProfessorReviewDTO;
-import persistence.util.JDBCUtil;
+
+import model.domain.ProfessorReview;
 
 public class ProfessorReviewDAO {
-
-    private JDBCUtil jdbcUtil;
+    private JDBCUtil jdbcUtil = null;
 
     public ProfessorReviewDAO() {
-        jdbcUtil = JDBCUtil.getInstance();
+        jdbcUtil = new JDBCUtil();
     }
 
     // 교수 후기 생성
@@ -34,7 +33,7 @@ public class ProfessorReviewDAO {
     }
 
     // 리뷰 ID로 교수 후기 조회
-    public ProfessorReviewDTO getProfessorReview(int reviewId) {
+    public ProfessorReview getProfessorReview(int reviewId) {
         String query = "SELECT * FROM ProfessorReview WHERE review_id = ?";
         Object[] params = {reviewId};
 
@@ -43,7 +42,7 @@ public class ProfessorReviewDAO {
         try {
             ResultSet rs = jdbcUtil.executeQuery();
             if (rs.next()) {
-                ProfessorReviewDTO dto = new ProfessorReviewDTO();
+                ProfessorReview dto = new ProfessorReview();
                 dto.setReviewId(rs.getInt("review_id"));
                 dto.setInterviewId(rs.getInt("interview_id"));
                 dto.setReviewOfInterview(rs.getString("review_of_interview"));

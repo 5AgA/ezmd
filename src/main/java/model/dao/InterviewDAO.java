@@ -1,21 +1,17 @@
 package model.dao;
 
 import java.sql.*;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import model.domain.Interview;
 
 public class InterviewDAO {
-
-	private JDBCUtil jdbcUtil = new JDBCUtil();
-	private Connection conn;
-	private PreparedStatement pstmt;
-
+	private JDBCUtil jdbcUtil = null;
 	
-	public InterviewDAO(Connection conn) {
-		this.conn = conn;
+	public InterviewDAO() {
+		jdbcUtil = new JDBCUtil();
 	}
+	
 	//면담 예약 생성
 	public boolean createInterview(Interview interview) {
 		String sql = "INSERT INTO interview(interview_id, requested_date, interview_category, interview_note, interview_status, is_completed, created_at, updated_at, student_id, professor_id)" 
@@ -154,6 +150,7 @@ public class InterviewDAO {
 				+ "WHERE interview_id = ?";
 		Object[] params = { interviewId };
 		
+		jdbcUtil.setSqlAndParameters(sql, params);
 		try {
 			int result = jdbcUtil.executeUpdate();
 			jdbcUtil.commit();

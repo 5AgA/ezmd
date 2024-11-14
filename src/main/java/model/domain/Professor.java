@@ -1,6 +1,6 @@
-package model.dto;
+package model.domain;
 
-public class ProfessorDTO {
+public class Professor {
     private int professorId;
     private String name;
     private String email;
@@ -10,9 +10,9 @@ public class ProfessorDTO {
     private String professorOffice;  // 연구실 위치
     private char deleted;            // 삭제 여부 (Y or N)
 
-    public ProfessorDTO() {}
+    public Professor() {}
 
-    public ProfessorDTO(int professorId, String name, String email, String password, 
+    public Professor(int professorId, String name, String email, String password, 
                         String phone, String dept, String professorOffice, char deleted) {
         this.professorId = professorId;
         this.name = name;

@@ -1,12 +1,13 @@
-import java.sql.ResultSet;
+package model.dao;
 
-import model.dto.InterviewResultDTO;
+import java.sql.ResultSet;
+import model.domain.InterviewResult;
 
 public class InterviewResultDAO {
-    private JDBCUtil jdbcUtil;
+    private JDBCUtil jdbcUtil = null;
 
     public InterviewResultDAO() {
-        jdbcUtil = JDBCUtil.getInstance();
+        jdbcUtil = new JDBCUtil();
     }
 
     // 면담 결과 생성
@@ -30,7 +31,7 @@ public class InterviewResultDAO {
     }
 
     // 면담 ID로 면담 결과 조회
-    public InterviewResultDTO getInterviewResult(int interviewId) {
+    public InterviewResult getInterviewResult(int interviewId) {
         String query = "SELECT * FROM InterviewResult WHERE interview_id = ?";
         Object[] params = {interviewId};
         
@@ -39,7 +40,7 @@ public class InterviewResultDAO {
         try {
             ResultSet rs = jdbcUtil.executeQuery();
             if (rs.next()) {
-                InterviewResultDTO dto = new InterviewResultDTO();
+                InterviewResult dto = new InterviewResult();
                 dto.setInterviewId(rs.getInt("interview_id"));
                 dto.setInterviewTopic(rs.getString("interview_topic"));
                 dto.setInterviewSummary(rs.getString("interview_summary"));

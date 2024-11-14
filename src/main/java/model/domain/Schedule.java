@@ -1,6 +1,7 @@
 package model.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Schedule {
@@ -71,7 +72,7 @@ public class Schedule {
     }
 
     public List<String> getRepeatedDays(int scheduleRepeat) {
-        List<String> repeatedDays = null;
+        List<String> repeatedDays = new ArrayList<String>();
         if (scheduleRepeat == 0) {
             return repeatedDays;
         }
