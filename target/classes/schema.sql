@@ -43,8 +43,8 @@ CREATE TABLE schedule (
     schedule_id NUMBER NOT NULL,
     schedule_type NUMBER NOT NULL,
     schedule_title VARCHAR2(100) NOT NULL,
-    schedule_start DATE NOT NULL,
-    schedule_end DATE NOT NULL,
+    schedule_start TIMESTAMP NOT NULL,
+    schedule_end TIMESTAMP NOT NULL,
     schedule_repeat NUMBER NULL,
     schedule_place VARCHAR2(100) NULL,
     memo VARCHAR2(500) NULL,
@@ -56,14 +56,14 @@ CREATE TABLE schedule (
 
 CREATE TABLE interview (
     interview_id NUMBER NOT NULL,
-    requested_date DATE NOT NULL,
+    requested_date TIMESTAMP NOT NULL,
     interview_category VARCHAR2(50) NOT NULL,
     interview_note VARCHAR2(2000) NULL,
     interview_status VARCHAR2(10) DEFAULT 'pending' NOT NULL,
     interview_notice VARCHAR2(1000) NULL,
     is_completed CHAR(1) DEFAULT 'N' NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NULL,
     student_id NUMBER NOT NULL,
     professor_id NUMBER NOT NULL,
     CONSTRAINT interview_pk PRIMARY KEY (interview_id),
@@ -75,8 +75,8 @@ CREATE TABLE interview_result (
     interview_id NUMBER NOT NULL,
     interview_topic VARCHAR2(100) NOT NULL,
     interview_summary VARCHAR2(2000) NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NULL,
     CONSTRAINT interview_result_pk PRIMARY KEY (interview_id)
 );
 
@@ -84,8 +84,8 @@ CREATE TABLE professor_review (
     review_id NUMBER NOT NULL,
     review_of_interview VARCHAR2(2000) NOT NULL,
     review_rating NUMBER NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NULL,
     interview_id NUMBER NOT NULL,
     CONSTRAINT professor_review_pk PRIMARY KEY (review_id)
 );
