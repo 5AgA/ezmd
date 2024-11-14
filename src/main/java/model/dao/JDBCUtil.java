@@ -6,6 +6,7 @@ package model.dao;
 import java.sql.*;
 
 public class JDBCUtil {
+	private static JDBCUtil instance = null;
 	private static ConnectionManager connMan = new ConnectionManager();
 	private String sql = null; // 실행할 query
 	private Object[] parameters = null;; // PreparedStatement 의 매개변수 값을 저장하는 배열
@@ -36,7 +37,13 @@ public class JDBCUtil {
 	public String getSql() {
 		return this.sql;
 	}
-
+	
+	 public static JDBCUtil getInstance() {
+	        if (instance == null) {
+	            instance = new JDBCUtil();
+	        }
+	        return instance;
+	    }
 	// 매개변수 배열에서 특정위치의 매개변수를 반환하는 메소드
 	private Object getParameter(int index) throws Exception {
 		if (index >= getParameterSize())
