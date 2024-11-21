@@ -39,13 +39,13 @@
             <div class="forgot-password"> 
                 <a href="findPassword.jsp" class="find-password-link">비밀번호를 잊어버리셨나요?</a>
             </div>
-
-            <!-- 회원가입 -->
-            <div class="sign-up">
-                계정이 없으신가요? <a href="signup.jsp" class="sign-up-link">가입하기</a>
-            </div>
         </div>
     </form>
+    <!-- 회원가입 -->
+    <div class="sign-up">
+    	계정이 없으신가요? 
+    	<button class="sign-up-link" onclick="window.location.href='<%= request.getContextPath() %>/user/register/form'">가입하기</button>
+    </div>
 
 </body>
 </html>

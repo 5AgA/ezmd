@@ -14,14 +14,6 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.header {
-    background-color: #dcdcdc;
-    text-align: left;
-    padding: 10px;
-    font-size: 14px;
-    color: #4a4a4a;
-}
-
 .content {
     text-align: center;
     padding: 20px;
