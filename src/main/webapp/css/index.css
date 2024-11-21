@@ -20,6 +20,7 @@ body {
     flex: 1;
     text-align: center;
     padding: 20px;
+    margin-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,7 +64,7 @@ body {
 
 .bottom {
 	background-color: #8b2942;
-	height: 20%;
+	height: 200px;
 	display: flex;
     align-items: center;
     justify-content: center;
@@ -74,7 +75,7 @@ body {
     color: white;
     border: none;
     padding: 15px 25px;
-    font-size: 24px;
+    font-size: 32px;
     border-radius: 15px;
     cursor: pointer;
     margin: 0;  
