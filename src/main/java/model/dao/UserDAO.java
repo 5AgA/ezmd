@@ -248,4 +248,56 @@ public class UserDAO {
         }
         return 0;
     }
+    
+    public Student findStudentByEmail(String email) throws SQLException {
+    	String sql = "SELECT student_id, name, email, password, phone, dept, grade, deleted FROM student WHERE email=?;";
+    	jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
+    	
+    	try {
+    		ResultSet rs = jdbcUtil.executeQuery();
+    		if (rs.next()) {
+    			return new Student(
+    				rs.getInt("student_id"),
+    				rs.getString("name"),
+    				rs.getString("email"),
+    				rs.getString("password"),
+                    rs.getString("phone"),
+                    rs.getString("dept"),
+                    rs.getInt("grade"),
+                    rs.getString("deleted").charAt(0)
+    			);
+    		}
+    	} catch(Exception ex) {
+    		ex.printStackTrace();
+    	} finally {
+    		jdbcUtil.close();
+    	}
+    	return null;
+    }
+    
+    public Professor findProfessorByEmail(String email) throws SQLException {
+        String sql = "SELECT professor_id, name, email, password, phone, dept, professor_office, deleted FROM professor WHERE email=?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                return new Professor(
+                    rs.getInt("professor_id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getString("phone"),
+                    rs.getString("dept"),
+                    rs.getString("professor_office"),
+                    rs.getString("deleted").charAt(0)
+                );
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
 }

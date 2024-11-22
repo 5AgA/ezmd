@@ -23,6 +23,12 @@ public class Professor {
         this.professorOffice = professorOffice;
         this.deleted = deleted;
     }
+    public Professor(int professorId, String name, String dept) {
+    	this.professorId = professorId;
+        this.name = name;
+        this.dept = dept;
+    }
+    
 
     public int getProfessorId() {
         return professorId;

@@ -1,9 +1,12 @@
 package model.dao;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import model.domain.Interview;
+import model.domain.Professor;
+import model.domain.ProfessorReview;
 
 public class InterviewDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -183,7 +186,7 @@ public class InterviewDAO {
 	}
 	
 	//학과별 교수 리스트 조회
-	/*
+	
 	public List<Professor> getAllProfessors() {
 		List<Professor> professors = new ArrayList<>();
 		String sql = "SELECT * FROM processor WHERE deleted = 'N'";
@@ -212,7 +215,7 @@ public class InterviewDAO {
 		List<Professor> professors = new ArrayList<>();
 		String sql = "SELECT * FROM professor WHERE name = ?";
 		
-		Object[] params = { name }
+		Object[] params = { name };
 		jdbcUtil.setSqlAndParameters(sql, params); 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
@@ -256,6 +259,6 @@ public class InterviewDAO {
 		}
 		return reviews;
 	}
-	*/
+	
 
 }
