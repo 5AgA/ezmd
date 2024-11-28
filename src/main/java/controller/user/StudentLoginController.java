@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/login/students")
+@WebServlet("/login/student")
 public class StudentLoginController extends HttpServlet implements Controller {
 	
 	@Override

@@ -4,9 +4,7 @@ package model.manager;
 import java.sql.SQLException;
 
 import model.dao.StudentDAO;
-import model.dao.ProfessorDAO;
 import model.domain.Student;
-import model.domain.Professor;
 
 public class StudentLoginManager {
 	private StudentDAO studentDAO;

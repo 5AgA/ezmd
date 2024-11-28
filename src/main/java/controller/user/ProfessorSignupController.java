@@ -14,7 +14,7 @@ import model.dao.ProfessorDAO;
 import model.domain.Professor;
 import model.manager.ProfessorSignupManager;
 
-@WebServlet("/signup/professors")
+@WebServlet("/signup/professor")
 public class ProfessorSignupController extends HttpServlet implements Controller {
 
     private ProfessorSignupManager professorSignupManager;
