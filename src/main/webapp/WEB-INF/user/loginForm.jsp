@@ -4,12 +4,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-=======
     <title>로그인</title>
->>>>>>> 240672737dc995d3e33800ccaf89d3ce185bb295
     <link rel="icon" href="<c:url value='/favicon.ico' />" type="image/x-icon">
     <link rel="stylesheet" href="<c:url value='/css/userForm.css' />">
 </head>
@@ -20,7 +17,7 @@
 
     <!-- 로그인 폼 -->
     <div class="loginForm">
-	    <form action="<c:url value='/user/login' />" method="post">
+	    <form action="<c:url value='/login' />" method="post">
 	        <!-- 로그인 박스 -->
 	        <div class="login-box">
 	            <div class="login-title">로그인을 해주세요</div>

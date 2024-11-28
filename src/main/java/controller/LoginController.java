@@ -15,11 +15,11 @@ public class LoginController implements Controller {
         if ("test@dongduk.ac.kr".equals(email) && "password123".equals(password)) {
             // 로그인 성공
             request.setAttribute("message", "로그인 성공!");
-            return "/user/loginSuccess.jsp";
+            return "/home";
         } else {
             // 로그인 실패
             request.setAttribute("message", "이메일 또는 비밀번호가 잘못되었습니다.");
-            return "/user/loginForm.jsp";
+            return "/login/form";
         }
     }
 }

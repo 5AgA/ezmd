@@ -19,7 +19,7 @@
         <!-- 프로필 정보 -->
         <div class="profile-section">
             <img src="<c:url value='/images/profile-icon.png'/>" alt="Profile Image" class="profile-img">
-            <h2 class="username">김동</h2>
+            <h2 class="username">김동덕</h2>
         </div>
 
         <!-- 개인정보 입력 폼 -->
