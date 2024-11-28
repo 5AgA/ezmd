@@ -1,6 +1,5 @@
 package controller.user;
 
-import model.dao.UserDAO;
 import model.domain.Professor;
 import model.domain.Student;
 import model.manager.LoginManager;
