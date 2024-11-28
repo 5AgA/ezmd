@@ -40,21 +40,28 @@
 	width: 100%;
 	height: 15vh;
 	display: flex;
+	flex-wrap: wrap;
 	
 }
 
 .navbar {
 	display: flex;
 	justify-content: flex-start;
+	height: 100%;
+	flex-grow: 1;
+	overflow: hidden;
 }
 
 .navbar ul {
 	list-style: none;
-	padding-top: 83px;
-	padding-left: 150px;
+	padding-top: 9vh;
+	padding-left: 9vw;
 	margin: 0;
 	display: flex;
+	flex-wrap: wrap;
 	gap: 10vw;
+	justify-content: flex-start;
+	width: 100%;
 }
 
 .navbar li.active a{
