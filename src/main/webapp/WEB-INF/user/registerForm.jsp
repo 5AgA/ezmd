@@ -42,7 +42,7 @@
     <div class="header-bar"></div>
 
     <!-- 회원가입 폼 -->
-    <form action="registerProcess.jsp" method="post" class="registerForm" onsubmit="return combineEmail();">
+    <form action="<c:url value='/user/login' />" method="post" class="registerForm" onsubmit="return combineEmail();">
         <!-- 회원가입 박스 -->
         <div class="register-box">
             <div class="register-title">회원가입을 해주세요</div>
