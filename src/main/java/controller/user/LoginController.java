@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import model.dao.UserDAO;
 import model.domain.Professor;
@@ -28,6 +28,7 @@ public class LoginController extends HttpServlet {
 			user = loginManager.authenticate(email, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("로그인 중 오류발생");
 			e.printStackTrace();
 		}
 		

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 //@WebServlet(name="dispatcherSevlet", urlPatterns="/", loadOnStartup=1)
 public class DispatcherServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    /*private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
     private RequestMapping rm;
@@ -57,5 +57,5 @@ public class DispatcherServlet extends HttpServlet {
             logger.error("Exception : {}", e);
             throw new ServletException(e.getMessage());
         }
-    }
+    }*/
 }
