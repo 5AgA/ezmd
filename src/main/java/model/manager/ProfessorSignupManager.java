@@ -3,7 +3,6 @@ package model.manager;
 import java.sql.SQLException;
 
 import model.dao.ProfessorDAO;
-import model.domain.Student;
 import model.domain.Professor;
 
 public class ProfessorSignupManager {

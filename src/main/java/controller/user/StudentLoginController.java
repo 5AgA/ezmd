@@ -1,5 +1,7 @@
 package controller.user;
 
+import controller.Controller;
+
 import model.domain.Student;
 import model.manager.StudentLoginManager;
 
@@ -12,33 +14,52 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/login/students")
-public class StudentLoginController extends HttpServlet {
+public class StudentLoginController extends HttpServlet implements Controller {
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-		//로그인 매니저에서 처리
-		StudentLoginManager studentLoginManager = new StudentLoginManager();
-		Object user = null;
-		try {
-			user = studentLoginManager.authenticate(email, password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("학생 로그인 중 오류발생");
-			e.printStackTrace();
-		}
-		
-		if(user != null) {
-			//로그인 성공; 세션에 사용자 정보를 저장
-			request.getSession().setAttribute("user", user);
-			response.sendRedirect("home.jsp");
-		} else {
-			//로그인 실패
-			request.setAttribute("errorMessage", "Invalid credentials");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
-	}
+	@Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        // 로그인 매니저에서 처리
+        StudentLoginManager studentLoginManager = new StudentLoginManager();
+        Object user = null;
+
+        try {
+            user = studentLoginManager.authenticate(email, password);
+        } catch (SQLException e) {
+            System.out.println("학생 로그인 중 오류 발생");
+            e.printStackTrace();
+            throw new ServletException("학생 로그인 처리 중 오류가 발생했습니다.", e);
+        }
+
+        // 로그인 결과에 따라 이동할 URL 반환
+        if (user != null) {
+            // 로그인 성공; 세션에 사용자 정보를 저장
+            request.getSession().setAttribute("user", user);
+            return "home.jsp";
+        } else {
+            // 로그인 실패
+            request.setAttribute("errorMessage", "Invalid credentials");
+            return "login.jsp";
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            // execute 메서드 호출 후 반환된 URL로 이동
+            String view = execute(request, response);
+            if (view.equals("home.jsp")) {
+                response.sendRedirect(view);
+            } else {
+                request.getRequestDispatcher(view).forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "학생 로그인 처리 중 오류가 발생했습니다.");
+        }
+    }
 	
 }
