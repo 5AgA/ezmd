@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import model.domain.Professor;
 import model.domain.ProfessorReview;
-import model.domain.Student;
 
 public class ProfessorReviewDAO {
     private JDBCUtil jdbcUtil = null;
@@ -125,4 +124,5 @@ public class ProfessorReviewDAO {
             jdbcUtil.close();
         }
         return null;
+    }
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.domain.Professor;
-import model.domain.Student;
 
 public class ProfessorDAO {
 
