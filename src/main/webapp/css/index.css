@@ -8,6 +8,7 @@ body {
     justify-content: center;
 }
 
+
 .container {
     width: 100%;
     height: 100%;
@@ -32,39 +33,41 @@ body {
     justify-content: center;
     gap: 0px;
     margin-bottom: 20px;
+    width: 200px;
 }
 
 .icon1 {
-    width: 180px;
-    height: 180px;
+    width: 20vw;
+    height: 20vh;
     margin-top: 150px;
+    padding: 0;
 }
 
 .icon2 {
-	width: 250px;
-    height: 250px;
+	width: 25vw;
+    height: 25vh;
 }
 
 .icon3 {
-	width: 200px;
-    height: 200px;
+    width: 23vw;
+    height: 23vh;
     margin-top: 100px;
 }
 
 .description {
-    font-size: 32px;
+    font-size: 1.5vw;
     line-height: 1.5;
 }
 
 .title {
-    font-size: 48px;
+    font-size: 2vw;
     color: #8b2942;
     margin: 10px 0;
 }
 
 .bottom {
 	background-color: #8b2942;
-	height: 200px;
+	height: 20vh;
 	display: flex;
     align-items: center;
     justify-content: center;
@@ -74,8 +77,8 @@ body {
     background-color: #770421;
     color: white;
     border: none;
-    padding: 15px 25px;
-    font-size: 32px;
+    padding: 1vh 1.5vw;
+    font-size: 2vw;
     border-radius: 15px;
     cursor: pointer;
     margin: 0;  
