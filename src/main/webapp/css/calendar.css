@@ -58,7 +58,7 @@ body {
 }
 
 .month-nav:hover {
-    color: #a52a2a;
+    color: #8b2942;
 }
 
 .calendar-view {
@@ -108,7 +108,7 @@ body {
 #calendarDays {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7개의 동일한 열 */
-    grid-gap: 5px;
+    grid-gap: 1px;
     width: 100%; /* 그리드가 컨테이너 너비에 맞게 확장 */
 }
 
@@ -121,7 +121,7 @@ body {
 
 /* 오늘 날짜 강조 */
 .day-cell.today {
-    background-color: #ffe4e1;
+    background-color: #eeeeee;
     font-weight: bold;
 }
 
