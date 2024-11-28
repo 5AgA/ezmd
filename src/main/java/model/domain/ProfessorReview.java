@@ -22,7 +22,12 @@ public class ProfessorReview {
         this.updatedAt = updatedAt;
         this.interviewId = interviewId;
     }
-
+    public ProfessorReview(int reviewId, String reviewOfInterview, int reviewRating) {
+        this.reviewId = reviewId;
+        this.reviewOfInterview = reviewOfInterview;
+        this.reviewRating = reviewRating;  
+    }
+    
     // Getter와 Setter 메서드
     public int getReviewId() {
         return reviewId;
