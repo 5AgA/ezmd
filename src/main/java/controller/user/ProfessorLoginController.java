@@ -1,8 +1,8 @@
+
 package controller.user;
 
 import model.domain.Professor;
-import model.domain.Student;
-import model.manager.LoginManager;
+import model.manager.ProfessorLoginManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/login/professors")
+public class ProfessorLoginController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
@@ -21,13 +21,13 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		//로그인 매니저에서 처리
-		LoginManager loginManager = new LoginManager();
+		ProfessorLoginManager professorLoginManager = new ProfessorLoginManager();
 		Object user = null;
 		try {
-			user = loginManager.authenticate(email, password);
+			user = professorLoginManager.authenticate(email, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("로그인 중 오류발생");
+			System.out.println("교수님 로그인 중 오류발생");
 			e.printStackTrace();
 		}
 		
