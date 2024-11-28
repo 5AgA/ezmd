@@ -19,7 +19,7 @@ public class LoginController implements Controller {
         } else {
             // 로그인 실패
             request.setAttribute("message", "이메일 또는 비밀번호가 잘못되었습니다.");
-            return "/user/login.jsp";
+            return "/user/loginForm.jsp";
         }
     }
 }

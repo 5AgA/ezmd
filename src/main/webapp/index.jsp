@@ -22,7 +22,7 @@
             
         </div>
         <div class="bottom">
-	    	<button class="button" onclick="window.location.href='<%= request.getContextPath() %>/user/login/form'"><b>사용하기</b></button>
+	    	<button class="button" onclick="window.location.href='<%= request.getContextPath() %>/login/form'"><b>사용하기</b></button>
         </div>
     </div>
 </body>
