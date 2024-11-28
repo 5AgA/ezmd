@@ -4,12 +4,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-=======
     <title>로그인</title>
->>>>>>> 240672737dc995d3e33800ccaf89d3ce185bb295
     <link rel="icon" href="<c:url value='/favicon.ico' />" type="image/x-icon">
     <link rel="stylesheet" href="<c:url value='/css/userForm.css' />">
 </head>
