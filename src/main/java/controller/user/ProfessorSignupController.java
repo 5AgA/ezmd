@@ -10,11 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.ProfessorDAO;
 import model.domain.Professor;
 import model.manager.ProfessorSignupManager;
 
-@WebServlet("/signup/professors")
+@WebServlet("/signup/professor")
 public class ProfessorSignupController extends HttpServlet implements Controller {
 
     private ProfessorSignupManager professorSignupManager;

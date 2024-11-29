@@ -2,7 +2,6 @@
 package controller.user;
 
 import controller.Controller;
-import model.domain.Professor;
 import model.manager.ProfessorLoginManager;
 
 import javax.servlet.ServletException;
@@ -13,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/login/professors")
+@WebServlet("/login/professor")
 public class ProfessorLoginController extends HttpServlet implements Controller{
-	
-	
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = request.getParameter("email");

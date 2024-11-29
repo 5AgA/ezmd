@@ -2,7 +2,6 @@ package controller.user;
 
 import controller.Controller;
 
-import model.domain.Student;
 import model.manager.StudentLoginManager;
 
 import javax.servlet.ServletException;
@@ -13,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/login/students")
+
+@WebServlet("/login/student")
 public class StudentLoginController extends HttpServlet implements Controller {
 	
 	@Override

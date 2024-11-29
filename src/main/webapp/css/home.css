@@ -1,44 +1,16 @@
-/* Global Styles */
 body {
-    margin: 0;
     font-family: 'Arial', sans-serif;
     color: #333;
 }
 
-/* Header */
-.header {
-    background-color: #800000;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header .logo img {
-    height: 40px;
-}
-
-.header .nav a {
-    margin: 0 10px;
-    color: white;
-    text-decoration: none;
-}
-
-.header .user-menu a {
-    color: white;
-    margin-left: 15px;
-}
-
-/* Main Layout */
 .main {
     display: flex;
     padding: 20px;
+    justify-content: center;
 }
 
 .sidebar {
-    width: 25%;
-    margin-right: 20px;
+    width: 20%;
 }
 
 .sidebar .profile {
@@ -49,13 +21,21 @@ body {
 }
 
 .sidebar .profile img {
+	border: 1px solid #ddd;
     border-radius: 50%;
     width: 80px;
     height: 80px;
 }
 
-.sidebar h3 {
+.sidebar .pending-meetings, .scheduled-meetings {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     margin-top: 20px;
+}
+
+.sidebar h3 {
+    margin-top: 10px;
     font-size: 18px;
 }
 
@@ -68,36 +48,8 @@ body {
     margin-bottom: 10px;
 }
 
-/* Calendar */
-.calendar {
-    width: 75%;
-}
-
-.calendar h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-.calendar .calendar-controls {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.calendar-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.calendar-table th,
-.calendar-table td {
+.calendar-container {
     border: 1px solid #ddd;
-    text-align: center;
-    padding: 10px;
-    height: 60px;
-}
-
-.calendar-table .highlight {
-    background-color: #f99;
-    color: white;
+    border-radius: 10px;
+    padding: 30px;
 }

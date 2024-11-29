@@ -4,9 +4,13 @@ package model.manager;
 import java.sql.SQLException;
 
 import model.dao.StudentDAO;
+<<<<<<< HEAD
 import model.dao.ProfessorDAO;
 import model.domain.Student;
 import model.domain.Professor;
+=======
+import model.domain.Student;
+>>>>>>> schedule
 
 public class StudentLoginManager {
 	private StudentDAO studentDAO;
