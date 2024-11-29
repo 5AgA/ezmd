@@ -25,6 +25,7 @@ body {
     border-radius: 50%;
     width: 80px;
     height: 80px;
+    font-size: 1vw;
 }
 
 .sidebar .pending-meetings, .scheduled-meetings {
@@ -37,6 +38,7 @@ body {
 .sidebar h3 {
     margin-top: 10px;
     font-size: 18px;
+    font-size: 1vw;
 }
 
 .sidebar ul {
