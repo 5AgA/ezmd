@@ -41,16 +41,16 @@ CREATE TABLE schedule_category (
 
 CREATE TABLE schedule (
     schedule_id NUMBER NOT NULL,
-    schedule_type NUMBER NOT NULL, -- 비정기적 일정(0), 주간 일정(1), 면담(2)
+    schedule_type NUMBER NOT NULL,
     schedule_title VARCHAR2(100) NOT NULL,
     schedule_start TIMESTAMP NOT NULL,
     schedule_end TIMESTAMP NOT NULL,
     schedule_repeat NUMBER NULL,
     schedule_place VARCHAR2(100) NULL,
     memo VARCHAR2(500) NULL,
-    category_id NUMBER NOT NULL,
-    student_id NUMBER NULL,
-    professor_id NUMBER NULL,
+    category_id NUMBER,
+    student_id NUMBER,
+    professor_id NUMBER,
     CONSTRAINT schedule_pk PRIMARY KEY (schedule_id)
 );
 
@@ -118,25 +118,6 @@ FOREIGN KEY (interview_id) REFERENCES interview (interview_id) ON DELETE SET NUL
 ALTER TABLE professor_review
 ADD CONSTRAINT fk_interview_review
 FOREIGN KEY (interview_id) REFERENCES interview (interview_id) ON DELETE SET NULL;
-
--- 일정 테이블 제약 조건 추가
-ALTER TABLE schedule
-ADD CONSTRAINT chk_student_or_professor 
-CHECK (
-    (student_id IS NOT NULL OR professor_id IS NOT NULL) AND 
-    NOT (student_id IS NULL AND professor_id IS NULL)
-);
-
-ALTER TABLE schedule
-ADD CONSTRAINT chk_schedule_type 
-CHECK (
-    (schedule_type IN (0, 1) AND 
-        ((student_id IS NOT NULL AND professor_id IS NULL) OR 
-         (student_id IS NULL AND professor_id IS NOT NULL))) OR
-    (schedule_type = 2 AND 
-        (student_id IS NOT NULL AND professor_id IS NOT NULL))
-);
-
 
 -- 트리거
 CREATE OR REPLACE TRIGGER PROFESSOR_ID_TRIGGER
