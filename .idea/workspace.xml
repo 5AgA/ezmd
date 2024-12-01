@@ -9,39 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jsp_api.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.egit.core/.org.eclipse.egit.core.cmp/.org.eclipse.egit.core.cmp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/ScheduleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ezmd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ezmd.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/LogoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/LogoutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/StudentLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/StudentLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ScheduleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ScheduleDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/LogoutManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/user/LogoutManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorLoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/user/ProfessorLoginManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/user/ProfessorSignupManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/StudentLoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/user/StudentLoginManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/StudentSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/user/StudentSignupManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/schedule/schedule.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/schedule/schedule.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" afterDir="false" />
-    </list>
+    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -223,7 +191,7 @@
       <updated>1733049689184</updated>
       <workItem from="1733049690342" duration="2627000" />
       <workItem from="1733052323754" duration="6534000" />
-      <workItem from="1733058879786" duration="4438000" />
+      <workItem from="1733058879786" duration="5042000" />
     </task>
     <servers />
   </component>
