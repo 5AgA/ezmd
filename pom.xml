@@ -88,7 +88,14 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
+
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
@@ -105,5 +112,16 @@
 				<version>3.2.2</version>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.yml</include>
+					 <include>**/*.setting</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 </project>
