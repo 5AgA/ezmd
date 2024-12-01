@@ -1,4 +1,4 @@
-package model.manager;
+package model.manager.user;
 
 import java.sql.SQLException;
 

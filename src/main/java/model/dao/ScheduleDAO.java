@@ -3,6 +3,7 @@ package model.dao;
 import model.domain.Schedule;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class ScheduleDAO {
     }
 
     // Create
-    public Schedule create(Schedule schedule) {
+    public Schedule create(Schedule schedule) throws SQLException {
         String query = "INSERT INTO Schedule (schedule_id, schedule_type, schedule_title, schedule_start, schedule_end, schedule_repeat, schedule_place, memo, category_id, professor_id, student_id) " +
                        "VALUES (schedule_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] param = new Object[]{
@@ -53,7 +54,7 @@ public class ScheduleDAO {
     }
 
     // Update
-    public int update(Schedule schedule) {
+    public int update(Schedule schedule) throws SQLException {
         String query = "UPDATE Schedule SET schedule_type=?, schedule_title=?, schedule_start=?, schedule_end=?, schedule_repeat=?, schedule_place=?, memo=?, " +
                 "category_id=? WHERE schedule_id=?";
         Object[] param = new Object[]{schedule.getScheduleType(), schedule.getScheduleTitle(), Timestamp.valueOf(schedule.getScheduleStart()),
@@ -73,7 +74,7 @@ public class ScheduleDAO {
     }
     
     // Delete
-    public int remove(int scheduleId) {
+    public int remove(int scheduleId) throws SQLException {
         String query = "DELETE FROM Schedule WHERE schedule_id=?";
         jdbcUtil.setSqlAndParameters(query, new Object[]{scheduleId});
         try {
@@ -88,36 +89,34 @@ public class ScheduleDAO {
     }
 
     // Read
-    public List<Schedule> findScheduleByStartDate(LocalDateTime startDate) {
-        String qeury = "SELECT * FROM Schedule WHERE schedule_start=?";
-        List<Schedule> scheduleList = new ArrayList<>();
-        jdbcUtil.setSqlAndParameters(qeury, new Object[]{Timestamp.valueOf(startDate)});
-
+    public List<Schedule> getSchedules(int userId) throws SQLException {
+        String query = "SELECT * FROM Schedule WHERE student_id = ? OR professor_id = ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{userId, userId});
         try {
             ResultSet rs = jdbcUtil.executeQuery();
-            if (rs.next()) {
-                do {
-                    Schedule s = new Schedule();
-                    s.setScheduleId(rs.getInt("schedule_id"));
-                    s.setScheduleType(rs.getInt("schedule_type"));
-                    s.setScheduleTitle(rs.getString("schedule_title"));
-                    s.setScheduleStart(rs.getTimestamp("schedule_start").toLocalDateTime());
-                    s.setScheduleEnd(rs.getTimestamp("schedule_end").toLocalDateTime());
-                    s.setScheduleRepeat(rs.getInt("schedule_repeat"));
-                    s.setSchedulePlace(rs.getString("schedule_place"));
-                    s.setScheduleMemo(rs.getString("memo"));
-                    s.setCategoryId(rs.getInt("category_id"));
-                    s.setProfessorId(rs.getInt("professor_id"));
-                    s.setStudentId(rs.getInt("student_id"));
-                    scheduleList.add(s);
-                } while(rs.next());
-
+            List<Schedule> scheduleList = new ArrayList<>();
+            while (rs.next()) {
+                Schedule schedule = new Schedule();
+                schedule.setScheduleId(rs.getInt("schedule_id"));
+                schedule.setScheduleType(rs.getInt("schedule_type"));
+                schedule.setScheduleTitle(rs.getString("schedule_title"));
+                schedule.setScheduleStart(rs.getTimestamp("schedule_start").toLocalDateTime());
+                schedule.setScheduleEnd(rs.getTimestamp("schedule_end").toLocalDateTime());
+                schedule.setScheduleRepeat(rs.getInt("schedule_repeat"));
+                schedule.setSchedulePlace(rs.getString("schedule_place"));
+                schedule.setScheduleMemo(rs.getString("memo"));
+                schedule.setCategoryId(rs.getInt("category_id"));
+                schedule.setProfessorId(rs.getInt("professor_id"));
+                schedule.setStudentId(rs.getInt("student_id"));
+                scheduleList.add(schedule);
             }
+            return scheduleList;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             jdbcUtil.close();
         }
-        return scheduleList;
+        return null;
     }
+
 }

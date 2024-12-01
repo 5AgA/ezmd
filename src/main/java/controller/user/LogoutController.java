@@ -1,7 +1,7 @@
 package controller.user;
 
 import controller.Controller;
-import model.manager.LogoutManager;
+import model.manager.user.LogoutManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

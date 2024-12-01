@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import controller.user.LoginController;
-//import controller.user.LogoutController;
-//import controller.user.SignupController;
+import controller.user.StudentLoginController;
+import controller.user.ProfessorLoginController;
+import controller.user.LogoutController;
+import controller.user.StudentSignupController;
+import controller.user.ProfessorSignupController;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);

@@ -2,8 +2,7 @@ package controller.user;
 
 import controller.Controller;
 
-import model.domain.Student;
-import model.manager.StudentLoginManager;
+import model.manager.user.StudentLoginManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
