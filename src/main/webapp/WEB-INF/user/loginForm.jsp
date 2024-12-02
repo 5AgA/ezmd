@@ -17,7 +17,7 @@
 
     <!-- 로그인 폼 -->
     <div class="loginForm">
-	    <form action="<c:url value='/user/login' />" method="post">
+	    <form action="<c:url value='/login' />" method="post">
 	        <!-- 로그인 박스 -->
 	        <div class="login-box">
 	            <div class="login-title">로그인을 해주세요</div>
