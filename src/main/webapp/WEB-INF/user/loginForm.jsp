@@ -9,6 +9,18 @@
     <title>로그인</title>
     <link rel="icon" href="<c:url value='/favicon.ico' />" type="image/x-icon">
     <link rel="stylesheet" href="<c:url value='/css/userForm.css' />">
+    <script>
+    	function updateFormAction(){
+    		const studentRadio = document.getElementById('studentRadio');
+    		const form = document.getElementById('loginForm');
+    		
+    		if (studentRadio.checked){
+    			form.action= '<c:url value="/login/student" />';
+    		}else{
+    			form.action = '<c:url value="/login/professor" />';
+    		}
+    	}
+    </script>
 </head>
 <body>
 
@@ -17,11 +29,24 @@
 
     <!-- 로그인 폼 -->
     <div class="loginForm">
-	    <form action="<c:url value='/login' />" method="post">
+	    <form id="loginForm" method="post">
 	        <!-- 로그인 박스 -->
 	        <div class="login-box">
 	            <div class="login-title">로그인을 해주세요</div>
 	
+				<!-- 사용자 타입 선택 -->
+				<div class="input-group">
+					<label class="input-label">사용자 유형</label>
+					<div class="radio-group">
+						<label>
+							<input type="radio" id="studentRadio" name="userType" value="student" checked onclick="updateFormAction()"> 학생
+						</label>
+						<label>
+                            <input type="radio" id="professorRadio" name="userType" value="professor" onclick="updateFormAction()"> 교수
+                        </label>
+					</div>
+				</div>
+				
 	            <!-- 이메일 입력 필드 -->
 	            <div class="input-group">
 	                <label class="input-label" for="email">이메일</label>

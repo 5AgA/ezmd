@@ -4,50 +4,45 @@ import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import controller.user.LoginController;
-//import controller.user.LogoutController;
-//import controller.user.SignupController;
+import controller.user.LogoutController;
+import controller.user.ProfessorLoginController;
+import controller.user.ProfessorSignupController;
+import controller.user.StudentLoginController;
+import controller.user.StudentSignupController;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
-    
-    // 각 요청 uri에 대한 controller 객체를 저장할 HashMap 생성
-    private Map<String, Controller> mappings = new HashMap<String, Controller>();
+
+    // 각 요청 URI에 대한 Controller 객체를 저장할 HashMap 생성
+    private Map<String, Controller> mappings = new HashMap<>();
 
     public void initMapping() {
-    	// 각 uri에 대응되는 controller 객체를 생성 및 저장
+        // 기본 페이지 매핑
         mappings.put("/", new ForwardController("/index/index.jsp"));
-        mappings.put("/login/form", new ForwardController("/user/loginForm.jsp"));
-//        mappings.put("/login", new LoginController());
-//        mappings.put("/logout", new LogoutController());
-//        mappings.put("/user/list", new ListUserController());
-//        mappings.put("/user/view", new ViewUserController());
-        
-        // 회원 가입 폼 요청과 가입 요청 처리 병합 (폼에 커뮤니티 선택 메뉴 추가를 위함)
-        mappings.put("/register/form", new ForwardController("/user/registerForm.jsp"));
-<<<<<<< HEAD
-        mappings.put("/register", new RegisterUserController());
-        
-=======
-//        mappings.put("/register", new SignupController());
-
->>>>>>> bd05baa78083d1a2961f6f11ec4ebbb4953cf89a
-        // 사용자 정보 수정 폼 요청과 수정 요청 처리 병합
-//      mappings.put("/user/update/form", new UpdateUserFormController());
-//      mappings.put("/user/update", new UpdateUserController());        
-//        mappings.put("/user/update", new UpdateUserController());
-//        mappings.put("/user/delete", new DeleteUserController());
-        
-        // 페이지 이동
         mappings.put("/home", new ForwardController("/user/home.jsp"));
         mappings.put("/myPage", new ForwardController("/user/mypage.jsp"));
         mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));
-        
+
+        // 로그인 폼 및 요청 처리
+        mappings.put("/login/form", new ForwardController("/user/loginForm.jsp"));
+        mappings.put("/login/student", new StudentLoginController()); // 학생 로그인
+        mappings.put("/login/professor", new ProfessorLoginController()); // 교수 로그인
+
+        // 로그아웃 처리
+        mappings.put("/logout", new LogoutController());
+
+        // 회원가입 폼 및 요청 처리
+        mappings.put("/register/form", new ForwardController("/user/registerForm.jsp")); // 회원가입 메인 폼
+        mappings.put("/register/form/stud", new ForwardController("/user/studentRegisterForm.jsp")); // 학생 회원가입 폼
+        mappings.put("/register/form/prof", new ForwardController("/user/professorRegisterForm.jsp")); // 교수 회원가입 폼
+        mappings.put("/signup/student", new StudentSignupController()); // 학생 회원가입 처리
+        mappings.put("/signup/professor", new ProfessorSignupController()); // 교수 회원가입 처리
+
         logger.info("Initialized Request Mapping!");
     }
 
-    public Controller findController(String uri) {	
-    	// 주어진 uri에 대응되는 controller 객체를 찾아 반환
+    public Controller findController(String uri) {
+        // 주어진 URI에 대응되는 Controller 객체를 찾아 반환
         return mappings.get(uri);
     }
 }
