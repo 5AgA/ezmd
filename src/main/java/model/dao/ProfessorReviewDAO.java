@@ -101,7 +101,7 @@ public class ProfessorReviewDAO {
     }
     
     public Professor findProfessorByEmail(String email) throws SQLException {
-        String sql = "SELECT professor_id, name, email, password, phone, dept, professor_office, deleted FROM professor WHERE email=?";
+        String sql = "SELECT professor_id, name, email, password, dept, professor_office, deleted FROM professor WHERE email=?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
 
         try {
@@ -112,7 +112,6 @@ public class ProfessorReviewDAO {
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getString("phone"),
                     rs.getString("dept"),
                     rs.getString("professor_office"),
                     rs.getString("deleted").charAt(0)

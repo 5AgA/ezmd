@@ -32,7 +32,6 @@ public class StudentSignupController extends HttpServlet implements Controller {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String phone = request.getParameter("phone");
             String dept = request.getParameter("dept");
             Integer grade = Integer.parseInt(request.getParameter("grade"));
 
@@ -42,7 +41,6 @@ public class StudentSignupController extends HttpServlet implements Controller {
             student.setName(name);
             student.setEmail(email);
             student.setPassword(password);
-            student.setPhone(phone);
             student.setDept(dept);
             student.setGrade(grade);
             student.setDeleted('N'); // 기본값 설정

@@ -5,7 +5,6 @@ public class Professor {
     private String name;
     private String email;
     private String password;
-    private String phone;
     private String dept;
     private String professorOffice;  // 연구실 위치
     private char deleted;            // 삭제 여부 (Y or N)
@@ -13,12 +12,11 @@ public class Professor {
     public Professor() {}
 
     public Professor(int professorId, String name, String email, String password, 
-                        String phone, String dept, String professorOffice, char deleted) {
+                         String dept, String professorOffice, char deleted) {
         this.professorId = professorId;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
         this.dept = dept;
         this.professorOffice = professorOffice;
         this.deleted = deleted;
@@ -54,14 +52,6 @@ public class Professor {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getDept() {

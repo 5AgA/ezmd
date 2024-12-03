@@ -14,7 +14,7 @@ public class StudentSignupManager {
 		this.studentDAO = new StudentDAO();
 	}
 
-	//교수 회원가입 처리
+	//학생 회원가입 처리
 	public boolean registerStudent(Student student) throws SQLException {
 		//이메일 중복 체크
 		if(studentDAO.findAllStudents().stream()

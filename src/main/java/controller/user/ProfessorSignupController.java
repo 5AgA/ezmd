@@ -30,7 +30,6 @@ public class ProfessorSignupController extends HttpServlet implements Controller
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String phone = request.getParameter("phone");
             String dept = request.getParameter("dept");
             String office = request.getParameter("professorOffice");
 
@@ -40,7 +39,6 @@ public class ProfessorSignupController extends HttpServlet implements Controller
             professor.setName(name);
             professor.setEmail(email);
             professor.setPassword(password);
-            professor.setPhone(phone);
             professor.setDept(dept);
             professor.setProfessorOffice(office);
             professor.setDeleted('N'); // 기본값 설정

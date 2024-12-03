@@ -17,13 +17,12 @@ public class StudentDAO {
 
     // Create - 학생 추가
     public int createStudent(Student student) {
-        String sql = "INSERT INTO student (student_id, name, email, password, phone, dept, grade, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO student (student_id, name, email, password, dept, grade, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] params = {
             student.getStudentId(),
             student.getName(),
             student.getEmail(),
             student.getPassword(),
-            student.getPhone(),
             student.getDept(),
             student.getGrade(),
             student.getDeleted()
@@ -44,7 +43,7 @@ public class StudentDAO {
 
     // Read - ID로 학생 조회
     public Student findStudentById(int studentId) throws SQLException {
-        String sql = "SELECT student_id, name, email, password, phone, dept, grade, deleted "
+        String sql = "SELECT student_id, name, email, password, dept, grade, deleted "
                    + "FROM student WHERE student_id=?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{studentId});
 
@@ -56,7 +55,6 @@ public class StudentDAO {
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getString("phone"),
                     rs.getString("dept"),
                     rs.getInt("grade"),
                     rs.getString("deleted").charAt(0)
@@ -72,7 +70,7 @@ public class StudentDAO {
 
     // Read - 전체 학생 조회
     public List<Student> findAllStudents() throws SQLException {
-        String sql = "SELECT student_id, name, email, password, phone, dept, grade, deleted FROM student ORDER BY student_id";
+        String sql = "SELECT student_id, name, email, password, dept, grade, deleted FROM student ORDER BY student_id";
         jdbcUtil.setSqlAndParameters(sql, null);
 
         List<Student> studentList = new ArrayList<>();
@@ -84,7 +82,6 @@ public class StudentDAO {
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getString("phone"),
                     rs.getString("dept"),
                     rs.getInt("grade"),
                     rs.getString("deleted").charAt(0)
@@ -100,12 +97,11 @@ public class StudentDAO {
 
     // Update - 학생 정보 수정
     public int updateStudent(Student student) {
-        String sql = "UPDATE student SET name=?, email=?, password=?, phone=?, dept=?, grade=?, deleted=? WHERE student_id=?";
+        String sql = "UPDATE student SET name=?, email=?, password=?, dept=?, grade=?, deleted=? WHERE student_id=?";
         Object[] params = {
             student.getName(),
             student.getEmail(),
             student.getPassword(),
-            student.getPhone(),
             student.getDept(),
             student.getGrade(),
             student.getDeleted(),
@@ -147,7 +143,7 @@ public class StudentDAO {
         return 0;
     }
     public Student findStudentByEmail(String email) throws SQLException {
-    	String sql = "SELECT student_id, name, email, password, phone, dept, grade, deleted FROM student WHERE email=?;";
+    	String sql = "SELECT student_id, name, email, password, dept, grade, deleted FROM student WHERE email=?;";
     	jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
     	
     	try {
@@ -158,7 +154,6 @@ public class StudentDAO {
     				rs.getString("name"),
     				rs.getString("email"),
     				rs.getString("password"),
-                    rs.getString("phone"),
                     rs.getString("dept"),
                     rs.getInt("grade"),
                     rs.getString("deleted").charAt(0)

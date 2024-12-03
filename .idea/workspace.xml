@@ -11,6 +11,16 @@
   <component name="ChangeListManager">
     <list default="true" id="fb1472ab-3c1b-4ac5-ab2f-692f33066625" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorReviewDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorReviewDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/StudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/StudentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/Professor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/StudentSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/StudentSignupManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +177,7 @@
       <updated>1733204570188</updated>
       <workItem from="1733204572437" duration="635000" />
       <workItem from="1733205220493" duration="4679000" />
-      <workItem from="1733226653586" duration="1576000" />
+      <workItem from="1733226653586" duration="3625000" />
     </task>
     <servers />
   </component>

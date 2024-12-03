@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <title>로그인</title>
     <link rel="icon" href="<c:url value='/favicon.ico' />" type="image/x-icon">
     <link rel="stylesheet" href="<c:url value='/css/userForm.css' />">
     <script>
@@ -73,6 +72,13 @@
 			    	계정이 없으신가요? &nbsp;&nbsp;
 			    	<input type="button" value="회원가입" class="sign-up-link" onclick="window.location.href='<%= request.getContextPath() %>/register/form'">
 			    </div>
+
+				<!-- 에러 메시지 표시 -->
+				<c:if test="${not empty errorMessage}">
+					<div class="error-message" style="color:red;">
+						${errorMessage}
+					</div>
+				</c:if>
 	        </div>
 	    </form>
     </div>

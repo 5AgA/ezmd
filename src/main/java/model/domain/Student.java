@@ -5,7 +5,6 @@ public class Student {
     private String name;
     private String email;
     private String password;
-    private String phone;
     private String dept;
     private Integer grade;     // 학년
     private char deleted;      // 삭제 여부 (Y or N)
@@ -13,12 +12,11 @@ public class Student {
     public Student() {}
 
     public Student(int studentId, String name, String email, String password, 
-                      String phone, String dept, Integer grade, char deleted) {
+                       String dept, Integer grade, char deleted) {
         this.studentId = studentId;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
         this.dept = dept;
         this.grade = grade;
         this.deleted = deleted;
@@ -54,14 +52,6 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getDept() {
