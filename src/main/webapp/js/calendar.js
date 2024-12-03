@@ -7,17 +7,8 @@ let currentMonth = new Date().getMonth(); // 0: 1월, 1: 2월...
 // 월 이름 배열
 const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 
-// Fetch schedules from the server
-async function fetchSchedules(userId) {
-    const response = await fetch(`/schedule?userId=${userId}`);
-    if (!response.ok) {
-        throw new Error('서버에서 스케줄을 가져오는데 실패했습니다.');
-    }
-    return await response.json();
-}
-
 // 월간 달력을 표시하는 함수
-function renderCalendar(year, month, userId) {
+function renderCalendar(year, month) {
     const firstDay = new Date(year, month, 1).getDay(); // 해당 월의 첫 번째 요일
     const lastDate = new Date(year, month + 1, 0).getDate(); // 해당 월의 마지막 날짜
     const prevLastDate = new Date(year, month, 0).getDate(); // 이전 달의 마지막 날짜
@@ -55,23 +46,11 @@ function renderCalendar(year, month, userId) {
             dayElement.classList.add('prev-month');
         } else if (i <= firstDay + lastDate) {
             // 현재 달
+            const day = i - firstDay;
             dayElement.textContent = i - firstDay;
             if (year === todayYear && month === todayMonth && i - firstDay === todayDate) {
                 dayElement.classList.add('today');
             }
-
-            // Add schedules to the day cell
-            const daySchedules = schedules.filter(schedule => {
-                const scheduleDate = new Date(schedule.scheduleStart);
-                return scheduleDate.getFullYear() === year && scheduleDate.getMonth() === month && scheduleDate.getDate() === date;
-            });
-
-            daySchedules.forEach(schedule => {
-                const scheduleElement = document.createElement('div');
-                scheduleElement.classList.add('schedule');
-                scheduleElement.textContent = schedule.scheduleTitle;
-                dayElement.appendChild(scheduleElement);
-            });
         } else {
             // 다음 달
             dayElement.textContent = i - firstDay - lastDate;
@@ -89,7 +68,7 @@ document.querySelectorAll('.month-nav')[0].addEventListener('click', () => {
         currentMonth = 11;
         currentYear--;
     }
-    renderCalendar(currentYear, currentMonth, userId);
+    renderCalendar(currentYear, currentMonth);
 });
 
 // 다음 달 버튼
@@ -99,10 +78,9 @@ document.querySelectorAll('.month-nav')[1].addEventListener('click', () => {
         currentMonth = 0;
         currentYear++;
     }
-    renderCalendar(currentYear, currentMonth, userId);
+    renderCalendar(currentYear, currentMonth);
 });
 
 
 // 초기 달력 표시
-const userId = 1;
-renderCalendar(currentYear, currentMonth, userId);
+renderCalendar(currentYear, currentMonth);
