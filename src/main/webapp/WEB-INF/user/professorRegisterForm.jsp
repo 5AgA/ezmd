@@ -41,12 +41,6 @@
                     </div>
 				</div>
 
-                <!-- 전화번호 -->
-                <div class="input-group">
-                    <label class="input-label" for="phone">전화번호</label>
-                    <input type="text" id="phone" name="phone" placeholder="010-0000-0000" class="input-field" required>
-                </div>
-
 				<!-- 교수 번호 -->
                 <div class="input-group">
                     <label class="input-label" for="professorId">교수 번호</label>

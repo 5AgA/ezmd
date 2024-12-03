@@ -27,6 +27,8 @@
                     <label class="input-label" for="email">이메일</label>
                     <input type="email" id="email" name="email" placeholder="example@dongduk.ac.kr" class="input-field" required>
                 	<button type="button" class="duplicate-check-button" onclick="checkEmail()">중복확인</button>
+                    <span id="emailError" style="color:red;"></span>
+                    <span id="duplicateMessage" style="color:red;"></span>
                 </div>
 
                 <!-- 비밀번호 -->
@@ -40,12 +42,6 @@
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="비밀번호 확인" class="input-field" required>
                     </div>
 				</div>
-				
-                <!-- 전화번호 -->
-                <div class="input-group">
-                    <label class="input-label" for="phone">전화번호</label>
-                    <input type="text" id="phone" name="phone" placeholder="010-0000-0000" class="input-field" required>
-                </div>
 
 				<!-- 학번 -->
                 <div class="input-group">
@@ -74,26 +70,47 @@
     </div>
     <script>
         function checkEmail() {
-            const email = document.getElementById('email').value;
-            if (!email) {
-                alert('이메일을 입력해주세요.');
+            const email = document.getElementById('email').value.trim();
+            const emailError = document.getElementById('emailError');
+            const duplicateMessage = document.getElementById('duplicateMessage');
+            emailError.textContent = '';
+            duplicateMessage.textContent = '';
+
+            // 정규식 검증: 기본 형식 + @dongduk.ac.kr 도메인 확인
+            const emailRegex = /^[^\s@]+@dongduk\.ac\.kr$/;
+
+            if (!email){
+                emailError.textContent = '이메일을 입력해주세요.';
                 return;
             }
 
-            // AJAX 요청으로 중복 확인 처리
-            fetch('<%= request.getContextPath() %>/checkEmail?email=' + encodeURIComponent(email))
-                .then(response => response.json())
-                .then(data => {
-                    if (data.exists) {
-                        alert('이미 사용 중인 이메일입니다.');
-                    } else {
-                        alert('사용 가능한 이메일입니다.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('중복 확인 중 오류가 발생했습니다.');
-                });
+            if (!emailRegex.test(email)){
+                emailError.textContent = '유효한 @dongduk.ac.kr 이메일을 입력해주세요.';
+                return;
+            }
+
+            //AJAX 요청으로 중복 확인 처리
+            fetch('<%= request.getContextPath() %>/checkEmail',{
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'email=' + encodeURIComponent(email)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists){
+                    duplicateMessage.style.color = 'red';
+                    duplicateMessage.textContent = '이미 사용 중인 이메일입니다.';
+                } else{
+                    duplicateMessage.style.color = 'green';
+                    duplicateMessage.textContent = '사용 가능한 이메일입니다.';
+                }
+            })
+            .catch(error =>{
+                console.error('Error:', error);
+                alert('중복 확인 중 오류가 발생했습니다.');
+            });
         }
     </script>
 </body>
