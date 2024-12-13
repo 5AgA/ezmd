@@ -12,6 +12,13 @@
     <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/schedule/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/ScheduleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" afterDir="false" />
+>>>>>>> 4c763f96d92eb4a9949b801e2b90d18c834f2295
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,8 +209,12 @@
       <workItem from="1733049690342" duration="2627000" />
       <workItem from="1733052323754" duration="6534000" />
       <workItem from="1733058879786" duration="5042000" />
+<<<<<<< HEAD
       <workItem from="1733202905945" duration="6228000" />
       <workItem from="1734088424563" duration="376000" />
+=======
+      <workItem from="1733202905945" duration="5873000" />
+>>>>>>> 4c763f96d92eb4a9949b801e2b90d18c834f2295
     </task>
     <servers />
   </component>
