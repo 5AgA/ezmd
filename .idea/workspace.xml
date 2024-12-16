@@ -10,22 +10,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb1472ab-3c1b-4ac5-ab2f-692f33066625" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/user/CheckEmailServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorReviewDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorReviewDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/StudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/StudentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/Professor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorSignupManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/StudentSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/StudentSignupManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/professorRegisterForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/professorRegisterForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/studentRegisterForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/studentRegisterForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/register.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,6 +46,9 @@
     <option name="FILTER_INFO" value="true" />
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -177,7 +186,7 @@
       <updated>1733204570188</updated>
       <workItem from="1733204572437" duration="635000" />
       <workItem from="1733205220493" duration="4679000" />
-      <workItem from="1733226653586" duration="3625000" />
+      <workItem from="1733226653586" duration="9301000" />
     </task>
     <servers />
   </component>

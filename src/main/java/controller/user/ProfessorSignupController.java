@@ -30,8 +30,15 @@ public class ProfessorSignupController extends HttpServlet implements Controller
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String confirmPassword = request.getParameter("confirm-password");
             String dept = request.getParameter("dept");
             String office = request.getParameter("professorOffice");
+
+            // 비밀번호 확인
+            if (!password.equals(confirmPassword)) {
+                request.setAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+                return "studentRegisterForm.jsp";
+            }
 
             // Professor 객체 생성
             Professor professor = new Professor();
@@ -51,7 +58,7 @@ public class ProfessorSignupController extends HttpServlet implements Controller
                 return "home.jsp"; // 회원가입 성공
             } else {
                 request.setAttribute("errorMessage", "교수 회원가입 중 문제가 발생했습니다.");
-                return "signup.jsp"; // 실패 시 회원가입 페이지로 이동
+                return "professorRegisterForm.jsp"; // 실패 시 회원가입 페이지로 이동
             }
         } catch (Exception e) {
             e.printStackTrace();

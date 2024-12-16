@@ -80,7 +80,15 @@
 			<version>${oracle-jdbc-driver.version}</version>			
 			<scope>runtime</scope>
 		</dependency>
-		
+
+		<!-- Gson 라이브러리 추가: 이메일 유효성 검증 과정-->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+
+
 		<!-- for unit test -->
 		<dependency>
 			<groupId>junit</groupId>

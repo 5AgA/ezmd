@@ -26,7 +26,7 @@
                 <div class="input-group email-group">
                     <label class="input-label" for="email">이메일</label>
                     <input type="email" id="email" name="email" placeholder="example@dongduk.ac.kr" class="input-field" required>
-                	<button type="button" class="duplicate-check-button" onclick="checkEmail()">중복확인</button>
+                	<button type="button" class="duplicate-check-button" onclick="checkEmail()" disabled>중복확인</button>
                     <span id="emailError" style="color:red;"></span>
                     <span id="duplicateMessage" style="color:red;"></span>
                 </div>
@@ -69,48 +69,87 @@
         </form>
     </div>
     <script>
-        function checkEmail() {
-            const email = document.getElementById('email').value.trim();
-            const emailError = document.getElementById('emailError');
-            const duplicateMessage = document.getElementById('duplicateMessage');
+        // 이메일 입력 필드 요소 가져오기
+        const emailInput = document.getElementById('email');
+        const duplicateCheckBtn = document.getElementById('duplicateCheckBtn');
+        const emailError = document.getElementById('emailError');
+        const duplicateMessage = document.getElementById('duplicateMessage');
+        const studentRegisterForm = document.getElementById('studentRegisterForm');
+
+        // 이메일 정규식: @dongduk.ac.kr 도메인 확인
+        const emailRegex = /^[^\s@]+@dongduk\.ac\.kr$/;
+
+        // 이메일 입력 시 중복 확인 버튼 활성화 및 에러 메시지 초기화
+        emailInput.addEventListener('input', function() {
+            const email = this.value.trim();
             emailError.textContent = '';
             duplicateMessage.textContent = '';
 
-            // 정규식 검증: 기본 형식 + @dongduk.ac.kr 도메인 확인
-            const emailRegex = /^[^\s@]+@dongduk\.ac\.kr$/;
+            if (emailRegex.test(email)) {
+                duplicateCheckBtn.disabled = false;
+            } else {
+                duplicateCheckBtn.disabled = true;
+                if (email.length > 0) {
+                    emailError.textContent = '유효한 @dongduk.ac.kr 이메일을 입력해주세요.';
+                }
+            }
+        });
 
-            if (!email){
+        // 폼 제출 시 중복 확인이 완료되지 않은 경우 방지
+        studentRegisterForm.addEventListener('submit', function(event) {
+            if (duplicateMessage.textContent === '이미 사용 중인 이메일입니다.') {
+                event.preventDefault();
+                alert('이미 사용 중인 이메일입니다. 다른 이메일을 사용해주세요.');
+            }
+            if (duplicateMessage.textContent === '') {
+                alert('이메일 중복 확인을 해주세요.');
+                event.preventDefault();
+            }
+        });
+
+        function checkEmail() {
+            const email = emailInput.value.trim();
+            emailError.textContent = '';
+            duplicateMessage.textContent = '';
+
+            // 이메일 형식 검증
+            if (!email) {
                 emailError.textContent = '이메일을 입력해주세요.';
                 return;
             }
 
-            if (!emailRegex.test(email)){
+            if (!emailRegex.test(email)) {
                 emailError.textContent = '유효한 @dongduk.ac.kr 이메일을 입력해주세요.';
                 return;
             }
 
-            //AJAX 요청으로 중복 확인 처리
-            fetch('<%= request.getContextPath() %>/checkEmail',{
+            // AJAX 요청으로 중복 확인 처리
+            fetch('<c:url value="/checkEmail" />', {
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: 'email=' + encodeURIComponent(email)
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.exists){
-                    duplicateMessage.style.color = 'red';
-                    duplicateMessage.textContent = '이미 사용 중인 이메일입니다.';
-                } else{
-                    duplicateMessage.style.color = 'green';
-                    duplicateMessage.textContent = '사용 가능한 이메일입니다.';
-                }
-            })
-            .catch(error =>{
-                console.error('Error:', error);
-                alert('중복 확인 중 오류가 발생했습니다.');
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('네트워크 응답에 문제가 있습니다.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.exists){
+                        duplicateMessage.style.color = 'red';
+                        duplicateMessage.textContent = '이미 사용 중인 이메일입니다.';
+                    } else{
+                        duplicateMessage.style.color = 'green';
+                        duplicateMessage.textContent = '사용 가능한 이메일입니다.';
+                    }
+                })
+                .catch(error =>{
+                    console.error('Error:', error);
+                    alert('중복 확인 중 오류가 발생했습니다.');
+                });
         }
     </script>
 </body>

@@ -32,8 +32,15 @@ public class StudentSignupController extends HttpServlet implements Controller {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String confirmPassword = request.getParameter("confirm-password");
             String dept = request.getParameter("dept");
             Integer grade = Integer.parseInt(request.getParameter("grade"));
+
+            // 비밀번호 확인
+            if (!password.equals(confirmPassword)) {
+                request.setAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+                return "studentRegisterForm.jsp";
+            }
 
             // Student 객체 생성
             Student student = new Student();
@@ -53,7 +60,7 @@ public class StudentSignupController extends HttpServlet implements Controller {
                 return "home.jsp"; // 성공 시 홈 화면으로 이동
             } else {
                 request.setAttribute("errorMessage", "학생 회원가입 중 문제가 발생했습니다.");
-                return "signup.jsp"; // 실패 시 회원가입 페이지로 이동
+                return "studentRegisterForm.jsp"; // 실패 시 회원가입 페이지로 이동
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -168,6 +168,11 @@ body {
     background-color: #6A1F34;
 }
 
+.duplicate-check-button:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
 .password-wrapper{
 	width: 48%;
 	margin-bottom: 10px;
