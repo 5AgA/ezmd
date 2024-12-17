@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,9 +13,19 @@
     <div class="header-bar"></div>
    
     <div class="registerForm">
-        <form action="<c:url value='/signup/student' />" method="post">
+        <form action="<c:url value='/signup/student' />" method="post" id="studentRegisterForm">
             <div class="register-box">
                 <div class="register-title">학생 회원가입</div>
+
+
+                <!-- 서버 측 에러 메시지 표시 -->
+                <jsp:useBean id="errorMessage" scope="request" />
+                <c:if test="${not empty errorMessage}">
+                    <div class="error-message" style="color:red; margin-bottom:10px;">
+                            ${errorMessage}
+                    </div>
+                </c:if>
+
 
                 <!-- 이름 -->
                 <div class="input-group">
@@ -26,7 +37,7 @@
                 <div class="input-group email-group">
                     <label class="input-label" for="email">이메일</label>
                     <input type="email" id="email" name="email" placeholder="example@dongduk.ac.kr" class="input-field" required>
-                	<button type="button" class="duplicate-check-button" onclick="checkEmail()" disabled>중복확인</button>
+                	<button type="button" class="duplicate-check-button" id="duplicateCheckBtn" onclick="checkEmail()" disabled>중복확인</button>
                     <span id="emailError" style="color:red;"></span>
                     <span id="duplicateMessage" style="color:red;"></span>
                 </div>

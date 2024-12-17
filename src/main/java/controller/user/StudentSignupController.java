@@ -74,7 +74,7 @@ public class StudentSignupController extends HttpServlet implements Controller {
         try {
             // execute 메서드 호출 후 반환된 URL로 이동
             String view = execute(request, response);
-            if (view.equals("home.jsp")) {
+            if (view.equals("loginForm.jsp")) {
                 response.sendRedirect(view);
             } else {
                 request.getRequestDispatcher(view).forward(request, response);

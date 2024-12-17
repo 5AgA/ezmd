@@ -172,6 +172,10 @@ body {
 	background-color: #ccc;
 	cursor: not-allowed;
 }
+/* 추가: 유효한 이메일 상태 */
+.duplicate-check-button.valid {
+	background-color: #4CAF50; /* 녹색 */
+}
 
 .password-wrapper{
 	width: 48%;

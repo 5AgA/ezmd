@@ -1,6 +1,8 @@
 package controller.user;
 
 import java.io.IOException;
+import java.io.Serial;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -66,6 +68,8 @@ public class CheckEmailServlet extends HttpServlet {
 
         // JSON 응답 전송
         response.getWriter().write(jsonResponse);
+        System.out.println("Received email for duplication check: " + email);
+
     }
 
     // GET 요청도 동일하게 처리하도록 doGet 오버라이드

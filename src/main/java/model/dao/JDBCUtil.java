@@ -16,7 +16,13 @@ public class JDBCUtil {
 	private int resultSetType = ResultSet.TYPE_FORWARD_ONLY, resultSetConcurrency = ResultSet.CONCUR_READ_ONLY;
 
 	// 기본 생성자
-	public JDBCUtil() {}
+	public JDBCUtil() {
+		try{
+			conn = connMan.getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
 
 	/*
 	 * // 매개변수 없는 query를 전달받아 query를 설정하는 생성자 public JDBCUtil(String sql) {
