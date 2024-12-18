@@ -17,7 +17,7 @@ public class StudentDAO {
 
     // Create - 학생 추가
     public int createStudent(Student student) {
-        String sql = "INSERT INTO student (student_id, name, email, password, dept, grade, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO student (student_id, name, email, password, dept, grade, deleted) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Object[] params = {
             student.getStudentId(),
             student.getName(),
@@ -142,29 +142,48 @@ public class StudentDAO {
         }
         return 0;
     }
-    public Student findStudentByEmail(String email) throws SQLException {
-    	String sql = "SELECT student_id, name, email, password, dept, grade, deleted FROM student WHERE email=?;";
-    	jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
-    	
-    	try {
-    		ResultSet rs = jdbcUtil.executeQuery();
-    		if (rs.next()) {
-    			return new Student(
-    				rs.getInt("student_id"),
-    				rs.getString("name"),
-    				rs.getString("email"),
-    				rs.getString("password"),
-                    rs.getString("dept"),
-                    rs.getInt("grade"),
-                    rs.getString("deleted").charAt(0)
-    			);
-    		}
-    	} catch(Exception ex) {
-    		ex.printStackTrace();
-    	} finally {
-    		jdbcUtil.close();
-    	}
-    	return null;
+
+    public boolean findStudentByEmail(String email) {
+        String sql = "SELECT count(*) FROM student WHERE email = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if(rs.next()){
+                int count = rs.getInt(1);
+                return (count == 1 ? true : false);
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            jdbcUtil.close();
+        }
+        return false;
     }
-    
+
+    public Student findStudPwdByEmail(String email){
+        String sql = "SELECT * FROM student WHERE email = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                Student student = new Student(
+                        rs.getInt("student_id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("dept"),
+                        rs.getInt("grade"),
+                        rs.getString("deleted").charAt(0)
+                );
+                return student;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
 }

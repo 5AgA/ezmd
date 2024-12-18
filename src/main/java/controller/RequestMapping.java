@@ -10,6 +10,8 @@ import controller.user.ProfessorSignupController;
 import controller.user.StudentLoginController;
 import controller.user.StudentSignupController;
 
+import controller.ForwardController;
+
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
@@ -43,6 +45,10 @@ public class RequestMapping {
 
     public Controller findController(String uri) {
         // 주어진 URI에 대응되는 Controller 객체를 찾아 반환
-        return mappings.get(uri);
+        Controller controller = mappings.get(uri);
+        if (controller == null) {
+            logger.warn("No controller found for URI: {}", uri);
+        }
+        return controller;
     }
 }

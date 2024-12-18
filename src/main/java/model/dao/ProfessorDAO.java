@@ -1,11 +1,16 @@
 package model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.domain.Professor;
+import model.domain.Student;
+
+import static java.sql.DriverManager.getConnection;
 
 public class ProfessorDAO {
 
@@ -17,7 +22,7 @@ public class ProfessorDAO {
 
     // Create - 교수 추가
     public int createProfessor(Professor professor) {
-        String sql = "INSERT INTO professor (professor_id, name, email, password, dept, professor_office, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO professor (professor_id, name, email, password, dept, professor_office, deleted) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Object[] params = {
             professor.getProfessorId(),
             professor.getName(),
@@ -142,24 +147,42 @@ public class ProfessorDAO {
         }
         return 0;
     }
-    
-    
-    public Professor findProfessorByEmail(String email) throws SQLException {
-        String sql = "SELECT professor_id, name, email, password, dept, professor_office, deleted FROM professor WHERE email=?";
+
+
+    public boolean findProfessorByEmail(String email) throws SQLException {
+        String sql = "SELECT count(*) FROM professor WHERE email = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if(rs.next()){
+                int count = rs.getInt(1);
+                return (count == 1 ? true : false);
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            jdbcUtil.close();
+        }
+        return false;
+    }
+    public Professor findProfPwdByEmail(String email){
+        String sql = "SELECT * FROM professor WHERE email = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();
             if (rs.next()) {
-                return new Professor(
-                    rs.getInt("professor_id"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("dept"),
-                    rs.getString("professor_office"),
-                    rs.getString("deleted").charAt(0)
+                Professor professor = new Professor(
+                        rs.getInt("professor_id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("dept"),
+                        rs.getString("professor_office"),
+                        rs.getString("deleted").charAt(0)
                 );
+                return professor;
             }
         } catch (Exception ex) {
             ex.printStackTrace();

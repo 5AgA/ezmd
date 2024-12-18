@@ -2,6 +2,7 @@
 package controller.user;
 
 import controller.Controller;
+import model.domain.Professor;
 import model.manager.ProfessorLoginManager;
 
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
 
         // 로그인 매니저에서 처리
         ProfessorLoginManager professorLoginManager = new ProfessorLoginManager();
-        Object user;
+        Professor user;
 
         try {
             user = professorLoginManager.authenticate(email, password);
@@ -35,8 +36,9 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
         if (user != null) {
             // 로그인 성공; 세션에 사용자 정보를 저장
             request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("userType", "professor");
             // 성공 시 홈 페이지로 이동
-            return "home.jsp";
+            return "redirect:/home";
         } else {
             // 로그인 실패 시 로그인 페이지로 이동하며 에러 메시지 설정
             request.setAttribute("errorMessage", "Invalid credentials");
@@ -48,8 +50,8 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
 		  try {
 	            // execute 메서드를 호출하여 반환된 URL로 리다이렉트 또는 포워드
 	            String view = execute(request, response);
-	            if (view.equals("home.jsp")) {
-	                response.sendRedirect(view);
+	            if (view.startsWith("redirect:")) {
+                    response.sendRedirect(view.substring("redirect:".length()));
 	            } else {
 	                request.getRequestDispatcher(view).forward(request, response);
 	            }

@@ -89,9 +89,9 @@ public class ScheduleDAO {
 
     // Read
     public List<Schedule> findScheduleByStartDate(LocalDateTime startDate) {
-        String qeury = "SELECT * FROM Schedule WHERE schedule_start=?";
+        String query = "SELECT * FROM Schedule WHERE schedule_start=?";
         List<Schedule> scheduleList = new ArrayList<>();
-        jdbcUtil.setSqlAndParameters(qeury, new Object[]{Timestamp.valueOf(startDate)});
+        jdbcUtil.setSqlAndParameters(query, new Object[]{Timestamp.valueOf(startDate)});
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();

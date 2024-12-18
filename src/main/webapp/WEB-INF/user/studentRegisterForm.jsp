@@ -11,21 +11,14 @@
 </head>
 <body>
     <div class="header-bar"></div>
-   
+
     <div class="registerForm">
         <form action="<c:url value='/signup/student' />" method="post" id="studentRegisterForm">
             <div class="register-box">
                 <div class="register-title">학생 회원가입</div>
 
-
-                <!-- 서버 측 에러 메시지 표시 -->
-                <jsp:useBean id="errorMessage" scope="request" />
-                <c:if test="${not empty errorMessage}">
-                    <div class="error-message" style="color:red; margin-bottom:10px;">
-                            ${errorMessage}
-                    </div>
-                </c:if>
-
+                <!-- CSRF 토큰 -->
+                <input type="hidden" name="csrfToken" value="${csrfToken}">
 
                 <!-- 이름 -->
                 <div class="input-group">
@@ -36,10 +29,16 @@
                 <!-- 이메일 -->
                 <div class="input-group email-group">
                     <label class="input-label" for="email">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="example@dongduk.ac.kr" class="input-field" required>
-                	<button type="button" class="duplicate-check-button" id="duplicateCheckBtn" onclick="checkEmail()" disabled>중복확인</button>
+                    <input type="email" id="email" name="email" placeholder="example@dongduk.ac.kr" class="input-field" required
+                           value="${email != null ? email : ''}">
+                    <button type="button" class="duplicate-check-button" id="duplicateCheckBtn" onclick="checkEmail()"
+                            <c:if test="${not empty email && !email.matches('^[^\\\\s@]+@dongduk\\\\.ac\\\\.kr$')}">disabled="disabled"</c:if>
+                    >
+                        중복확인
+                    </button>
                     <span id="emailError" style="color:red;"></span>
                     <span id="duplicateMessage" style="color:red;"></span>
+                    <span id="loadingMessage" style="color:blue; display:none;"></span>
                 </div>
 
                 <!-- 비밀번호 -->
@@ -52,14 +51,14 @@
                         <label class="input-label" for="confirm-password">비밀번호 확인</label>
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="비밀번호 확인" class="input-field" required>
                     </div>
-				</div>
+                </div>
 
-				<!-- 학번 -->
+                <!-- 학번 -->
                 <div class="input-group">
                     <label class="input-label" for="studentId">학번</label>
                     <input type="text" id="studentId" name="studentId" placeholder="학번을 입력하세요" class="input-field" required>
                 </div>
-                
+
                 <!-- 학과 -->
                 <div class="input-group">
                     <label class="input-label" for="dept">학과</label>
@@ -69,7 +68,7 @@
                 <!-- 학년 -->
                 <div class="input-group">
                     <label class="input-label" for="grade">학년</label>
-                    <input type="number" id="grade" name="grade" placeholder="학년을 입력하세요" class="input-field" required>
+                    <input type="number" id="grade" name="grade" placeholder="학년을 입력하세요" class="input-field" required min="1" max="4">
                 </div>
 
                 <!-- 가입하기 버튼 -->
@@ -79,26 +78,35 @@
             </div>
         </form>
     </div>
+
     <script>
-        // 이메일 입력 필드 요소 가져오기
+        // 이메일 정규식: @dongduk.ac.kr 도메인 확인 (대소문자 무시)
+        const emailRegex = /^[^\s@]+@dongduk\.ac\.kr$/i;
+
+        // 이메일 중복 확인 버튼 및 관련 요소 가져오기
         const emailInput = document.getElementById('email');
         const duplicateCheckBtn = document.getElementById('duplicateCheckBtn');
         const emailError = document.getElementById('emailError');
         const duplicateMessage = document.getElementById('duplicateMessage');
+        const loadingMessage = document.getElementById('loadingMessage');
         const studentRegisterForm = document.getElementById('studentRegisterForm');
-
-        // 이메일 정규식: @dongduk.ac.kr 도메인 확인
-        const emailRegex = /^[^\s@]+@dongduk\.ac\.kr$/;
 
         // 이메일 입력 시 중복 확인 버튼 활성화 및 에러 메시지 초기화
         emailInput.addEventListener('input', function() {
             const email = this.value.trim();
+            console.log(`입력된 이메일: "${email}"`); // 디버깅 로그
             emailError.textContent = '';
             duplicateMessage.textContent = '';
+            loadingMessage.style.display = 'none';
+
+            // 이전에 추가된 valid/invalid 클래스 제거
+            duplicateCheckBtn.classList.remove('valid', 'invalid');
 
             if (emailRegex.test(email)) {
+                console.log('이메일이 정규식과 일치합니다. 버튼 활성화.');
                 duplicateCheckBtn.disabled = false;
             } else {
+                console.log('이메일이 정규식과 일치하지 않습니다. 버튼 비활성화.');
                 duplicateCheckBtn.disabled = true;
                 if (email.length > 0) {
                     emailError.textContent = '유효한 @dongduk.ac.kr 이메일을 입력해주세요.';
@@ -106,33 +114,21 @@
             }
         });
 
-        // 폼 제출 시 중복 확인이 완료되지 않은 경우 방지
-        studentRegisterForm.addEventListener('submit', function(event) {
-            if (duplicateMessage.textContent === '이미 사용 중인 이메일입니다.') {
-                event.preventDefault();
-                alert('이미 사용 중인 이메일입니다. 다른 이메일을 사용해주세요.');
-            }
-            if (duplicateMessage.textContent === '') {
-                alert('이메일 중복 확인을 해주세요.');
-                event.preventDefault();
-            }
-        });
-
+        // 이메일 중복 확인 함수
         function checkEmail() {
             const email = emailInput.value.trim();
             emailError.textContent = '';
             duplicateMessage.textContent = '';
 
-            // 이메일 형식 검증
-            if (!email) {
-                emailError.textContent = '이메일을 입력해주세요.';
-                return;
-            }
-
+            // 이메일 형식 검증 (클라이언트 측)
             if (!emailRegex.test(email)) {
                 emailError.textContent = '유효한 @dongduk.ac.kr 이메일을 입력해주세요.';
                 return;
             }
+
+            // 로딩 메시지 표시
+            loadingMessage.textContent = '확인 중...';
+            loadingMessage.style.display = 'inline';
 
             // AJAX 요청으로 중복 확인 처리
             fetch('<c:url value="/checkEmail" />', {
@@ -152,16 +148,101 @@
                     if (data.exists){
                         duplicateMessage.style.color = 'red';
                         duplicateMessage.textContent = '이미 사용 중인 이메일입니다.';
+                        duplicateCheckBtn.classList.remove('valid');
+                        duplicateCheckBtn.classList.add('invalid');
                     } else{
                         duplicateMessage.style.color = 'green';
                         duplicateMessage.textContent = '사용 가능한 이메일입니다.';
+                        duplicateCheckBtn.classList.remove('invalid');
+                        duplicateCheckBtn.classList.add('valid');
                     }
+                    // 로딩 메시지 숨기기
+                    loadingMessage.style.display = 'none';
                 })
                 .catch(error =>{
                     console.error('Error:', error);
                     alert('중복 확인 중 오류가 발생했습니다.');
+                    loadingMessage.style.display = 'none';
                 });
         }
+
+        // 중복 확인 버튼 클릭 시 checkEmail 함수 호출
+        duplicateCheckBtn.addEventListener('click', checkEmail);
+
+        // 폼 제출 시 검증
+        studentRegisterForm.addEventListener('submit', function(event) {
+            let valid = true;
+            const name = this.name.value.trim();
+            const email = this.email.value.trim();
+            const password = this.password.value;
+            const confirmPassword = this['confirm-password'].value;
+            const studentId = this.studentId.value.trim();
+            const dept = this.dept.value.trim();
+            const grade = this.grade.value.trim();
+
+            // 이름 검증
+            if (name === "") {
+                alert("이름을 입력해주세요.");
+                this.name.focus();
+                valid = false;
+            }
+
+            // 이메일 검증
+            if (!emailRegex.test(email)) {
+                alert("이메일 형식이 올바르지 않습니다.");
+                this.email.focus();
+                valid = false;
+            }
+
+            // 비밀번호 검증
+            if (password.length < 8) {
+                alert("비밀번호는 최소 8자 이상이어야 합니다.");
+                this.password.focus();
+                valid = false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("비밀번호가 일치하지 않습니다.");
+                this['confirm-password'].focus();
+                valid = false;
+            }
+
+            // 학번 검증
+            if (studentId === "") {
+                alert("학번을 입력해주세요.");
+                this.studentId.focus();
+                valid = false;
+            }
+
+            // 학과 검증
+            if (dept === "") {
+                alert("학과를 입력해주세요.");
+                this.dept.focus();
+                valid = false;
+            }
+
+            // 학년 검증
+            if (grade === "") {
+                alert("학년을 입력해주세요.");
+                this.grade.focus();
+                valid = false;
+            }
+
+            // 이메일 중복 확인 여부 검증
+            if (duplicateMessage.textContent === '이미 사용 중인 이메일입니다.') {
+                alert('이미 사용 중인 이메일입니다. 다른 이메일을 사용해주세요.');
+                this.email.focus();
+                valid = false;
+            }
+            if (duplicateMessage.textContent === '') {
+                alert('이메일 중복 확인을 해주세요.');
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        })
     </script>
 </body>
 </html>

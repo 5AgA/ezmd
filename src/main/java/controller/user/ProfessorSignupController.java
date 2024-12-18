@@ -37,7 +37,7 @@ public class ProfessorSignupController extends HttpServlet implements Controller
             request.setAttribute("csrfToken", csrfToken);
 
             // 회원가입 폼으로 포워딩
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/professorRegisterForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/professorRegisterForm.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +56,10 @@ public class ProfessorSignupController extends HttpServlet implements Controller
             String sessionCsrfToken = (String) request.getSession().getAttribute("csrfToken");
             String formCsrfToken = request.getParameter("csrfToken");
 
-            if (sessionCsrfToken == null || formCsrfToken == null || !sessionCsrfToken.equals(formCsrfToken)) {
+//            System.out.println("Session CSRF Token: " + sessionCsrfToken);
+//            System.out.println("Form CSRF Token: " + formCsrfToken);
+
+            if (sessionCsrfToken == null || !sessionCsrfToken.equals(formCsrfToken)) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "유효하지 않은 CSRF 토큰입니다.");
                 return;
             }
@@ -66,8 +69,8 @@ public class ProfessorSignupController extends HttpServlet implements Controller
 
             // execute 메서드 호출 후 반환된 URL로 이동
             String view = execute(request, response);
-            if (view.equals("login.jsp")) {
-                response.sendRedirect(view);
+            if (view.startsWith("redirect:")) {
+                response.sendRedirect(view.substring("redirect:".length()));
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher(view);
                 dispatcher.forward(request, response);
@@ -88,7 +91,7 @@ public class ProfessorSignupController extends HttpServlet implements Controller
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 요청 데이터 추출
-        String professorId = request.getParameter("professorId").trim();
+        String professorIdStr = request.getParameter("professorId").trim();
         String name = request.getParameter("name").trim();
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password");
@@ -99,13 +102,13 @@ public class ProfessorSignupController extends HttpServlet implements Controller
         // 서버 측 유효성 검사
         String errorMessage = null;
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() ||
-                confirmPassword.isEmpty() || professorId.isEmpty() ||
+                confirmPassword.isEmpty() || professorIdStr.isEmpty() ||
                 dept.isEmpty() || professorOffice.isEmpty()) {
             errorMessage = "모든 필드를 올바르게 입력해주세요.";
         } else if (!password.equals(confirmPassword)) {
             errorMessage = "비밀번호가 일치하지 않습니다.";
         } else if (!email.matches("^[^\\s@]+@dongduk\\.ac\\.kr$")) {
-            errorMessage = "controller 유효한 @dongduk.ac.kr 이메일을 입력해주세요.";
+            errorMessage = "유효한 @dongduk.ac.kr 이메일을 입력해주세요.";
         }
 
         // 이메일 중복 확인
@@ -128,7 +131,14 @@ public class ProfessorSignupController extends HttpServlet implements Controller
 
         // Professor 객체 생성
         Professor professor = new Professor();
-        professor.setProfessorId(Integer.parseInt(professorId)); // 교수 ID는 String으로 가정
+        try {
+            int professorId = Integer.parseInt(professorIdStr);
+            professor.setProfessorId(professorId);
+        } catch (NumberFormatException e) {
+            errorMessage = "교수 ID는 숫자여야 합니다.";
+            request.setAttribute("errorMessage", errorMessage);
+            return "professorRegisterForm.jsp";
+        }
         professor.setName(name);
         professor.setEmail(email);
         professor.setPassword(password); // 비밀번호는 Manager에서 해싱
@@ -148,7 +158,7 @@ public class ProfessorSignupController extends HttpServlet implements Controller
         }
 
         if (result) {
-            return "loginForm.jsp"; // 회원가입 성공 후 로그인 페이지로 이동
+            return "redirect:/login/form?signupSuccess=true"; // 회원가입 성공 후 로그인 페이지로 이동
         } else {
             request.setAttribute("errorMessage", "교수 회원가입 중 문제가 발생했습니다.");
             return "professorRegisterForm.jsp"; // 실패 시 회원가입 페이지로 이동

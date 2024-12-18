@@ -19,6 +19,10 @@
     			form.action = '<c:url value="/login/professor" />';
     		}
     	}
+
+		window.onload = function(){
+			updateFormAction();
+		}
     </script>
 </head>
 <body>
@@ -26,6 +30,12 @@
     <!-- 상단 바 -->
     <div class="header-bar"></div>
 
+
+	<c:if test="${param.signupSuccess == 'true'}">
+		<script>
+			alert('회원가입이 완료되었습니다. 로그인해주세요.');
+		</script>
+	</c:if>
     <!-- 로그인 폼 -->
     <div class="loginForm">
 	    <form id="loginForm" method="post">
