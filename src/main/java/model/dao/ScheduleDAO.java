@@ -18,8 +18,8 @@ public class ScheduleDAO {
 
     // **1. Create (스케줄 생성)**
     public Schedule create(Schedule schedule) {
-        String query = "INSERT INTO Schedule (schedule_id, schedule_title, schedule_start, schedule_end, schedule_repeat, schedule_place, memo, category_id, professor_id, student_id) " +
-                "VALUES (schedule_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Schedule (schedule_id, schedule_title, schedule_start, schedule_end, schedule_repeat, schedule_place, memo, category_id, user_id) " +
+                "VALUES (schedule_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] param = new Object[] {
                 schedule.getScheduleTitle(),
                 Timestamp.valueOf(schedule.getScheduleStart()),
@@ -28,8 +28,7 @@ public class ScheduleDAO {
                 schedule.getSchedulePlace(),
                 schedule.getScheduleMemo(),
                 schedule.getCategoryId(),
-                schedule.getProfessorId(),
-                schedule.getStudentId()
+                schedule.getUserId()
         };
 
         String[] key = {"schedule_id"};
@@ -145,8 +144,7 @@ public class ScheduleDAO {
         schedule.setSchedulePlace(rs.getString("schedule_place"));
         schedule.setScheduleMemo(rs.getString("memo"));
         schedule.setCategoryId(rs.getInt("category_id"));
-        schedule.setProfessorId(rs.getInt("professor_id"));
-        schedule.setStudentId(rs.getInt("student_id"));
+        schedule.setUserId(rs.getInt("user_id"));
         return schedule;
     }
 

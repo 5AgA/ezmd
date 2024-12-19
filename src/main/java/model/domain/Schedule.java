@@ -3,26 +3,26 @@ package model.domain;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 public class Schedule {
 
-    private int scheduleId; // 스케줄 ID
+    private Integer scheduleId; // 스케줄 ID
     private String scheduleTitle; // 스케줄 제목
     private LocalDateTime scheduleStart; // 시작 시간
     private LocalDateTime scheduleEnd; // 종료 시간
-    private int scheduleRepeat; // 반복 요일 비트 값
+    private Integer scheduleRepeat; // 반복 요일 비트 값
     private String schedulePlace; // 장소
     private String scheduleMemo; // 메모
-    private int categoryId; // 카테고리 ID
-    private int professorId; // 교수 ID
-    private int studentId; // 학생 ID
+    private Integer categoryId; // 카테고리 ID
+    private Integer userId;
 
     // **기본 생성자**
     public Schedule() {}
 
     // **전체 필드를 포함한 생성자**
     public Schedule(int scheduleId, String scheduleTitle, LocalDateTime scheduleStart, LocalDateTime scheduleEnd,
-                    int scheduleRepeat, String schedulePlace, String scheduleMemo, int categoryId, int professorId, int studentId) {
+                    int scheduleRepeat, String schedulePlace, String scheduleMemo, int categoryId, int userId) {
         this.scheduleId = scheduleId;
         this.scheduleTitle = scheduleTitle;
         this.scheduleStart = scheduleStart;
@@ -31,8 +31,7 @@ public class Schedule {
         this.schedulePlace = schedulePlace;
         this.scheduleMemo = scheduleMemo;
         this.categoryId = categoryId;
-        this.professorId = professorId;
-        this.studentId = studentId;
+        this.userId = userId;
     }
 
     // **toString 메서드** (디버깅 용도)
@@ -41,7 +40,19 @@ public class Schedule {
         return "Schedule [scheduleId=" + scheduleId + ", scheduleTitle=" + scheduleTitle
                 + ", scheduleStart=" + scheduleStart + ", scheduleEnd=" + scheduleEnd + ", scheduleRepeat=" + scheduleRepeat
                 + ", schedulePlace=" + schedulePlace + ", scheduleMemo=" + scheduleMemo + ", categoryId=" + categoryId
-                + ", professorId=" + professorId + ", studentId=" + studentId + "]";
+                + ", userId=" + userId + "]";
+    }
+
+    // LocalDateTime을 String으로 변환
+    public static String formatDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return dateTime.format(formatter);
+    }
+
+    // String을 LocalDateTime으로 변환
+    public static LocalDateTime parseDateTime(String dateTimeStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(dateTimeStr, formatter);
     }
 
     // **요일 관련 유틸리티 메서드**
@@ -83,8 +94,6 @@ public class Schedule {
     public void setScheduleId(int scheduleId) {
         this.scheduleId = scheduleId;
     }
-
-
 
     public String getScheduleTitle() {
         return scheduleTitle;
@@ -142,19 +151,11 @@ public class Schedule {
         this.categoryId = categoryId;
     }
 
-    public int getProfessorId() {
-        return professorId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setProfessorId(int professorId) {
-        this.professorId = professorId;
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

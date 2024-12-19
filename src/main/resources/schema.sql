@@ -36,6 +36,7 @@ CREATE TABLE schedule_category (
     category_id NUMBER NOT NULL,
     category_name VARCHAR2(50) NOT NULL,
     category_color VARCHAR2(20) NOT NULL,
+    user_id NUMBER NOT NULL,
     CONSTRAINT category_pk PRIMARY KEY (category_id)
 );
 
@@ -46,7 +47,7 @@ CREATE TABLE schedule (
     schedule_end TIMESTAMP NOT NULL,
     schedule_repeat NUMBER NULL,
     schedule_place VARCHAR2(100) NULL,
-    memo VARCHAR2(500) NULL,
+    schedule_memo VARCHAR2(500) NULL,
     category_id NUMBER NOT NULL,
     user_id NUMBER NOT NULL,
     CONSTRAINT schedule_pk PRIMARY KEY (schedule_id)

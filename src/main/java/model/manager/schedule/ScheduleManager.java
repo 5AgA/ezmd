@@ -42,8 +42,7 @@ public class ScheduleManager {
                 repeatedSchedule.setSchedulePlace(schedule.getSchedulePlace());
                 repeatedSchedule.setScheduleMemo(schedule.getScheduleMemo());
                 repeatedSchedule.setCategoryId(schedule.getCategoryId());
-                repeatedSchedule.setProfessorId(schedule.getProfessorId());
-                repeatedSchedule.setStudentId(schedule.getStudentId());
+                repeatedSchedule.setUserId(schedule.getUserId());
 
                 repeatingSchedules.add(repeatedSchedule);
             }
@@ -72,8 +71,7 @@ public class ScheduleManager {
                 repeatedSchedule.setSchedulePlace(schedule.getSchedulePlace());
                 repeatedSchedule.setScheduleMemo(schedule.getScheduleMemo());
                 repeatedSchedule.setCategoryId(schedule.getCategoryId());
-                repeatedSchedule.setProfessorId(schedule.getProfessorId());
-                repeatedSchedule.setStudentId(schedule.getStudentId());
+                repeatedSchedule.setUserId(schedule.getUserId());
 
                 repeatingSchedules.add(repeatedSchedule);
             }
