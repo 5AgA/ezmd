@@ -1,22 +1,19 @@
 package model.dao.mybatis.mapper;
 
-import model.domain.Schedule;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.InputStream;
-import java.util.List;
 
-public class MapperTest {
+public class ScheduleMapperTest {
 
     private SqlSessionFactory sqlSessionFactory;
     private SqlSession session;
     private ScheduleMapper scheduleMapper;
+    private ScheduleCategoryMapper scheduleCategoryMapper;
     private int userId = 20210670;
 
     @BeforeEach
@@ -33,6 +30,7 @@ public class MapperTest {
 
         // Mapper 가져오기
         scheduleMapper = session.getMapper(ScheduleMapper.class);
+        scheduleCategoryMapper = session.getMapper(ScheduleCategoryMapper.class);
     }
 
 //    @Test
@@ -97,11 +95,75 @@ public class MapperTest {
 //        assertEquals(1, result, "스케줄 삭제에 실패했습니다.");
 //    }
 
+//    @Test
+//    public void testInsertScheduleCategory() {
+//        // 테스트할 데이터 생성
+//        ScheduleCategory category = new ScheduleCategory();
+//        category.setCategoryName("알바");
+//        category.setCategoryColor("#FF5733");
+//        category.setUserId(userId);
+//
+//        // 카테고리 삽입
+//        int result = scheduleCategoryMapper.insertScheduleCategory(category);
+//
+//        // 데이터가 성공적으로 삽입되었는지 검증
+//        assertEquals(1, result); // 반환 값은 1이어야 합니다.
+//    }
+
+//    @Test
+//    public void testSelectCategoriesByUserId() {
+//        // 특정 userId로 카테고리 목록 조회
+//        List<ScheduleCategory> categories = scheduleCategoryMapper.selectCategoriesByUserId(userId);
+//
+//        // 조회된 카테고리 리스트가 null이 아닌지 확인
+//        assertNotNull(categories);
+//        assertTrue(categories.size() > 0); // 적어도 하나 이상의 카테고리가 있어야 합니다.
+//
+//        // 카테고리 목록 출력
+//        categories.forEach(category -> System.out.println(category));
+//    }
+
+//    @Test
+//    public void testSelectScheduleCategoryById() {
+//        // ID로 특정 카테고리 조회
+//        ScheduleCategory category = scheduleCategoryMapper.selectScheduleCategoryById(1);
+//
+//        // 카테고리가 null이 아니어야 하고, 필드가 예상대로 설정되어 있어야 합니다.
+//        assertNotNull(category);
+//        assertEquals("Work", category.getCategoryName());
+//        assertEquals("#FF5733", category.getCategoryColor());
+//    }
+
+//    @Test
+//    public void testUpdateScheduleCategory() {
+//        // 기존 카테고리 수정
+//        ScheduleCategory category = new ScheduleCategory();
+//        category.setCategoryId(4);
+//        category.setCategoryName("일정");
+//        category.setCategoryColor("#33FF22");
+//        category.setUserId(userId);
+//
+//        // 카테고리 업데이트
+//        int result = scheduleCategoryMapper.updateScheduleCategory(category);
+//
+//        // 업데이트가 성공적으로 이루어졌는지 확인
+//        assertEquals(1, result);
+//    }
+
+//    @Test
+//    public void testDeleteScheduleCategory() {
+//        // 특정 카테고리 삭제
+//        int result = scheduleCategoryMapper.deleteScheduleCategory(22);
+//
+//        // 삭제가 성공적으로 이루어졌는지 확인
+//        assertEquals(1, result);
+//    }
+
     // 종료 시 세션 닫기
     @AfterEach
     public void tearDown() {
         if (session != null) {
-            session.commit();
+//            session.commit();
             session.close();
         }
     }

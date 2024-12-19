@@ -10,18 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/dao/mybatis/mapper/ScheduleCategoryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/dao/mybatis/mapper/ScheduleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/dao/mybatis/mapper/MapperTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/mybatis-config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ScheduleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ScheduleDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/mybatis/mapper/ScheduleCategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/mybatis/mapper/ScheduleCategoryMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/ScheduleCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/ScheduleCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/dao/mybatis/mapper/MapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/dao/mybatis/mapper/MapperTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

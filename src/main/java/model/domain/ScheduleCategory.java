@@ -1,10 +1,10 @@
 package model.domain;
 
 public class ScheduleCategory {
-    private int categoryId;
+    private Integer categoryId;
     private String categoryName;
     private String categoryColor;
-    private int userId;
+    private Integer userId;
 
     public ScheduleCategory() {}
     public ScheduleCategory(int categoryId, String categoryName, String categoryColor, int userId) {
