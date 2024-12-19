@@ -11,10 +11,10 @@ public class InterviewResultDAO {
     }
 
     // 면담 결과 생성
-    public int createInterviewResult(String interviewTopic, String interviewSummary) {
+    public int createInterviewResult(int interviewId, String interviewTopic, String interviewSummary) {
         int result = 0;
-        String query = "INSERT INTO InterviewResult (interview_topic, interview_summary, created_time) VALUES (?, ?, SYSTIMESTAMP, SYSTIMESTAMP)";
-        Object[] params = {interviewTopic, interviewSummary};
+        String query = "INSERT INTO InterviewResult (interview_id, interview_topic, interview_summary, created_time) VALUES (?, ?, ?, SYSTIMESTAMP, SYSTIMESTAMP)";
+        Object[] params = {interviewId, interviewTopic, interviewSummary};
         
         jdbcUtil.setSqlAndParameters(query, params);
         

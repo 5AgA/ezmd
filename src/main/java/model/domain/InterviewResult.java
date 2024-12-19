@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class InterviewResult {
 
-    private int interviewId;
+    private int interviewId; //PK&FK
     private String interviewTopic;
     private String interviewSummary;
     private Timestamp createdAt;
