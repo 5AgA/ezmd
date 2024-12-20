@@ -13,10 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+<<<<<<< HEAD
 @WebServlet("/login/professors")
 public class ProfessorLoginController extends HttpServlet implements Controller{
 	
 	
+=======
+@WebServlet("/login/professor")
+public class ProfessorLoginController extends HttpServlet implements Controller{
+>>>>>>> 442fcd4b9ce0b0d9d452df219ae786f538f98d71
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = request.getParameter("email");

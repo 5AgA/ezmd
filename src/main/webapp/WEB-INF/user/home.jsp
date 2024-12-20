@@ -14,12 +14,12 @@
     	<jsp:param name="currentPage" value="home" />
 	</jsp:include>
 
-    <main class="main">
-        <aside class="sidebar">
+    <div class="main">
+        <div class="sidebar">
             <div class="profile">
                 <img src="<%= request.getContextPath() %>/images/profile-icon.png" alt="Profile">
                 <div class="profile-info">
-                    <p>김동덕</p>
+                    <p><b>김동덕</b></p>
                     <p>동덕여자대학교</p>
                     <p>컴퓨터학과 22학번 3학년</p>
                 </div>
@@ -40,50 +40,10 @@
                     <li>10/5 18:00 한혁 교수님</li>
                 </ul>
             </div>
-        </aside>
-
-        <section class="calendar">
-            <h2>2024년 9월</h2>
-            <div class="calendar-controls">
-                <button class="prev-month">&lt;</button>
-                <button class="next-month">&gt;</button>
-            </div>
-            <table class="calendar-table">
-                <thead>
-                    <tr>
-                        <th>일</th>
-                        <th>월</th>
-                        <th>화</th>
-                        <th>수</th>
-                        <th>목</th>
-                        <th>금</th>
-                        <th>토</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example dates -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td class="highlight">9</td>
-                        <td>10</td>
-                    </tr>
-                    <!-- Add more rows as necessary -->
-                </tbody>
-            </table>
-        </section>
-    </main>
+        </div>
+        <div class="calendar-container">
+       		<jsp:include page="../schedule/calendar.jsp"></jsp:include>
+        </div>
+    </div>
 </body>
 </html>

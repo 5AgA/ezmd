@@ -1,7 +1,6 @@
 package model.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import model.domain.Professor;
 import model.domain.ProfessorReview;
