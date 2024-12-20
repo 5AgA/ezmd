@@ -6,12 +6,17 @@ body {
 }
 
 .container {
-    width: 60%;
-    margin: 30px auto;
+    /*width: 60%;*/
+    width: 600px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: 40px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
 }
 
 .profile-section {
@@ -39,19 +44,23 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
+    align-items: flex-start; /*추가*/
+    flex-direction: column;
 }
 
 label {
-    width: 30%;
+    width: 150px;
     font-weight: bold;
 }
 
-input {
-    width: 65%;
+input, select {
+    /*width: 65%;*/
+    width: 300px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
+    box-sizing: border-box; /*추가*/
 }
 
 input[readonly] {
@@ -74,6 +83,7 @@ button {
     color: #fff;
     cursor: pointer;
     font-size: 14px;
+    width: 150px; /* 버튼의 고정 너비 */
 }
 
 button:hover {

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,9 +18,9 @@
             <div class="register-box">
                 <div class="register-title">교수 회원가입</div>
 
-                <!-- CSRF 토큰 -->
+                <%-- <!-- CSRF 토큰 -->
                 <input type="hidden" name="csrfToken" value="${csrfToken}">
-
+			 --%>
                 <!-- 이름 -->
                 <div class="input-group">
                     <label class="input-label" for="name">이름</label>
@@ -31,7 +32,7 @@
                     <label class="input-label" for="email">이메일</label>
                     <input type="email" id="email" name="email" placeholder="example@dongduk.ac.kr" class="input-field" required
                            value="${email != null ? email : ''}">
-                    <button type="button" class="duplicate-check-button" id="duplicateCheckBtn" onclick="checkEmail()"
+                    <button type="button" class="duplicate-check-button" id="duplicateCheckBtn"
                             <c:if test="${not empty email && !email.matches('^[^\\\\s@]+@dongduk\\\\.ac\\\\.kr$')}">disabled="disabled"</c:if>
                     >
                         중복확인
@@ -240,7 +241,7 @@
             if (!valid) {
                 event.preventDefault();
             }
-        })
+        }) 
     </script>
 </body>
 </html>

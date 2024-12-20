@@ -149,16 +149,20 @@ public class ProfessorDAO {
     }
 
 
-    public boolean findProfessorByEmail(String email) throws SQLException {
-        String sql = "SELECT count(*) FROM professor WHERE email = ?";
-        jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
-
-        try {
-            ResultSet rs = jdbcUtil.executeQuery();
-            if(rs.next()){
-                int count = rs.getInt(1);
-                return (count == 1 ? true : false);
-            }
+    public boolean findUserByEmail(String email) throws SQLException {
+    	String sql = "SELECT COUNT(*) as count FROM ("
+    	           + "SELECT email FROM STUDENT WHERE email = ? "
+    	           + "UNION "
+    	           + "SELECT email FROM PROFESSOR WHERE email = ?"
+    	           + ")";
+    	
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{email, email});
+        try{
+        	ResultSet rs= jdbcUtil.executeQuery();
+        	if(rs.next()) {
+        		return rs.getInt("count") > 0;
+        	}
+        	
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
@@ -166,6 +170,7 @@ public class ProfessorDAO {
         }
         return false;
     }
+    
     public Professor findProfPwdByEmail(String email){
         String sql = "SELECT * FROM professor WHERE email = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{email});

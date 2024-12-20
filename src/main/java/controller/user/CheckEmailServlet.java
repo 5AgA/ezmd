@@ -23,7 +23,6 @@ public class CheckEmailServlet extends HttpServlet {
         studentDAO = new StudentDAO();
         professorDAO = new ProfessorDAO();
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,13 +30,13 @@ public class CheckEmailServlet extends HttpServlet {
         boolean exists = false;
         String message = null;
 
-        // 이메일 형식 검증: @dongduk.ac.kr 도메인 확인
         try {
-            // 학생 테이블에서 이메일 존재 여부 확인
-            if (professorDAO.findProfessorByEmail(email) || studentDAO.findStudentByEmail(email)) {
-                exists = true;
+            //메일 존재 여부 확인
+            if (professorDAO.findUserByEmail(email)) {
+            	exists = true;
                 message = "이미 사용 중인 이메일입니다.";
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             exists = true;

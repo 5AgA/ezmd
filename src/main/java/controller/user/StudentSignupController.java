@@ -31,14 +31,13 @@ public class StudentSignupController extends HttpServlet implements Controller {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // CSRF 토큰 생성
-            String csrfToken = java.util.UUID.randomUUID().toString();
-            HttpSession session = request.getSession();
-            session.setAttribute("csrfToken", csrfToken);
-            request.setAttribute("csrfToken", csrfToken);
-
+			/*
+			 * // CSRF 토큰 생성 String csrfToken = java.util.UUID.randomUUID().toString();
+			 * HttpSession session = request.getSession(); session.setAttribute("csrfToken",
+			 * csrfToken); request.setAttribute("csrfToken", csrfToken);
+			 */
             // 회원가입 폼으로 포워딩
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/studentRegisterForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("studentRegisterForm.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,20 +50,21 @@ public class StudentSignupController extends HttpServlet implements Controller {
             throws ServletException, IOException {
         try {
             // CSRF 토큰 검증
-            String sessionCsrfToken = (String) request.getSession().getAttribute("csrfToken");
-            String formCsrfToken = request.getParameter("csrfToken");
-
-//            System.out.println("Session CSRF Token: " + sessionCsrfToken);
-//            System.out.println("Form CSRF Token: " + formCsrfToken);
-
-            if (sessionCsrfToken == null || !sessionCsrfToken.equals(formCsrfToken)) {
-                response.sendError(HttpServletResponse.SC_FORBIDDEN, "유효하지 않은 CSRF 토큰입니다.");
-                return;
-            }
-
-            // CSRF 토큰을 세션에서 제거하여 재사용 방지
-            request.getSession().removeAttribute("csrfToken");
-
+			/*
+			 * String sessionCsrfToken = (String)
+			 * request.getSession().getAttribute("csrfToken"); String formCsrfToken =
+			 * request.getParameter("csrfToken");
+			 * 
+			 * // System.out.println("Session CSRF Token: " + sessionCsrfToken); //
+			 * System.out.println("Form CSRF Token: " + formCsrfToken);
+			 * 
+			 * if (sessionCsrfToken == null || !sessionCsrfToken.equals(formCsrfToken)) {
+			 * response.sendError(HttpServletResponse.SC_FORBIDDEN, "유효하지 않은 CSRF 토큰입니다.");
+			 * return; }
+			 * 
+			 * // CSRF 토큰을 세션에서 제거하여 재사용 방지
+			 * request.getSession().removeAttribute("csrfToken");
+			 */
             // execute 메서드 호출 후 반환된 URL로 이동
             String view = execute(request, response);
             if (view.startsWith("redirect:")) {
@@ -79,6 +79,13 @@ public class StudentSignupController extends HttpServlet implements Controller {
         }
     }
 
+    /**
+     * 비즈니스 로직 수행 및 결과에 따른 뷰 결정
+     * @param request 클라이언트 요청
+     * @param response 클라이언트 응답
+     * @return 이동할 뷰의 경로
+     * @throws Exception
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 요청 데이터 추출
@@ -102,17 +109,6 @@ public class StudentSignupController extends HttpServlet implements Controller {
             errorMessage = "유효한 @dongduk.ac.kr 이메일을 입력해주세요.";
         }
 
-//        if (errorMessage == null) {
-//            try {
-//                grade = Integer.parseInt(gradeStr);
-//                if (grade < 1 || grade > 4) {
-//                    errorMessage = "학년은 1~4 사이의 숫자여야 합니다.";
-//                }
-//            } catch (NumberFormatException e) {
-//                errorMessage = "학년은 숫자여야 합니다.";
-//            }
-//        }
-
         // 이메일 중복 확인
         if (errorMessage == null) {
             try {
@@ -127,6 +123,7 @@ public class StudentSignupController extends HttpServlet implements Controller {
 
         if (errorMessage != null) {
             // 에러 메시지를 요청에 저장하고 폼으로 다시 포워딩
+        	
             request.setAttribute("errorMessage", errorMessage);
             return "studentRegisterForm.jsp";
         }
@@ -160,10 +157,10 @@ public class StudentSignupController extends HttpServlet implements Controller {
         }
 
         if (result) {
-            return "redirect:/login/form?signupSuccess=true";
+            return "redirect:/ezmd/login/form?signupSuccess=true";
         } else {
             request.setAttribute("errorMessage", "학생 회원가입 중 문제가 발생했습니다.");
-            return "studentRegisterForm.jsp"; // 실패 시 회원가입 페이지로 이동
+            return "/ezmd/register/form/stud"; // 실패 시 회원가입 페이지로 이동
         }
     }
 }

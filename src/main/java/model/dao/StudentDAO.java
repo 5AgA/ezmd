@@ -143,24 +143,6 @@ public class StudentDAO {
         return 0;
     }
 
-    public boolean findStudentByEmail(String email) {
-        String sql = "SELECT count(*) FROM student WHERE email = ?";
-        jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
-
-        try {
-            ResultSet rs = jdbcUtil.executeQuery();
-            if(rs.next()){
-                int count = rs.getInt(1);
-                return (count == 1 ? true : false);
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }finally{
-            jdbcUtil.close();
-        }
-        return false;
-    }
-
     public Student findStudPwdByEmail(String email){
         String sql = "SELECT * FROM student WHERE email = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{email});

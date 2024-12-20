@@ -26,8 +26,11 @@ public class StudentSignupManager {
 	 * @throws SQLException
 	 */
 	public boolean checkEmailExists(String email) throws SQLException {
-		return professorDAO.findProfessorByEmail(email) || studentDAO.findStudentByEmail(email);
-	}
+		if(professorDAO.findUserByEmail(email)) {
+			return true;
+		}else {
+			return false;
+		}	}
 
 	public boolean registerStudent(Student student) throws SQLException {
 		// 비밀번호 해싱

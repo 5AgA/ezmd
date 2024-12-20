@@ -5,6 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.user.LogoutController;
+import controller.user.MyPageUpdateController;
 import controller.user.ProfessorLoginController;
 import controller.user.ProfessorSignupController;
 import controller.user.StudentLoginController;
@@ -22,7 +23,9 @@ public class RequestMapping {
         // 기본 페이지 매핑
         mappings.put("/", new ForwardController("/index/index.jsp"));
         mappings.put("/home", new ForwardController("/user/home.jsp"));
-        mappings.put("/myPage", new ForwardController("/user/mypage.jsp"));
+        mappings.put("/mypage", new ForwardController("/user/mypage.jsp"));
+        mappings.put("/mypage/update", new MyPageUpdateController());
+        
         mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));
 
         // 로그인 폼 및 요청 처리

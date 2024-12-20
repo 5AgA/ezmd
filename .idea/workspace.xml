@@ -9,27 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb1472ab-3c1b-4ac5-ab2f-692f33066625" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/DispatcherServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/DispatcherServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/CheckEmailServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/CheckEmailServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/StudentLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/StudentLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ScheduleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ScheduleDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/StudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/StudentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorLoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorLoginManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/ProfessorSignupManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/StudentLoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/StudentLoginManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/StudentSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/StudentSignupManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/professorRegisterForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/professorRegisterForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/studentRegisterForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/studentRegisterForm.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="fb1472ab-3c1b-4ac5-ab2f-692f33066625" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,6 +179,7 @@
       <workItem from="1734331793626" duration="23715000" />
       <workItem from="1734493840324" duration="11861000" />
       <workItem from="1734519383108" duration="12774000" />
+      <workItem from="1734632117564" duration="103000" />
     </task>
     <servers />
   </component>

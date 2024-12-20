@@ -18,13 +18,21 @@
 			<li class="<%= "meeting".equals(currentPage) ? "active" : "" %>"><a
 				href="<c:url value='/meeting'/>">면담 관리</a></li>
 			<li class="<%= "mypage".equals(currentPage) ? "active" : "" %>"><a
-				href="<c:url value='/myPage'/>">마이페이지</a></li>
+				href="<c:url value='/mypage'/>">마이페이지</a></li>
 		</ul>
 	</nav>
 	<div class="submenu">
 		<div class="logout">
-			<a href="<c:url value='/logout'/>">로그아웃</a>
-		</div>	
+            <!-- 로그인 상태에 따라 로그아웃/로그인 링크 표시 -->
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <a href="<c:url value='/logout'/>">로그아웃</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="<c:url value='/login/form'/>">로그인</a>
+                </c:otherwise>
+            </c:choose>
+        </div>  
 		<div class="notification">
 			<a href="<c:url value='/notification'/>"> <img
 				src="<c:url value='/images/noti-icon.svg'/>">

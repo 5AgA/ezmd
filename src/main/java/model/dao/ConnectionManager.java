@@ -59,10 +59,13 @@ public class ConnectionManager {
     	Connection conn = null;
     	try {
 			conn = ds.getConnection();
+			System.out.println("DB 연결 성공: " + conn);
+            return conn;
 		} catch (SQLException e) {
+			System.err.println("DB 연결 실패");
 			e.printStackTrace();
 		}
-		return conn;
+		return null;
     }
     
     public void close() {

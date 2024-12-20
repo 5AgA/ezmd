@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -35,14 +37,15 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
 
         if (user != null) {
             // 로그인 성공; 세션에 사용자 정보를 저장
+        	HttpSession session = request.getSession();
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("userType", "professor");
             // 성공 시 홈 페이지로 이동
-            return "redirect:/home";
+            return "redirect:/ezmd/home";
         } else {
             // 로그인 실패 시 로그인 페이지로 이동하며 에러 메시지 설정
             request.setAttribute("errorMessage", "Invalid credentials");
-            return "login.jsp";
+            return "/ezmd/login/form";
         }
    }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
