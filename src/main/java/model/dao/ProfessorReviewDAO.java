@@ -125,4 +125,5 @@ public class ProfessorReviewDAO {
             jdbcUtil.close();
         }
         return null;
+    }
 }
