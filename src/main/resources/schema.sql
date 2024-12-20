@@ -45,7 +45,6 @@ CREATE TABLE schedule (
     schedule_title VARCHAR2(100) NOT NULL,
     schedule_start TIMESTAMP NOT NULL,
     schedule_end TIMESTAMP NOT NULL,
-    schedule_repeat NUMBER NULL,
     schedule_place VARCHAR2(100) NULL,
     schedule_memo VARCHAR2(500) NULL,
     category_id NUMBER NOT NULL,

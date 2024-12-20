@@ -18,8 +18,8 @@ function getScheduleForDate(date) {
             // 일정 정보 표시
             if (data.length > 0) {
                 todayInfo.innerHTML = data.map(schedule => `
-                                <div class="schedule-item">
-                                    <h2>${schedule.scheduleTitle}</h2>
+                                <div class="schedule-item" data-sid="${schedule.scheduleId}">
+                                    <h3>${schedule.scheduleTitle}</h3>
                                     <p id="schedule-date">${schedule.scheduleStart} ~ ${schedule.scheduleEnd}</p>
                                     <div class="schedule-place">
                                         <img src="../images/place-icon.svg"><p>${schedule.schedulePlace}</p>
@@ -115,6 +115,10 @@ function renderCalendar(year, month) {
             // 다음 달
             pElement.textContent = i - firstDay - lastDate;
             dayElement.classList.add('next-month');
+        }
+        // 토요일과 일요일에 id="weekend" 추가
+        if ((i - firstDay) % 7 === 0 || (i - firstDay) % 7 === 1) { // 일요일(0) 또는 토요일(6)
+            dayElement.id = 'weekend';
         }
 
         dayElement.addEventListener('click', handleClick);

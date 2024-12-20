@@ -46,10 +46,19 @@ public class ScheduleService {
         }
     }
 
-    public int insertSchedule(Schedule schedule) {
+    public int addSchedule(Schedule schedule) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             int result = scheduleMapper.insertSchedule(schedule);
-            sqlSession.commit();
+
+            if (result > 0) {
+                sqlSession.commit(); // 트랜잭션 커밋
+                Schedule insertedSchedule = scheduleMapper.getScheduleById(schedule.getScheduleId()); // 삽입된 데이터 조회
+                System.out.println("삽입된 스케줄: " + insertedSchedule);
+            } else {
+                sqlSession.rollback(); // 삽입 실패 시 롤백
+                System.out.println("스케줄 삽입 실패");
+            }
+
             return result;
         }
     }

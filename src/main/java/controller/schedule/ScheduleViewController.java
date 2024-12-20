@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class ScheduleViewController implements Controller {
-
     private ScheduleService scheduleService;
 
     public ScheduleViewController() {

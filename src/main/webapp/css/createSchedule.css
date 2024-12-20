@@ -1,0 +1,121 @@
+.schedule-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경을 반투명하게 */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 15px;
+    width: 500px;
+}
+
+#schedule-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 40px;
+}
+
+#schedule-form input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #969696;
+}
+
+#schedule-form label, #schedule-form p {
+    font-size: 0.8vw;
+}
+
+#title {
+    font-size: 1.3vw;
+    padding: 5px 0 ;
+    font-weight: bolder;
+}
+
+#title::placeholder {
+    font-weight: normal;
+    color: #969696;
+}
+
+.date label {
+    font-size: 1vw;
+}
+
+input[type="datetime-local"] {
+    font-size: 0.8vw;
+    padding: 3px 5px;
+    width: 65%;
+    color: #969696;
+    cursor: pointer;
+}
+
+.place {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.place img {
+    width: 1vw; height: 1vw;
+    margin: 0;
+}
+
+.place input {
+    margin: 0;
+    width: 100%;
+    padding: 3px 5px;
+    font-size: 1vw;
+}
+
+.place input::placeholder {
+    color: #969696;
+}
+
+.category {
+    margin-top: 10px;
+}
+
+.category input {
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 0.8vw;
+}
+
+.memo textarea {
+    resize: none;
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    background-color: #fafafa;
+}
+
+.memo textarea:focus {
+    outline: none;
+}
+
+button[type="submit"] {
+    border: none;
+    background-color: #fff;
+    font-size: 1vw;
+    margin-top: 30px;
+    padding-top: 20px;
+    cursor: pointer;
+}
+

@@ -3,15 +3,12 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-//import controller.schedule.ScheduleController;
+import controller.schedule.AddScheduleController;
+import controller.schedule.CategoryListController;
+import controller.schedule.ScheduleController;
 import controller.schedule.ScheduleViewController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import controller.user.StudentLoginController;
-import controller.user.ProfessorLoginController;
-import controller.user.LogoutController;
-import controller.user.StudentSignupController;
-import controller.user.ProfessorSignupController;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -34,6 +31,9 @@ public class RequestMapping {
         // 스케줄
         mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));
         mappings.put("/schedule/view", new ScheduleViewController());
+        mappings.put("/schedule/info", new ScheduleController());
+        mappings.put("/schedule/categories", new CategoryListController());
+        mappings.put("/schedule/add", new AddScheduleController());
 
         logger.info("Initialized Request Mapping!");
     }

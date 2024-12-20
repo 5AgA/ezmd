@@ -36,7 +36,7 @@
 //        scheduleCategoryMapper = session.getMapper(ScheduleCategoryMapper.class);
 //    }
 //
-//    @Test
+////    @Test
 ////    public void testGetSchedulesByDate() {
 ////        // 특정 날짜에 해당하는 스케줄 가져오기
 ////        String startDate = "2024-12-02 00:00";
@@ -54,7 +54,6 @@
 ////        newSchedule.setScheduleTitle("Test Schedule");
 ////        newSchedule.setScheduleStart(Schedule.parseDateTime("2024-12-19 10:00"));
 ////        newSchedule.setScheduleEnd(Schedule.parseDateTime("2024-12-19 12:00"));
-////        newSchedule.setScheduleRepeat(0);
 ////        newSchedule.setSchedulePlace("Test Place");
 ////        newSchedule.setScheduleMemo("Test Memo");
 ////        newSchedule.setCategoryId(2);

@@ -10,6 +10,7 @@
 <title>일정 관리</title>
 <link rel="stylesheet" href="<c:url value='/css/calendar.css'/>">
 </head>
+
 <body>
 	<jsp:include page="/WEB-INF/header.jsp">
 		<jsp:param name="currentPage" value="schedule" />
@@ -22,5 +23,9 @@
 		<button class="add-schedule-btn">+</button>
 		<div class="today-info"></div>
 	</div>
+
+	<jsp:include page="./createScheduleForm.jsp" />
+	<jsp:include page="./editScheduleForm.jsp" />
+
 </body>
 </html>
