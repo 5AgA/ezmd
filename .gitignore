@@ -1,2 +1,3 @@
 /target/
 context.properties
+mybatis-config.xml

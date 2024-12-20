@@ -9,8 +9,8 @@ public class Schedule {
 
     private Integer scheduleId; // 스케줄 ID
     private String scheduleTitle; // 스케줄 제목
-    private LocalDateTime scheduleStart; // 시작 시간
-    private LocalDateTime scheduleEnd; // 종료 시간
+    private String scheduleStart; // 시작 시간
+    private String scheduleEnd; // 종료 시간
     private Integer scheduleRepeat; // 반복 요일 비트 값
     private String schedulePlace; // 장소
     private String scheduleMemo; // 메모
@@ -21,7 +21,7 @@ public class Schedule {
     public Schedule() {}
 
     // **전체 필드를 포함한 생성자**
-    public Schedule(int scheduleId, String scheduleTitle, LocalDateTime scheduleStart, LocalDateTime scheduleEnd,
+    public Schedule(int scheduleId, String scheduleTitle, String scheduleStart, String scheduleEnd,
                     int scheduleRepeat, String schedulePlace, String scheduleMemo, int categoryId, int userId) {
         this.scheduleId = scheduleId;
         this.scheduleTitle = scheduleTitle;
@@ -103,20 +103,20 @@ public class Schedule {
         this.scheduleTitle = scheduleTitle;
     }
 
-    public LocalDateTime getScheduleStart() {
+    public String getScheduleStart() {
         return scheduleStart;
     }
 
     public void setScheduleStart(LocalDateTime scheduleStart) {
-        this.scheduleStart = scheduleStart;
+        this.scheduleStart = formatDateTime(scheduleStart);
     }
 
-    public LocalDateTime getScheduleEnd() {
+    public String getScheduleEnd() {
         return scheduleEnd;
     }
 
     public void setScheduleEnd(LocalDateTime scheduleEnd) {
-        this.scheduleEnd = scheduleEnd;
+        this.scheduleEnd = formatDateTime(scheduleEnd);
     }
 
     public int getScheduleRepeat() {
