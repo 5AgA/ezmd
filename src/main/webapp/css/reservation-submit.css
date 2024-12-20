@@ -1,0 +1,131 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-wrapper {
+  margin-top: 30px;
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar-wrapper {
+  width: 200px;
+  background-color: none;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 200px;
+}
+
+.menu-item {
+  margin-bottom: 50px;
+  min-width: 123px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.menu-item:hover {
+  font-weight:bold;
+  background-color: #d9d9d9;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-aligned-wrapper {
+  width: 100%;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  margin-right: 550px; /* 오른쪽으로 여백을 주어 왼쪽 정렬 효과 */
+}
+
+.radio-group {
+  margin-bottom: 30px;
+}
+
+.radio-group label {
+  margin-right: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.radio-group input {
+  margin-right: 5px;
+}
+
+.text-area {
+  width: 720px;
+  height: 244px;
+  border: 3px solid #8B2942;
+  border-radius: 15px;
+  padding: 15px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  resize: none;
+  outline: none;
+}
+
+.notice {
+  font-size: 20px;
+  color: grey;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.reservation-details {
+  background-color: #8B2942;
+  width: 700px;
+  height: 90px;
+  color: white;
+  padding: 40px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.professor-info {
+  font-weight: bold;
+}
+
+.reserve-button-wrapper {
+  text-align: center;
+  margin-top: 70px;
+  margin-left: 430px;
+}
+
+.reserve-button-styled {
+  padding: 10px 20px;
+  border: 3px solid #8B2942;
+  border-radius: 8px;
+  width: 290px;
+  height:61px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #8B2942;
+  background-color: white;
+  cursor: pointer;
+}
+
+.reserve-button-styled:hover {
+  background-color: #f8f9fa;
+}

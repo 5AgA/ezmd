@@ -46,6 +46,7 @@ function renderCalendar(year, month) {
             dayElement.classList.add('prev-month');
         } else if (i <= firstDay + lastDate) {
             // 현재 달
+            const day = i - firstDay;
             dayElement.textContent = i - firstDay;
             if (year === todayYear && month === todayMonth && i - firstDay === todayDate) {
                 dayElement.classList.add('today');

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>면담 예약 페이지</title>
-<link rel="stylesheet" type="text/css" href="../css/reservation.css">
+<link rel="stylesheet" type="text/css" href="/css/reservation.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reservation.css">
+<title>면담 예약</title>
 <script>
   // 날짜, 시간 선택 로직
   window.addEventListener('DOMContentLoaded', function() {
@@ -41,20 +43,12 @@
 </script>
 </head>
 <body>
-  <div class="top-nav">
-    <div class="left-nav-area">
-      <div class="home-icon">⌂</div>
-      <ul class="menu">
-        <li class="top-menu-item">일정 관리</li>
-        <li class="top-menu-item active">면담 관리</li>
-        <li class="top-menu-item">마이페이지</li>
-      </ul>
-    </div>
-    <div class="right-area">
-      <div>로그아웃</div>
-      <div>🔔</div>
-    </div>
-  </div>
+
+<!-- 헤더 -->
+ <jsp:include page="/WEB-INF/header.jsp">
+    	<jsp:param name="currentPage" value="reservation" />
+	</jsp:include>
+
 
   <div class="reservation-page-wrapper">
     <div class="sidebar-wrapper">
@@ -70,7 +64,7 @@
         <button class="review-button">면담 후기</button>
       </div>
       <div class="sub-content">
-        <form action="reserve.do" method="post">
+        <form action="<%=request.getContextPath()%>/interview-submit" method="post">
           <input type="hidden" name="selectedDate" id="selectedDate" value="">
           <input type="hidden" name="selectedTime" id="selectedTime" value="">
 
@@ -134,7 +128,9 @@
             </div>
 
             <div class="reserve-button-wrapper">
-              <button class="reserve-button-styled" type="submit">예약 진행하기</button>
+              <button class="reserve-button-styled" type="submit" >예약 진행하기
+              
+              </button>
             </div>
           </div>
         </form>

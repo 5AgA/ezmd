@@ -1,19 +1,21 @@
 package model.domain;
 
 public class ScheduleCategory {
-    private int categoryId;
+    private Integer categoryId;
     private String categoryName;
     private String categoryColor;
+    private Integer userId;
 
     public ScheduleCategory() {}
-    public ScheduleCategory(int categoryId, String categoryName, String categoryColor) {
+    public ScheduleCategory(int categoryId, String categoryName, String categoryColor, int userId) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryColor = categoryColor;
+        this.userId = userId;
     }
 
     public String toString() {
-        return "ScheduleCategory [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryColor=" + categoryColor + "]";
+        return "ScheduleCategory [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryColor=" + categoryColor + ", userId=" + userId + "]";
     }
 
     public int getCategoryId() {
@@ -33,5 +35,11 @@ public class ScheduleCategory {
     }
     public void setCategoryColor(String categoryColor) {
         this.categoryColor = categoryColor;
+    }
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

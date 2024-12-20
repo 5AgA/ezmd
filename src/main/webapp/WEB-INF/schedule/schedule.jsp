@@ -17,7 +17,7 @@
 	
 	<div class="container">
 		<div class="calendar-container">
-			<jsp:include page="./calendar.jsp"></jsp:include>
+			<jsp:include page="./calendar.jsp"/>
 			<button class="add-schedule-btn">+</button>
 		</div>	
 		<div class="today-info">오늘은 일정이 없습니다</div>
