@@ -33,8 +33,10 @@
                 <textarea id="edit-memo" name="scheduleMemo" placeholder="메모를 입력하세요"></textarea><br>
             </div>
 
-            <input type="button" id="delete" value="삭제"/>
-            <button type="submit">수정</button>
+            <div class="edit-button">
+                <input type="button" id="delete" value="삭제"/>
+                <button type="submit">수정</button>
+            </div>
         </form>
     </div>
 </div>

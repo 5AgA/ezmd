@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById('editSchedule-modal');
     const categoryContainer = document.querySelector(".edit-category");
+    let selectedCategory = ''; // 카테고리 ID
 
     // 카테고리 데이터 가져오기
     fetch("/schedule/categories")
@@ -15,36 +16,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 button.style.backgroundColor = category.categoryColor;
                 categoryContainer.appendChild(button);
             });
-
-            // 카테고리 버튼 클릭 이벤트 추가
-            const categoryButtons = document.querySelectorAll(".edit-category-btn");
-            categoryButtons.forEach(button => {
-                button.addEventListener("click", () => {
-                    const categoryId = button.dataset.categoryId;
-
-                    if (selectedCategory === categoryId) {
-                        selectedCategory = '';
-                        button.classList.remove('selected');
-                        button.style.border = ''; // 회색 테두리 제거
-                    } else {
-                        if (selectedCategory !== '') {
-                            const prevButton = document.querySelector(`[data-category-id='${selectedCategory}']`);
-                            prevButton.classList.remove('selected');
-                            prevButton.style.border = ''; // 이전 카테고리의 회색 테두리 제거
-                        }
-
-                        selectedCategory = categoryId;
-                        button.classList.add('selected');
-                        button.style.border = '2px solid gray'; // 회색 테두리 추가
-                    }
-                });
-            });
         })
         .catch(error => console.error("Error fetching categories:", error));
 
+    // 카테고리 버튼 클릭 시 선택 효과
+    document.body.addEventListener('click', function (event) {
+        if (event.target.classList.contains('edit-category-btn')) {
+            const button = event.target;
+            const categoryId = button.dataset.categoryId;
+
+            // 기존에 선택된 버튼이 있으면, 그 버튼의 선택을 해제
+            if (selectedCategory && selectedCategory !== categoryId) {
+                const prevButton = document.querySelector('.edit-category-btn.selected');
+                if (prevButton) {
+                    prevButton.classList.remove('selected');
+                    prevButton.style.border = ''; // 회색 테두리 제거
+                }
+            }
+
+            // 카테고리 선택 상태 변경
+            if (selectedCategory === categoryId) {
+                // 카테고리 선택 해제
+                selectedCategory = '';
+                button.classList.remove('selected');
+                button.style.border = ''; // 회색 테두리 제거
+            } else {
+                // 카테고리 선택
+                selectedCategory = categoryId;
+                button.classList.add('selected');
+                button.style.border = '2px solid gray';
+            }
+        }
+    });
+
     // schedule-item 클릭 시 모달 열기 (이벤트 위임)
     document.body.addEventListener('click', function (event) {
-        // 클릭된 요소가 schedule-item 클래스인지 확인
         if (event.target.classList.contains('schedule-item')) {
             const scheduleId = event.target.dataset.sid;
             openEditScheduleModal(scheduleId); // scheduleId를 이용해 모달 열기
@@ -59,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`/schedule/info?id=${scheduleId}`)
             .then(response => response.json())
             .then(schedule => {
-
                 document.getElementById('edit-title').value = schedule.scheduleTitle;
                 document.getElementById('edit-sdate').value = schedule.scheduleStart;
                 document.getElementById('edit-edate').value = schedule.scheduleEnd;
@@ -70,6 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const selectedCategoryButton = document.querySelector(`.edit-category-btn[data-category-id="${schedule.categoryId}"]`);
                 if (selectedCategoryButton) {
                     selectedCategoryButton.classList.add('selected');
+                    selectedCategoryButton.style.border = '2px solid gray';
+                    selectedCategory = schedule.categoryId.toString();  // 모달 열 때 카테고리 ID 설정
                 }
             })
             .catch(error => console.error('Error loading schedule data:', error));
@@ -78,6 +85,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // 모달 닫기
     function closeModal() {
         modal.style.display = 'none';
+
+        // 폼 초기화
+        document.getElementById('edit-title').value = '';
+        document.getElementById('edit-sdate').value = '';
+        document.getElementById('edit-edate').value = '';
+        document.getElementById('edit-place').value = '';
+        document.getElementById('edit-memo').value = '';
+
+        // 카테고리 버튼의 선택 상태 초기화
+        const categoryButtons = document.querySelectorAll('.edit-category-btn');
+        categoryButtons.forEach(button => {
+            button.classList.remove('selected');
+            button.style.border = ''; // 회색 테두리 제거
+        });
+
+        // 선택된 카테고리 초기화
+        selectedCategory = '';
     }
 
     // 모달 외부 클릭 시 모달 닫기

@@ -28,7 +28,6 @@
 #editSchedule-form input {
     outline: none;
     border: none;
-    border-bottom: 1px solid #969696;
 }
 
 #editSchedule-form label, #editSchedule-form p {
@@ -39,11 +38,16 @@
     font-size: 1.3vw;
     padding: 5px 0 ;
     font-weight: bolder;
+    border-bottom: 1px solid #969696;
 }
 
 #edit-title::placeholder {
     font-weight: normal;
     color: #969696;
+}
+
+#edit-title:focus {
+    border-bottom: 1px solid #969696 !important;
 }
 
 .edit-date label {
@@ -56,6 +60,7 @@ input[type="datetime-local"] {
     width: 65%;
     color: #969696;
     cursor: pointer;
+    border-bottom: 1px solid #969696;
 }
 
 .edit-place {
@@ -81,6 +86,10 @@ input[type="datetime-local"] {
 
 .edit-place input::placeholder {
     color: #969696;
+}
+
+.edit-place input:focus {
+    border-bottom: 1px solid #969696 !important;
 }
 
 .edit-category {
@@ -110,7 +119,16 @@ input[type="datetime-local"] {
     outline: none;
 }
 
-button[type="submit"] {
+.edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button[type="submit"] , .edit-button input[type="button"] {
     border: none;
     background-color: #fff;
     font-size: 1vw;

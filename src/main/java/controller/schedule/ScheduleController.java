@@ -18,14 +18,21 @@ public class ScheduleController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int scheduleId = Integer.parseInt(request.getParameter("id"));
+        String idParam = request.getParameter("id");
+        int scheduleId = 0;
+        if (idParam == null) {
+            System.out.println("id 파라미터가 없습니다.");
+        } else {
+            System.out.println("받은 id: " + idParam);
+            scheduleId = Integer.parseInt(idParam);
+        }
 
         // DB에서 해당 날짜의 일정 가져오기
-        Schedule schedules = scheduleService.getScheduleById(scheduleId);
+        Schedule schedule = scheduleService.getScheduleById(scheduleId);
 
         // JSON 응답
         response.setContentType("application/json; charset=UTF-8");
-        response.getWriter().write(new Gson().toJson(schedules));
+        response.getWriter().write(new Gson().toJson(schedule));
         return null; // JSON만 반환
     }
 }

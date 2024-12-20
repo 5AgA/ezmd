@@ -113,6 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 if (data.status === "success") {
                     alert('일정이 추가되었습니다.');
+                    // 일정 추가 후 alert 확인 버튼을 누르면 모달을 닫음
+                    setTimeout(() => {
+                        modal.style.display = "none";
+                        selectedCategory = '';
+                    }, 100);
                 } else {
                     alert('일정 추가에 실패했습니다.');
                 }
@@ -124,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
             modal.style.display = "none";
+            selectedCategory = '';
         }
     });
 });
