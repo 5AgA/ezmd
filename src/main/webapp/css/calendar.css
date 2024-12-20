@@ -9,6 +9,7 @@ body {
     background-color: white;
     font-size: 1vw;
 }
+
 /* 메인 컨테이너 */
 .container {
     display: flex;
@@ -38,18 +39,19 @@ body {
 .today-btn {
     text-decoration: none;
     color: black;
-    padding: 5px 10px;
+    padding: 3px 8px;
+    margin-top: -5px;
     border-radius: 5px;
     background-color: #d09c2c80;
     font-size: 1vw;
-    font-weight: bolder;
     border: none;
+    cursor: pointer;
 }
 
 /* 이전/다음 버튼 스타일 */
 .month-nav {
     background-color: white; /* 버튼 색깔 */
-    color: a52a2a;
+    color: black;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
@@ -98,11 +100,15 @@ body {
 }
 
 .day-cell {
-  text-align: right;
   padding: 10px;
   border: 1px solid #ddd;
   margin: 0px;
   box-sizing: border-box;
+    cursor: pointer;
+    height: 13vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
 }
 
 /* 달력 날짜 부분 */
@@ -113,33 +119,93 @@ body {
     width: 100%; /* 그리드가 컨테이너 너비에 맞게 확장 */
 }
 
+div.day-cell p {
+    border-radius: 50%;
+    width: 1.5vw; height: 1.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* 오늘 날짜 강조 */
+div.today p{
+    background-color: #d09b2c;
+    font-weight: bold;
+    color: white;
+}
+
+div.selected p {
+    background-color: #8B2942;
+    color: white;
+}
 
 /* 이전/다음 달 날짜 흐리게 */
 .day-cell.prev-month,
 .day-cell.next-month {
-    color: #aaa;
+    color: #aaa !important;
 }
 
-/* 오늘 날짜 강조 */
-.day-cell.today {
-    background-color: #eeeeee;
-    font-weight: bold;
-}
-
-.day-cell::after {
-    content: '';
-    display: block;
-    padding-bottom: 100%;
-}
-
+/* 일정 */
 .today-info {
-    margin-top: 80px;
+    margin-top: 70px;
+    margin-left: 50px;
+    width: 30%;
+    height: 70vh;
+    overflow: scroll;
+}
+
+.today-info::-webkit-scrollbar {
+    display: none;
+}
+
+.no-schedule {
     text-align: center;
     padding: 20px;
     color: #aaa;
-    width:30%;
-    margin-left: 50px;
     font-size: 1.3vw;
+}
+
+/* 일정 아이템 */
+.schedule-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 20px;
+    margin: 30px;
+    border-radius: 15px;
+    box-shadow: 4px 7px 20px rgba(0,0,0,0.25);
+    height: 20vh;
+}
+
+.schedule-item:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.schedule-item h2 {
+    margin-bottom: 0;
+}
+
+#schedule-date{
+    color: #969696;
+}
+
+.schedule-place {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3px;
+    width: 100%;
+}
+
+.schedule-place img {
+    width: 1vw; height: 1vw;
+    margin: 0;
+}
+
+.schedule-place p {
+    margin: 0;
 }
 
 .add-schedule-btn {

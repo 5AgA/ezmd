@@ -1,10 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
-<link rel="stylesheet" href="<c:url value='/css/calendar.css'/>">
+	<link rel="stylesheet" href="<c:url value='/css/calendar.css'/>">
 </head>
 		<div class="calendar-header">
-			<h2 id="currentMonth">2024년 9월</h2>
+			<h2 id="currentMonth">2024년 12월</h2>
 			<div class="currentDay">
 				<button class="month-nav prev">&lt;</button>
 				<button class="today-btn">오늘</button>

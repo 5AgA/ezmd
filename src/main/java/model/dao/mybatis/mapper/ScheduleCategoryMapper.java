@@ -24,6 +24,12 @@ public interface ScheduleCategoryMapper {
 
     // 일정 카테고리 조회 (ID로 검색)
     @Select("SELECT * FROM schedule_category WHERE category_id = #{categoryId}")
+    @Results({
+            @Result(property = "categoryId", column = "category_id"),
+            @Result(property = "categoryName", column = "category_name"),
+            @Result(property = "categoryColor", column = "category_color"),
+            @Result(property = "userId", column = "user_id")
+    })
     ScheduleCategory selectScheduleCategoryById(int categoryId);
 
     // 일정 카테고리 수정

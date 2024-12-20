@@ -1,8 +1,10 @@
 //package controller.schedule;
 //
+//import com.google.gson.Gson;
 //import controller.Controller;
 //import model.domain.Schedule;
-//import model.manager.schedule.ScheduleManager;
+//import model.manager.schedule.ScheduleService;
+//import model.manager.user.LogoutManager;
 //
 //import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
@@ -10,150 +12,108 @@
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 //import java.io.IOException;
-//import java.time.LocalDate;
 //import java.time.LocalDateTime;
-//import java.util.ArrayList;
 //import java.util.List;
 //
 //@WebServlet("/schedule")
 //public class ScheduleController extends HttpServlet implements Controller {
 //
-//    private final ScheduleManager scheduleManager = new ScheduleManager();
+//    private ScheduleService scheduleService;
+//
+//    @Override
+//    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        return null;
+//    }
+//
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        // 사용자 ID 가져오기 (예: 세션에서)
+//        Integer userId = (Integer) request.getSession().getAttribute("userId");
+//        if (userId == null) {
+//            userId = 20210670; // 테스트용 사용자 ID 설정
+//            request.getSession().setAttribute("userId", userId);
+//        }
+//
+//        // 날짜가 없으면 기본적으로 모든 스케줄을 가져옵니다
+//        List<Schedule> schedules = scheduleService.getSchedulesByUserId(userId);
+//        request.setAttribute("schedules", schedules);
+//        request.getRequestDispatcher("/WEB-INF/schedule/schedule.jsp").forward(request, response);
+//    }
 //
 //    @Override
 //    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        try {
-//            // `execute` 메서드 호출 및 반환된 뷰 처리
-//            String view = execute(request, response);
-//            request.getRequestDispatcher(view).forward(request, response);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "스케줄 처리 중 오류 발생");
+//        // 새 스케줄 추가 처리
+//        String title = request.getParameter("scheduleTitle");
+//        String start = request.getParameter("scheduleStart");
+//        String end = request.getParameter("scheduleEnd");
+//        int repeat = Integer.parseInt(request.getParameter("scheduleRepeat"));
+//        String place = request.getParameter("schedulePlace");
+//        String memo = request.getParameter("scheduleMemo");
+//        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+//        Integer userId = (Integer) request.getSession().getAttribute("userId");
+//
+//        if (userId != null) {
+//            Schedule schedule = new Schedule();
+//            schedule.setScheduleTitle(title);
+//            schedule.setScheduleStart(Schedule.parseDateTime(start));
+//            schedule.setScheduleEnd(Schedule.parseDateTime(end));
+//            schedule.setScheduleRepeat(repeat);
+//            schedule.setSchedulePlace(place);
+//            schedule.setScheduleMemo(memo);
+//            schedule.setCategoryId(categoryId);
+//            schedule.setUserId(userId);
+//
+//            // DB에 새 스케줄 추가
+//            scheduleService.insertSchedule(schedule);
+//
+//            // 스케줄 목록으로 리다이렉트
+//            response.sendRedirect("/schedule");
+//        } else {
+//            response.sendRedirect("/login"); // 로그인하지 않은 경우 로그인 페이지로 리다이렉트
 //        }
 //    }
 //
-//    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        String action = request.getParameter("action");
+//    @Override
+//    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        // 스케줄 수정 처리
+//        int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
+//        String title = request.getParameter("scheduleTitle");
+//        String start = request.getParameter("scheduleStart");
+//        String end = request.getParameter("scheduleEnd");
+//        int repeat = Integer.parseInt(request.getParameter("scheduleRepeat"));
+//        String place = request.getParameter("schedulePlace");
+//        String memo = request.getParameter("scheduleMemo");
+//        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+//        Integer userId = (Integer) request.getSession().getAttribute("userId");
 //
-//        switch (action) {
-//            case "create":
-//                return createSchedule(request, response);
-//            case "read":
-//                return readSchedule(request, response);
-//            case "readByDate":
-//                return readScheduleByDate(request, response);
-//            case "getToday":
-//                return getTodaySchedules(request, response);
-//            case "update":
-//                return updateSchedule(request, response);
-//            case "delete":
-//                return deleteSchedule(request, response);
-//            default:
-//                request.setAttribute("errorMessage", "Invalid action");
-//                return "error.jsp";
-//        }
-//    }
-//
-//    private String createSchedule(HttpServletRequest request, HttpServletResponse response) throws IOException {
 //        Schedule schedule = new Schedule();
-//        schedule.setScheduleTitle(request.getParameter("scheduleTitle"));
-//        schedule.setScheduleStart(LocalDateTime.parse(request.getParameter("scheduleStart")));
-//        schedule.setScheduleEnd(LocalDateTime.parse(request.getParameter("scheduleEnd")));
-//        schedule.setScheduleRepeat(Integer.parseInt(request.getParameter("scheduleRepeat")));
-//        schedule.setSchedulePlace(request.getParameter("schedulePlace"));
-//        schedule.setScheduleMemo(request.getParameter("memo"));
-//        schedule.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
-//        schedule.setProfessorId(Integer.parseInt(request.getParameter("professorId")));
-//        schedule.setStudentId(Integer.parseInt(request.getParameter("studentId")));
+//        schedule.setScheduleId(scheduleId);
+//        schedule.setScheduleTitle(title);
+//        schedule.setScheduleStart(Schedule.parseDateTime(start));
+//        schedule.setScheduleEnd(Schedule.parseDateTime(end));
+//        schedule.setScheduleRepeat(repeat);
+//        schedule.setSchedulePlace(place);
+//        schedule.setScheduleMemo(memo);
+//        schedule.setCategoryId(categoryId);
+//        schedule.setUserId(userId);
 //
-//        Schedule createdSchedule = scheduleManager.createSchedule(schedule);
-//        if (createdSchedule != null) {
-//            request.setAttribute("message", "Schedule created successfully: " + createdSchedule.toString());
-//            return "scheduleSuccess.jsp"; // 성공 시 JSP 반환
-//        } else {
-//            request.setAttribute("errorMessage", "Failed to create schedule");
-//            return "scheduleError.jsp"; // 실패 시 JSP 반환
-//        }
+//        // 스케줄 수정
+//        scheduleService.updateSchedule(schedule);
+//
+//        // 수정 후 스케줄 목록으로 리다이렉트
+//        response.sendRedirect("/schedule");
 //    }
 //
-//    private String readSchedule(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        String monthStartParam = request.getParameter("monthStart");
-//        String monthEndParam = request.getParameter("monthEnd");
-//
-//        LocalDateTime monthStart = LocalDateTime.parse(monthStartParam);
-//        LocalDateTime monthEnd = LocalDateTime.parse(monthEndParam);
-//
-//        List<Schedule> schedules = scheduleManager.findSchedulesByDateRange(monthStart, monthEnd);
-//
-//        List<Schedule> allSchedules = new ArrayList<>();
-//        for (Schedule schedule : schedules) {
-//            if (schedule.getScheduleRepeat() > 0) {
-//                allSchedules.addAll(scheduleManager.generateRepeatingSchedulesForMonth(schedule, monthStart, monthEnd));
-//            } else {
-//                allSchedules.add(schedule);
-//            }
-//        }
-//
-//        request.setAttribute("scheduleList", allSchedules);
-//        return "scheduleList.jsp"; // 스케줄 목록을 보여줄 JSP 반환
-//    }
-//
-//    private String readScheduleByDate(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        String dateParam = request.getParameter("date"); // 선택한 날짜
-//        LocalDate date = LocalDate.parse(dateParam);
-//
-//        List<Schedule> schedules = scheduleManager.findScheduleByDate(date);
-//
-//        request.setAttribute("scheduleList", schedules);
-//        return "scheduleList.jsp"; // JSP에서 해당 날짜 일정 출력
-//    }
-//
-//    private String updateSchedule(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//    @Override
+//    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        // 스케줄 삭제 처리
 //        int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
-//        Schedule schedule = scheduleManager.findScheduleById(scheduleId);
 //
-//        if (schedule != null) {
-//            schedule.setScheduleTitle(request.getParameter("scheduleTitle"));
-//            schedule.setScheduleStart(LocalDateTime.parse(request.getParameter("scheduleStart")));
-//            schedule.setScheduleEnd(LocalDateTime.parse(request.getParameter("scheduleEnd")));
-//            schedule.setScheduleRepeat(Integer.parseInt(request.getParameter("scheduleRepeat")));
-//            schedule.setSchedulePlace(request.getParameter("schedulePlace"));
-//            schedule.setScheduleMemo(request.getParameter("memo"));
-//            schedule.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
+//        // 스케줄 삭제
+//        scheduleService.deleteSchedule(scheduleId);
 //
-//            boolean success = scheduleManager.updateSchedule(schedule);
-//            if (success) {
-//                request.setAttribute("message", "Schedule updated successfully");
-//                return "scheduleSuccess.jsp"; // 성공 시 JSP 반환
-//            } else {
-//                request.setAttribute("errorMessage", "Failed to update schedule");
-//                return "scheduleError.jsp"; // 실패 시 JSP 반환
-//            }
-//        } else {
-//            request.setAttribute("errorMessage", "Schedule not found");
-//            return "scheduleError.jsp";
-//        }
-//    }
-//
-//    private String deleteSchedule(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
-//        boolean success = scheduleManager.deleteSchedule(scheduleId);
-//
-//        if (success) {
-//            request.setAttribute("message", "Schedule deleted successfully");
-//            return "scheduleSuccess.jsp"; // 성공 시 JSP 반환
-//        } else {
-//            request.setAttribute("errorMessage", "Schedule not found");
-//            return "scheduleError.jsp"; // 실패 시 JSP 반환
-//        }
-//    }
-//
-//    private String getTodaySchedules(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        List<Schedule> todaySchedules = scheduleManager.getTodaySchedules();
-//
-//        // 결과를 JSON으로 변환해서 반환하거나 JSP로 전달
-//        request.setAttribute("todaySchedules", todaySchedules);
-//        return "todayScheduleList.jsp"; // JSP 파일에 오늘 일정 전달
+//        // 삭제 후 스케줄 목록으로 리다이렉트
+//        response.sendRedirect("/schedule");
 //    }
 //
 //}
