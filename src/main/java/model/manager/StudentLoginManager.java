@@ -4,13 +4,7 @@ package model.manager;
 import java.sql.SQLException;
 
 import model.dao.StudentDAO;
-<<<<<<< HEAD
-import model.dao.ProfessorDAO;
 import model.domain.Student;
-import model.domain.Professor;
-=======
-import model.domain.Student;
->>>>>>> 442fcd4b9ce0b0d9d452df219ae786f538f98d71
 
 public class StudentLoginManager {
 	private StudentDAO studentDAO;

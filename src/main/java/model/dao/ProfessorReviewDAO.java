@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import model.domain.Professor;
 import model.domain.ProfessorReview;
 import model.domain.Student;
-
+import java.sql.*;
 public class ProfessorReviewDAO {
     private JDBCUtil jdbcUtil = null;
 

@@ -14,11 +14,7 @@ import model.dao.StudentDAO;
 import model.domain.Student;
 import model.manager.StudentSignupManager;
 
-<<<<<<< HEAD
-@WebServlet("/signup/students")
-=======
 @WebServlet("/signup/student")
->>>>>>> 442fcd4b9ce0b0d9d452df219ae786f538f98d71
 public class StudentSignupController extends HttpServlet implements Controller {
 	
 
