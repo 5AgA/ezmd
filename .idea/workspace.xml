@@ -9,13 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/editSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/editSchedule.js" afterDir="false" />
-    </list>
+    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -236,7 +230,7 @@
       <workItem from="1734700666863" duration="859000" />
       <workItem from="1734705677976" duration="914000" />
       <workItem from="1734706777668" duration="34036000" />
-      <workItem from="1734760004145" duration="2616000" />
+      <workItem from="1734760004145" duration="2924000" />
     </task>
     <servers />
   </component>
