@@ -73,7 +73,7 @@
 	
 			    <!-- 비밀번호 찾기 -->
 			    <div class="forgot-password"> 
-			    	<a href="findPassword.jsp" class="find-password-link">비밀번호를 잊어버리셨나요?</a>
+			    	<div class="find-password-link">비밀번호를 잊어버리셨나요? 관리자에게 문의주세요</div>
 			    </div>
 			    <!-- 회원가입 -->
 			    <div class="sign-up">
@@ -81,15 +81,18 @@
 			    	<input type="button" value="회원가입" class="sign-up-link" onclick="window.location.href='<%= request.getContextPath() %>/register/form'">
 			    </div>
 
-				<!-- 에러 메시지 표시 -->
+				<!-- 에러 메시지 표시 via alert -->
 				<c:if test="${not empty errorMessage}">
-					<div class="error-message" style="color:red;">
-						${errorMessage}
-					</div>
+				    <script>
+				        // 메시지에 포함될 수 있는 특수 문자를 안전하게 처리하기 위해 JSTL의 fn:escapeXml을 사용
+				        var errorMessage = '<c:out value="${errorMessage}" />';
+				        alert(errorMessage);
+				    </script>
 				</c:if>
+
 	        </div>
 	    </form>
     </div>
-
+	
 </body>
 </html>

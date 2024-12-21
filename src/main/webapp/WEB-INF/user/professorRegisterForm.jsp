@@ -54,12 +54,6 @@
                     </div>
                 </div>
 
-                <!-- 교수 번호 -->
-                <div class="input-group">
-                    <label class="input-label" for="professorId">교수 번호</label>
-                    <input type="text" id="professorId" name="professorId" placeholder="교수 번호를 입력하세요" class="input-field" required>
-                </div>
-
                 <!-- 학과 -->
                 <div class="input-group">
                     <label class="input-label" for="dept">학과</label>
@@ -175,7 +169,7 @@
             const email = this.email.value.trim();
             const password = this.password.value;
             const confirmPassword = this['confirm-password'].value;
-            const professorId = this.professorId.value.trim();
+           /*  const professorId = this.professorId.value.trim(); */
             const dept = this.dept.value.trim();
             const professorOffice = this.professorOffice.value.trim();
 
@@ -206,12 +200,12 @@
                 valid = false;
             }
 
-            // 교수 번호 검증
+            /* // 교수 번호 검증
             if (professorId === "") {
                 alert("교수 번호를 입력해주세요.");
                 this.professorId.focus();
                 valid = false;
-            }
+            } */
 
             // 학과 검증
             if (dept === "") {

@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+import model.dao.ProfessorDAO;
 import model.dao.StudentDAO;
 import model.domain.Professor;
 import model.domain.Student;
 
-@WebServlet("/mypage/update")
+@WebServlet("/myPage/update")
 public class MyPageUpdateController extends HttpServlet implements Controller {
 
     @Override
@@ -48,18 +49,23 @@ public class MyPageUpdateController extends HttpServlet implements Controller {
         // 교수 또는 학생 구분
         if (user instanceof Professor) {
             Professor prof = (Professor) user;
-            // 교수는 변경 불가능 필드이므로 업데이트할 필요가 없다면 생략 가능
-            // 하지만 여기서는 비밀번호 변경 시를 고려해서 password도 받을 수 있음.
-            // 현재 JSP는 password 변경 폼이 없으니, password 변경 기능을 추가하면 form에 password 필드 추가 후 처리 가능.
             
-            //prof.setPassword(request.getParameter("password")); // 예시
-            
-            // 필요하다면 DAO 업데이트 로직 호출
-            // professorDAO.updateProfessor(prof);
-            
+            // 업데이트할 학과 정보 가져오기
+            String dept = request.getParameter("dept");
+            if (dept != null && !dept.trim().isEmpty()) {
+                prof.setDept(dept.trim());
+            }
+            // DAO를 통해 교수 정보 업데이트
+            ProfessorDAO professorDAO = new ProfessorDAO();
+            professorDAO.updateProfessor(prof);
+
         } else if (user instanceof Student) {
             Student stu = (Student) user;
-            // 학년만 변경 가능
+            String dept = request.getParameter("dept");
+            if (dept != null && !dept.trim().isEmpty()) {
+                stu.setDept(dept.trim());
+            }
+            // 학년 변경 가능
             String gradeStr = request.getParameter("grade");
             int grade = Integer.parseInt(gradeStr);
             stu.setGrade(grade);
@@ -69,7 +75,7 @@ public class MyPageUpdateController extends HttpServlet implements Controller {
         }
 
         // 업데이트 후 메시지 표시용 또는 마이페이지 재로드
-        return "redirect:/ezmd/mypage";
+        return "redirect:/ezmd/myPage";
     }
 }
 

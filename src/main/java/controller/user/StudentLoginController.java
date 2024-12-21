@@ -3,7 +3,7 @@ package controller.user;
 import controller.Controller;
 
 import model.domain.Student;
-import model.manager.StudentLoginManager;
+import model.manager.user.StudentLoginManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,8 +45,8 @@ public class StudentLoginController extends HttpServlet implements Controller {
             return "redirect:/ezmd/home";
         } else {
             // 로그인 실패
-            request.setAttribute("errorMessage", "Invalid credentials");
-            return "/ezmd/login/form";
+            request.setAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다.");
+            return "form";
         }
     }
 

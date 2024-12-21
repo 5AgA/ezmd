@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import controller.user.ChangePasswordController;
 import controller.user.LogoutController;
 import controller.user.MyPageUpdateController;
 import controller.user.ProfessorLoginController;
@@ -23,8 +25,10 @@ public class RequestMapping {
         // 기본 페이지 매핑
         mappings.put("/", new ForwardController("/index/index.jsp"));
         mappings.put("/home", new ForwardController("/user/home.jsp"));
-        mappings.put("/mypage", new ForwardController("/user/mypage.jsp"));
-        mappings.put("/mypage/update", new MyPageUpdateController());
+        mappings.put("/myPage", new ForwardController("/user/myPage.jsp"));
+        mappings.put("/myPage/update", new MyPageUpdateController());
+        mappings.put("/myPage/update/password", new ForwardController("/user/changePassword.jsp"));
+        mappings.put("/myPage/update/info", new ChangePasswordController());
         
         mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));
 

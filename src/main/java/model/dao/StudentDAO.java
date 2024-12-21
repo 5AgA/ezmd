@@ -168,4 +168,23 @@ public class StudentDAO {
         }
         return null;
     }
+    
+    
+    public int updatePassword(int studentId, String newPassword) {
+    	String sql = "UPDATE student SET password=? WHERE student_id=?";
+    	
+    	Object[] params = {newPassword, studentId};
+        jdbcUtil.setSqlAndParameters(sql, params);
+
+        try {
+            return jdbcUtil.executeUpdate();
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close();
+        }
+        return 0;
+    }
 }

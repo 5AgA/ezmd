@@ -5,7 +5,7 @@ package controller.user;
 import controller.Controller;
 
 import model.domain.Student;
-import model.manager.StudentSignupManager;
+import model.manager.user.StudentSignupManager;
 
 import java.io.IOException;
 import java.sql.SQLException;

@@ -4,7 +4,7 @@ package controller.user;
 import controller.Controller;
 
 import model.domain.Professor;
-import model.manager.ProfessorSignupManager;
+import model.manager.user.ProfessorSignupManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -91,8 +91,10 @@ public class ProfessorSignupController extends HttpServlet implements Controller
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 요청 데이터 추출
-        String professorIdStr = request.getParameter("professorId").trim();
-        String name = request.getParameter("name").trim();
+		/*
+		 * String professorIdStr = request.getParameter("professorId").trim();
+		 */        
+    	String name = request.getParameter("name").trim();
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password").trim();
@@ -102,7 +104,7 @@ public class ProfessorSignupController extends HttpServlet implements Controller
         // 서버 측 유효성 검사
         String errorMessage = null;
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() ||
-                confirmPassword.isEmpty() || professorIdStr.isEmpty() ||
+                confirmPassword.isEmpty()||
                 dept.isEmpty() || professorOffice.isEmpty()) {
             errorMessage = "모든 필드를 올바르게 입력해주세요.";
         } else if (!password.equals(confirmPassword)) {
@@ -132,14 +134,12 @@ public class ProfessorSignupController extends HttpServlet implements Controller
 
         // Professor 객체 생성
         Professor professor = new Professor();
-        try {
-            int professorId = Integer.parseInt(professorIdStr);
-            professor.setProfessorId(professorId);
-        } catch (NumberFormatException e) {
-            errorMessage = "교수 ID는 숫자여야 합니다.";
-            request.setAttribute("errorMessage", errorMessage);
-            return "professorRegisterForm.jsp";
-        }
+		/*
+		 * try { int professorId = Integer.parseInt(professorIdStr);
+		 * professor.setProfessorId(professorId); } catch (NumberFormatException e) {
+		 * errorMessage = "교수 ID는 숫자여야 합니다."; request.setAttribute("errorMessage",
+		 * errorMessage); return "professorRegisterForm.jsp";
+		 }*/
         professor.setName(name);
         professor.setEmail(email);
         professor.setPassword(password); // 비밀번호는 Manager에서 해싱

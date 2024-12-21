@@ -1,23 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>마이페이지</title>
     <link rel="icon" href="<c:url value='/favicon.ico' />" type="image/x-icon">
-    <link rel="stylesheet" href="<c:url value='/css/mypage.css' />">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/mypage.css">
 </head>
 <body>
-	
-	<!-- 헤더 -->
+
 	<jsp:include page="/WEB-INF/header.jsp">
-	    <jsp:param name="currentPage" value="mypage" />
-	</jsp:include>	
+		<jsp:param name="currentPage" value="mypage" />
+	</jsp:include>
 
     <div class="container">
     	<div class="profile-box">
+    		<!-- 성공 메시지 -->
+			<c:if test="${not empty sessionScope.successMessage}">
+			    <script>
+			        alert('<c:out value="${sessionScope.successMessage}" />');
+			    </script>
+			    <!-- 성공 메시지 후 세션에서 제거 -->
+			    <c:remove var="successMessage" scope="session" />
+			</c:if>
+			
+			<!-- 오류 메시지 -->
+			<c:if test="${not empty sessionScope.errorMessage}">
+			    <script>
+			        alert('<c:out value="${sessionScope.errorMessage}" />');
+			    </script>
+			    <!-- 오류 메시지 후 세션에서 제거 -->
+			    <c:remove var="errorMessage" scope="session" />
+			</c:if>
+
+    	
+    	
 	        <!-- 프로필 정보 -->
 	        <div class="profile-section">
 	            <img src="<c:url value='/images/profile-icon.png'/>" alt="Profile Image" class="profile-img">
@@ -49,7 +70,7 @@
 	                    <!-- dept -->
 	                    <div class="form-group">
 	                        <label for="dept">학과</label>
-	                        <input type="text" id="dept" name="dept" value="${sessionScope.user.dept}" readonly>
+	                        <input type="text" id="dept" name="dept" value="${sessionScope.user.dept}">
 	                    </div>
 	                    <!-- professorOffice -->
 	                    <div class="form-group">
@@ -79,7 +100,7 @@
 	                    <!-- dept -->
 	                    <div class="form-group">
 	                        <label for="dept">학과</label>
-	                        <input type="text" id="dept" name="dept" value="${sessionScope.user.dept}" readonly>
+	                        <input type="text" id="dept" name="dept" value="${sessionScope.user.dept}">
 	                    </div>
 	                    <!-- grade: 수정 가능 (1~4, 그리고 5학년 이상) -->
 	                    <div class="form-group">
@@ -108,12 +129,19 @@
     </div>
     <script>
         function saveInfo() {
-           	document.getElementById('infoForm').submit();
-            alert('정보가 저장되었습니다.');
+        	if (confirm('저장하시겠습니까?')) {
+                // 현재 표시된 폼을 선택
+                const form = document.querySelector('.user-info-form');
+                if (form) {
+                    form.submit();
+                }
+            }
+           	/* document.getElementById('infoForm').submit();
+            alert('정보가 저장되었습니다.'); */
         }
 
         function changePassword() {
-            alert('비밀번호 변경 페이지로 이동합니다.');
+        	window.location.href = '<c:url value="/myPage/update/password" />';
         }
     </script>
 

@@ -3,7 +3,7 @@ package controller.user;
 
 import controller.Controller;
 import model.domain.Professor;
-import model.manager.ProfessorLoginManager;
+import model.manager.user.ProfessorLoginManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,8 +44,8 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
             return "redirect:/ezmd/home";
         } else {
             // 로그인 실패 시 로그인 페이지로 이동하며 에러 메시지 설정
-            request.setAttribute("errorMessage", "Invalid credentials");
-            return "/ezmd/login/form";
+            request.setAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다.");
+            return "form";
         }
    }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

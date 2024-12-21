@@ -17,8 +17,8 @@
 				href="<c:url value='/schedule'/>">일정 관리</a></li>
 			<li class="<%= "meeting".equals(currentPage) ? "active" : "" %>"><a
 				href="<c:url value='/meeting'/>">면담 관리</a></li>
-			<li class="<%= "mypage".equals(currentPage) ? "active" : "" %>"><a
-				href="<c:url value='/mypage'/>">마이페이지</a></li>
+			<li class="<%= "myPage".equals(currentPage) ? "active" : "" %>"><a
+				href="<c:url value='/myPage'/>">마이페이지</a></li>
 		</ul>
 	</nav>
 	<div class="submenu">
