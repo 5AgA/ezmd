@@ -4,6 +4,7 @@
 package model.dao;
 
 import java.sql.*;
+import java.util.Arrays;
 
 public class JDBCUtil {
 	private static ConnectionManager connMan = new ConnectionManager();
@@ -16,7 +17,8 @@ public class JDBCUtil {
 	private int resultSetType = ResultSet.TYPE_FORWARD_ONLY, resultSetConcurrency = ResultSet.CONCUR_READ_ONLY;
 
 	// 기본 생성자
-	public JDBCUtil() {}
+	public JDBCUtil() {
+	}
 
 	/*
 	 * // 매개변수 없는 query를 전달받아 query를 설정하는 생성자 public JDBCUtil(String sql) {
@@ -52,6 +54,11 @@ public class JDBCUtil {
 	public void setSqlAndParameters(String sql, Object[] parameters) {
 		this.sql = sql;
 		this.parameters = parameters;
+		System.out.println("SQL: " + sql);
+		System.out.println("Parameters: ");
+		for (Object param : parameters) {
+			System.out.println(param);
+		}
 		this.resultSetType = ResultSet.TYPE_FORWARD_ONLY;
 		this.resultSetConcurrency = ResultSet.CONCUR_READ_ONLY;
 	}
@@ -66,6 +73,8 @@ public class JDBCUtil {
 
 	// 현재의 PreparedStatement를 반환
 	private PreparedStatement getPreparedStatement() throws SQLException {
+		System.out.println("매개변수: " + Arrays.toString(parameters));
+		
 		if (conn == null) {
 			conn = connMan.getConnection();
 			conn.setAutoCommit(false);
@@ -80,13 +89,32 @@ public class JDBCUtil {
 	// JDBCUtil의 쿼리와 매개변수를 이용해 executeQuery를 수행하는 메소드
 	public ResultSet executeQuery() {
 		try {
+			System.out.println("실행 쿼리: " + sql);
+			System.out.println("매개변수: " + Arrays.toString(parameters));
 			pstmt = getPreparedStatement();
 			for (int i = 0; i < getParameterSize(); i++) {
 				pstmt.setObject(i + 1, getParameter(i));
 			}
-			rs = pstmt.executeQuery();
+			 System.out.println("Executing Query: " + pstmt.toString());
+			 for (int i = 0; i < parameters.length; i++) {
+				    System.out.println("Parameter " + (i + 1) + ": " + parameters[i]);
+				}
+			 String finalQuery = sql;
+			 for (int i = 0; i < parameters.length; i++) {
+			     finalQuery = finalQuery.replaceFirst("\\?", "'" + parameters[i] + "'");
+			 }
+			 System.out.println("Final SQL Query: " + finalQuery);
+			 rs = pstmt.executeQuery();
+			 if (!rs.isBeforeFirst()) {
+				    System.out.println("No data found in ResultSet. Query executed: " + finalQuery);
+				} else {
+				    System.out.println("Data found in ResultSet.");
+				}
+
+
 			return rs;
 		} catch (Exception ex) {
+			
 			ex.printStackTrace();
 		}
 		return null;
@@ -94,6 +122,9 @@ public class JDBCUtil {
 
 	// JDBCUtil의 쿼리와 매개변수를 이용해 executeUpdate를 수행하는 메소드
 	public int executeUpdate() throws SQLException, Exception {
+		System.out.println("실행 쿼리: " + sql);
+		System.out.println("매개변수: " + Arrays.toString(parameters));
+		
 		pstmt = getPreparedStatement();
 		int parameterSize = getParameterSize();
 		for (int i = 0; i < parameterSize; i++) {
@@ -103,7 +134,10 @@ public class JDBCUtil {
 				pstmt.setObject(i + 1, getParameter(i));
 			}
 		}
-		return pstmt.executeUpdate();
+		 int result = pstmt.executeUpdate(); 
+	    System.out.println("쿼리 성공적으로 실행됨. 반환 값: " + result);
+	    return result;
+	    
 	}
 
 	// 현재의 CallableStatement를 반환
@@ -127,8 +161,11 @@ public class JDBCUtil {
 		return cstmt.execute();
 	}
 
-	// PK 컬럼 이름 배열을 이용하여 PreparedStatement를 생성 (INSERT문에서 Sequence를 통해 PK 값을 생성하는 경우)
+	// PK 컬럼 이름 배열을 이용하여 PreparedStatement를 생성 (INSERT문에서 Sequence를 통해 PK 값을 생성하는
+	// 경우)
 	private PreparedStatement getPreparedStatement(String[] columnNames) throws SQLException {
+		
+		System.out.println("매개변수: " + Arrays.toString(parameters));
 		if (conn == null) {
 			conn = connMan.getConnection();
 			conn.setAutoCommit(false);
@@ -200,11 +237,13 @@ public class JDBCUtil {
 	}
 
 	public void commit() {
-		try {
-			conn.commit();
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
+		   try {
+		        System.out.println("Commit 호출");
+		        conn.commit();
+		        System.out.println("Commit 성공");
+		    } catch (SQLException ex) {
+		        ex.printStackTrace();
+		    }
 	}
 
 	public void rollback() {

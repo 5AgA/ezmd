@@ -7,6 +7,9 @@ public class InterviewResult {
     private int interviewId; //PK&FK
     private String interviewTopic;
     private String interviewSummary;
+    private int reviewId;
+	private String reviewOfInterview;
+	private int reviewRating;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -14,10 +17,13 @@ public class InterviewResult {
     public InterviewResult() {}
 
     // 모든 필드를 초기화하는 생성자
-    public InterviewResult(int interviewId, String interviewTopic, String interviewSummary, Timestamp createdAt, Timestamp updatedAt) {
+    public InterviewResult(int interviewId, String interviewTopic, String interviewSummary, int reviewId, String reviewOfInterview, int reviewRating,Timestamp createdAt, Timestamp updatedAt) {
         this.interviewId = interviewId;
         this.interviewTopic = interviewTopic;
         this.interviewSummary = interviewSummary;
+    	this.reviewId = reviewId;
+		this.reviewOfInterview = reviewOfInterview;
+		this.reviewRating = reviewRating;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -46,6 +52,31 @@ public class InterviewResult {
     public void setInterviewSummary(String interviewSummary) {
         this.interviewSummary = interviewSummary;
     }
+
+ // Getter와 Setter 메서드
+ 	public int getReviewId() {
+ 		return reviewId;
+ 	}
+
+ 	public void setReviewId(int reviewId) {
+ 		this.reviewId = reviewId;
+ 	}
+
+ 	public String getReviewOfInterview() {
+ 		return reviewOfInterview;
+ 	}
+
+ 	public void setReviewOfInterview(String reviewOfInterview) {
+ 		this.reviewOfInterview = reviewOfInterview;
+ 	}
+
+ 	public int getReviewRating() {
+ 		return reviewRating;
+ 	}
+
+ 	public void setReviewRating(int reviewRating) {
+ 		this.reviewRating = reviewRating;
+ 	}
 
     public Timestamp getCreatedAt() {
         return createdAt;
