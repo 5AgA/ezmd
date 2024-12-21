@@ -8,9 +8,8 @@ let currentMonth = new Date().getMonth(); // 0: 1월, 1: 2월...
 const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 
 let categories = []; // 카테고리 정보를 저장할 배열
-
 // 카테고리 데이터를 서버에서 가져옵니다.
-fetch('/schedule/categories')
+fetch('/schedule/categories?userId=20210670')
     .then(response => response.json())
     .then(data => {
         categories = data; // 카테고리 정보를 배열로 저장
@@ -124,6 +123,9 @@ function renderCalendar(year, month) {
         const pElement = document.createElement('p');
 
         // 날짜 계산 및 클래스 추가
+        let categoryColor = '';
+
+        // 날짜 계산 및 클래스 추가
         if (i <= firstDay) {
             // 이전 달
             pElement.textContent = prevLastDate - firstDay + i;
@@ -140,6 +142,7 @@ function renderCalendar(year, month) {
             pElement.textContent = i - firstDay - lastDate;
             dayElement.classList.add('next-month');
         }
+
         // 토요일과 일요일에 id="weekend" 추가
         if ((i - firstDay) % 7 === 0 || (i - firstDay) % 7 === 1) { // 일요일(0) 또는 토요일(6)
             dayElement.id = 'weekend';

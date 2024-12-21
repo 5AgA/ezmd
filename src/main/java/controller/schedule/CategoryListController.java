@@ -18,7 +18,7 @@ public class CategoryListController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int userId = 20210670; // 하드코딩된 사용자 ID
+        int userId = (int) request.getSession().getAttribute("userId");
 
         // 사용자 카테고리 가져오기
         List<ScheduleCategory> categories = categoryService.getCategoriesByUserId(userId);

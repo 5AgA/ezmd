@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 카테고리 데이터 가져오기
     const categoryContainer = document.querySelector(".category");
-    fetch("/schedule/categories")
+    fetch("/schedule/categories?userId=20210670")
         .then(response => response.json())
         .then(categories => {
             categories.forEach(category => {

@@ -18,14 +18,27 @@ public class ScheduleViewController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 하드코딩된 userId 사용
-        int userId = 20210670;
+        String userIdParam = request.getParameter("userId");
+        int userId;
+
+        try {
+            if (userIdParam != null && !userIdParam.isEmpty()) {
+                userId = Integer.parseInt(userIdParam); // userId가 전달된 경우
+            } else {
+                userId = 20210670; // userId가 전달되지 않은 경우
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid 'userId' parameter");
+            return null;
+        }
 
         // selectedDate 파라미터 가져오기
         String date = request.getParameter("date");
         if (date == null || date.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing 'date' parameter");
-            return null;
+            List<Schedule> schedules = scheduleService.getSchedulesByUserId(userId);
+            response.setContentType("application/json; charset=UTF-8");
+            response.getWriter().write(new Gson().toJson(schedules));
+            return null; // JSON만 반환
         }
 
         // DB에서 해당 날짜의 일정 가져오기

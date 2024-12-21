@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let sId = ''; // 수정할 일정 ID
 
     // 카테고리 데이터 가져오기
-    fetch("/schedule/categories")
+    fetch("/schedule/categories?userId=20210670")
         .then(response => response.json())
         .then(categories => {
             categories.forEach(category => {
