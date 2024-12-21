@@ -125,13 +125,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         alert('일정이 삭제되었습니다.');
                         setTimeout(() => {
                             closeModal();  // 모달 닫기
-                        }, 1000);
+                            handleClick({ target: document.querySelector('.selected') });
+                        }, 0);
                         // 페이지 갱신 또는 일정 목록을 새로고침하는 로직 추가 가능
                     } else {
                         alert('일정 삭제에 실패했습니다.');
                         setTimeout(() => {
                             closeModal();  // 모달 닫기
-                        }, 1000);
+                        }, 0);
                     }
                 })
                 .catch(error => console.error('Error deleting schedule:', error));
@@ -196,12 +197,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert('일정이 성공적으로 수정되었습니다.');
                     setTimeout(() => {
                         closeModal();  // 모달 닫기
-                    }, 1000);
+                        handleClick({ target: document.querySelector('.selected') });
+                    }, 0);
                 } else {
                     alert('일정 수정에 실패했습니다.');
                     setTimeout(() => {
                         closeModal();  // 모달 닫기
-                    }, 1000);
+                    }, 0);
                 }
             })
             .catch(error => console.error('Error updating schedule:', error));

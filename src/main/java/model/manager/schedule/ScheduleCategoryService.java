@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ScheduleCategoryService {
     private SqlSessionFactory sqlSessionFactory;
-    private ScheduleCategoryMapper scheduleCategoryMapper;
 
     public ScheduleCategoryService() {
         String resource = "mybatis-config.xml";
@@ -21,7 +20,6 @@ public class ScheduleCategoryService {
         try {
             inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            scheduleCategoryMapper = sqlSessionFactory.openSession().getMapper(ScheduleCategoryMapper.class);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("ScheduleService 초기화 실패", e);
@@ -30,8 +28,8 @@ public class ScheduleCategoryService {
 
     public List<ScheduleCategory> getCategoriesByUserId(int userId) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            ScheduleCategoryMapper mapper = sqlSession.getMapper(ScheduleCategoryMapper.class);
-            return mapper.selectCategoriesByUserId(userId);
+            ScheduleCategoryMapper scheduleCategoryMapper = sqlSession.getMapper(ScheduleCategoryMapper.class);
+            return scheduleCategoryMapper.selectCategoriesByUserId(userId);
         }
     }
 }

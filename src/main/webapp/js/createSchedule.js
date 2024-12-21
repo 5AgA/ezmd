@@ -117,13 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     setTimeout(() => {
                         modal.style.display = "none";
                         selectedCategory = '';
-                    }, 100);
+                        handleClick({ target: document.querySelector('.selected') });
+                    }, 0);
                 } else {
                     alert('일정 추가에 실패했습니다.');
                     setTimeout(() => {
                         modal.style.display = "none";
                         selectedCategory = '';
-                    }, 100);
+                    }, 0);
                 }
             })
             .catch(error => console.error('Error:', error));
