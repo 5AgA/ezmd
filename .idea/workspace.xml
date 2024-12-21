@@ -10,12 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/DeleteScheduleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/UpdateScheduleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/schedule/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/ScheduleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/editSchedule.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/editSchedule.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/schedule/AddScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/AddScheduleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/Schedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/editSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/editSchedule.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -237,7 +236,7 @@
       <workItem from="1734616665702" duration="21192000" />
       <workItem from="1734700666863" duration="859000" />
       <workItem from="1734705677976" duration="914000" />
-      <workItem from="1734706777668" duration="32718000" />
+      <workItem from="1734706777668" duration="34036000" />
     </task>
     <servers />
   </component>

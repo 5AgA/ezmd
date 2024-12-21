@@ -55,7 +55,7 @@ public class Schedule {
 
     // **Getter 및 Setter**
     public int getScheduleId() {
-        return scheduleId;
+        return this.scheduleId;
     }
 
     public void setScheduleId(int scheduleId) {

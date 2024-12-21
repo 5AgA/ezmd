@@ -162,14 +162,37 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const formData = new FormData(this);
+        const scheduleId = sId; // 수정할 일정 ID
+        const scheduleTitle = document.getElementById('edit-title').value;
+        const scheduleStart = new Date(document.getElementById('edit-sdate').value).toISOString().slice(0, 16).replace('T', ' ');
+        const scheduleEnd = new Date(document.getElementById('edit-edate').value).toISOString().slice(0, 16).replace('T', ' ');
+        const schedulePlace = document.getElementById('edit-place').value;
+        const scheduleMemo = document.getElementById('edit-memo').value;
+        const categoryId = selectedCategory; // 이미 선택된 카테고리 ID
+
+        const scheduleData = {
+            scheduleId: scheduleId,
+            scheduleTitle: scheduleTitle,
+            scheduleStart: scheduleStart,
+            scheduleEnd: scheduleEnd,
+            schedulePlace: schedulePlace,
+            scheduleMemo: scheduleMemo,
+            categoryId: categoryId,
+            userId: '20210670' // 예시로 1을 사용. 실제 사용자 ID로 변경 필요.
+        };
+
+        console.log(scheduleData);
+
         fetch('/schedule/update', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(scheduleData)
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (data.status === "success") {
                     alert('일정이 성공적으로 수정되었습니다.');
                     setTimeout(() => {
                         closeModal();  // 모달 닫기

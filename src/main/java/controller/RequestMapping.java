@@ -32,6 +32,7 @@ public class RequestMapping {
         mappings.put("/schedule/categories", new CategoryListController());
         mappings.put("/schedule/add", new AddScheduleController());
         mappings.put("/schedule/delete", new DeleteScheduleController());
+        mappings.put("/schedule/update", new UpdateScheduleController());
 
         logger.info("Initialized Request Mapping!");
     }
