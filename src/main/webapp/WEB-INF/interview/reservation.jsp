@@ -40,6 +40,8 @@
                 <input type="hidden" name="selectedDate" id="selectedDate" value="">
                 <input type="hidden" name="selectedTime" id="selectedTime" value="">
                 <input type="hidden" name="professorId" id="professorId" value="<%= professorId %>">
+                <input type="hidden" name="professorName" id="professorName" value="<%= professorName %>">
+
                 <div class="reservation-section">
                     <div class="calendar-wrapper">
                         <h3 class="calendar-title">면담 날짜 선택</h3>

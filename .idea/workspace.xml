@@ -10,16 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/user/SearchProfController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/reservation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/mybatis/mapper/ProfessorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/mybatis/mapper/ProfessorMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/user/ProfessorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/user/ProfessorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation-submit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation-submit.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/selectProf.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/selectProf.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/selectProf.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/selectProf.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/selectProf.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/selectProf.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +79,7 @@
     "Maven.ezmd [clean, install].executor": "Run",
     "Maven.ezmd [clean,install].executor": "Run",
     "Maven.ezmd [clean].executor": "Run",
+    "Maven.ezmd [compile].executor": "Run",
     "Maven.ezmd [install].executor": "Run",
     "Maven.ezmd [test].executor": "Run",
     "Repository.Attach.Annotations": "false",
