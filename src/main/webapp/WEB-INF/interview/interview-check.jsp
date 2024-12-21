@@ -42,7 +42,7 @@
         <div class="list-container">
         <c:forEach var="interview" items="${interviews}">
           <div class="list-item">
-            <div class="student-name">${interview.studentName}(${interview.studentMajor}, ${interview.studentId})
+            <div class="student-name">${interview.studentName}(${interview.studentMajor}, ${interview.interviewCategory})
             <br/><br/>    ${fn:replace(interview.requestedDate, 'T', ' ')}
 
 </div>

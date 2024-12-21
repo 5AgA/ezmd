@@ -3,6 +3,7 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.interview.ApproveInterviewController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.user.StudentLoginController;
@@ -45,6 +46,7 @@ public class RequestMapping {
         mappings.put("/interview", new ForwardController("/interview/reservation.jsp"));
         mappings.put("/interview-submit", new ForwardController("/interview/reservation-submit.jsp"));
         mappings.put("/interview-check", new ForwardController("/interview/interview-check.jsp"));
+        mappings.put("/interview-check/approve", new ApproveInterviewController());
 
         logger.info("Initialized Request Mapping!");
     }
