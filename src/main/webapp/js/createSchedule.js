@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (startDate > endDate) {
             // 경고 메시지 출력
             const errorElement = document.createElement('p');
+            errorElement.className = 'error-message';
             errorElement.textContent = '시작일은 종료일보다 앞서야 합니다.';
             errorElement.style.color = 'red';
             document.querySelector('.date').appendChild(errorElement);
@@ -100,8 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
             userId: '20210670' // 예시로 1을 사용. 실제 사용자 ID로 변경 필요.
         };
 
-        console.log(scheduleData);
-
         fetch('/schedule/add', {
             method: 'POST',
             headers: {
@@ -115,26 +114,48 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert('일정이 추가되었습니다.');
                     // 일정 추가 후 alert 확인 버튼을 누르면 모달을 닫음
                     setTimeout(() => {
-                        modal.style.display = "none";
-                        selectedCategory = '';
+                        closeModal();
                         handleClick({ target: document.querySelector('.selected') });
                     }, 0);
                 } else {
                     alert('일정 추가에 실패했습니다.');
                     setTimeout(() => {
-                        modal.style.display = "none";
-                        selectedCategory = '';
+                        closeModal();
                     }, 0);
                 }
             })
             .catch(error => console.error('Error:', error));
     });
 
+    // 모달 닫기
+    function closeModal() {
+        modal.style.display = 'none';
+
+        // 폼 초기화
+        document.getElementById('title').value = '';
+        document.getElementById('sdate').value = '';
+        document.getElementById('edate').value = '';
+        document.getElementById('place').value = '';
+        document.getElementById('memo').value = '';
+
+        // 카테고리 버튼의 선택 상태 초기화
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(button => {
+            button.classList.remove('selected');
+            button.style.border = ''; // 회색 테두리 제거
+        });
+
+        selectedCategory = '';
+        sId = '';
+        if(document.querySelector('.error-message')) {
+            document.querySelector('.error-message').remove(); // 에러 메시지 삭제
+        }
+    }
+
     // 모달 밖을 클릭하면 모달 닫기
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
-            modal.style.display = "none";
-            selectedCategory = '';
+            closeModal();
         }
     });
 });

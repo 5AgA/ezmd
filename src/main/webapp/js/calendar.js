@@ -38,6 +38,13 @@ function getScheduleForDate(date) {
 
 // 날짜를 클릭했을 때 실행될 함수
 function handleClick(event) {
+    const clickedElement = event.target.closest('.day-cell');
+
+    // 클릭된 요소가 prev-month나 next-month 클래스가 있으면 선택되지 않도록
+    if (clickedElement.classList.contains('prev-month') || clickedElement.classList.contains('next-month')) {
+        return; // prev-month나 next-month일 경우 아무 작업도 하지 않음
+    }
+
     const days = document.querySelectorAll('.calendar-grid .day-cell');
     days.forEach(day => {
         day.classList.remove('selected');
@@ -51,7 +58,6 @@ function handleClick(event) {
         clickedElement.classList.toggle('selected');
 
         const selectedDate = clickedElement.querySelector('p').textContent;
-
         const today = new Date();
         const selectedDateObj = new Date(today.getFullYear(), today.getMonth(), selectedDate); // 선택한 날짜의 Date 객체 생성
 

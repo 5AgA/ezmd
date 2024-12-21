@@ -104,6 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         selectedCategory = '';
         sId = '';
+        if(document.querySelector('.error-message')) {
+            document.querySelector('.error-message').remove(); // 에러 메시지 삭제
+        }
     }
 
     // 모달 외부 클릭 시 모달 닫기
@@ -148,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (startDate > endDate) {
             const errorElement = document.createElement('p');
+            errorElement.className = 'error-message';
             errorElement.textContent = '시작일은 종료일보다 앞서야 합니다.';
             errorElement.style.color = 'red';
             document.querySelector('.edit-date').appendChild(errorElement);
@@ -165,8 +169,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const scheduleId = sId; // 수정할 일정 ID
         const scheduleTitle = document.getElementById('edit-title').value;
-        const scheduleStart = new Date(document.getElementById('edit-sdate').value).toISOString().slice(0, 16).replace('T', ' ');
-        const scheduleEnd = new Date(document.getElementById('edit-edate').value).toISOString().slice(0, 16).replace('T', ' ');
+        // 로컬 시간대 기준으로 포맷하기
+        const scheduleStart = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}-${startDate.getDate().toString().padStart(2, '0')} ${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
+        const scheduleEnd = `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate.getDate().toString().padStart(2, '0')} ${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+
         const schedulePlace = document.getElementById('edit-place').value;
         const scheduleMemo = document.getElementById('edit-memo').value;
         const categoryId = selectedCategory; // 이미 선택된 카테고리 ID
