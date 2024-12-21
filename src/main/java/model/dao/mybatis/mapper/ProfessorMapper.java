@@ -36,6 +36,18 @@ public interface ProfessorMapper {
     })
     List<Professor> getAllProfessors();
 
+    @Select("SELECT * FROM professor WHERE name LIKE '%' || #{keyword} || '%' AND deleted = 'N'")
+    @Results({
+            @Result(property = "professorId", column = "professor_id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "dept", column = "dept"),
+            @Result(property = "professorOffice", column = "professor_office"),
+            @Result(property = "deleted", column = "deleted")
+    })
+    List<Professor> searchProfessorsByKeyword(String keyword);
+
     @Update("UPDATE professor SET name = #{name}, email = #{email}, password = #{password}, " +
             "dept = #{dept}, professor_office = #{professorOffice}, deleted = #{deleted} " +
             "WHERE professor_id = #{professorId}")

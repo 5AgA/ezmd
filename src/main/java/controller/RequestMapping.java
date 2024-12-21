@@ -39,6 +39,7 @@ public class RequestMapping {
         mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));
         mappings.put("/select-prof", new ForwardController("/interview/selectProf.jsp"));
         mappings.put("/profs/view", new ProfessorsViewController());
+        mappings.put("/profs/search", new SearchProfController());
         mappings.put("/interview", new ForwardController("/interview/reservation.jsp"));
         mappings.put("/interview-submit", new ForwardController("/interview/reservation-submit.jsp"));
         mappings.put("/interview-check", new ForwardController("/interview/interview-check.jsp"));

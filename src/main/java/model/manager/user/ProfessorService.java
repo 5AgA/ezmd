@@ -58,6 +58,17 @@ public class ProfessorService {
         }
     }
 
+    public List<Professor> searchProfessorsByKeyword(String keyword) {
+        try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            ProfessorMapper professorMapper = sqlSession.getMapper(ProfessorMapper.class);
+            List<Professor> professors = professorMapper.searchProfessorsByKeyword(keyword);
+            return professors;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("searchProfessorsByKeyword 실패", e);
+        }
+    }
+
     public int updateProfessor(Professor professor) {
         try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
             ProfessorMapper professorMapper = sqlSession.getMapper(ProfessorMapper.class);

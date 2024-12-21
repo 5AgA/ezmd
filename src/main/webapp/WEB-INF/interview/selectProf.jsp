@@ -12,8 +12,9 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/header.jsp">
-    <jsp:param name="currentPage" value="reservation" />
+    <jsp:param name="currentPage" value="meeting" />
 </jsp:include>
+
     <div class="global-wrapper">
         <!-- Sidebar -->
         <div class="sidebar-wrapper">
@@ -27,17 +28,7 @@
             <div class="professor-list-wrapper">
                 <h3 class="professor-title">교수 목록</h3>
                 <div class="departments">
-<%--                    <div>--%>
-<%--                        <button class="department-button">--%>
-<%--                            국사학과--%>
-<%--                            <span class="triangle">▶</span>--%>
-<%--                        </button>--%>
-<%--                        <ul class="professor-names hidden">--%>
-<%--                            <li class="professor-name">김지은</li>--%>
-<%--                            <li class="professor-name">안정이</li>--%>
-<%--                            <li class="professor-name">김종섭</li>--%>
-<%--                        </ul>--%>
-<%--                    </div>--%>
+
                 </div>
             </div>
 
@@ -46,6 +37,8 @@
                 <h2 class="name-search-title">이름 검색</h2>
                 <div class="search-box">
                     <input type="text" class="search-input" placeholder="검색어를 입력하세요">
+                </div>
+                <div class="searched-box">
                 </div>
             </div>
         </div>
