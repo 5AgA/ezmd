@@ -3,13 +3,9 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.user.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import controller.user.StudentLoginController;
-import controller.user.ProfessorLoginController;
-import controller.user.LogoutController;
-import controller.user.StudentSignupController;
-import controller.user.ProfessorSignupController;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -42,6 +38,7 @@ public class RequestMapping {
         mappings.put("/myPage", new ForwardController("/user/mypage.jsp"));
         mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));
         mappings.put("/select-prof", new ForwardController("/interview/selectProf.jsp"));
+        mappings.put("/profs/view", new ProfessorsViewController());
         mappings.put("/interview", new ForwardController("/interview/reservation.jsp"));
         mappings.put("/interview-submit", new ForwardController("/interview/reservation-submit.jsp"));
         mappings.put("/interview-check", new ForwardController("/interview/interview-check.jsp"));

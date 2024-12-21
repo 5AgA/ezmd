@@ -27,83 +27,17 @@
             <div class="professor-list-wrapper">
                 <h3 class="professor-title">교수 목록</h3>
                 <div class="departments">
-                			 <div>
-                        <button class="department-button">
-                            국사학과
-                            <span class="triangle">▶</span>
-                        </button>
-                        <ul class="professor-names hidden">
-                            <li class="professor-name">김지은</li>
-                            <li class="professor-name">안정이</li>
-                            <li class="professor-name">김종섭</li>
-                        </ul>
-                    </div>
-                     <div>
-                        <button class="department-button">
-                            데이터사이언스학과
-                            <span class="triangle">▶</span>
-                        </button>
-                        <ul class="professor-names hidden">
-                            <li class="professor-name">권범</li>
-                            <li class="professor-name">김태완</li>
-                            <li class="professor-name">문혜영</li>
-                        </ul>
-                    </div>
-                     <div>
-                        <button class="department-button">
-                            모델학과
-                            <span class="triangle">▶</span>
-                        </button>
-                        <ul class="professor-names hidden">
-                            <li class="professor-name">김지영</li>
-                            <li class="professor-name">박시은</li>
-                            <li class="professor-name">박종철</li>
-                        </ul>
-                    </div>
-                     <div>
-                        <button class="department-button">
-                            일본어학과
-                            <span class="triangle">▶</span>
-                        </button>
-                        <ul class="professor-names hidden">
-                            <li class="professor-name">김영민</li>
-                            <li class="professor-name">김유영</li>
-                            <li class="professor-name">사와다노부에</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <button class="department-button">
-                            컴퓨터학과
-                            <span class="triangle">▶</span>
-                        </button>
-                        <ul class="professor-names hidden">
-                            <li class="professor-name">노현아</li>
-                            <li class="professor-name">박소희</li>
-                            <li class="professor-name">박창섭</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <button class="department-button">
-                            응용화학과
-                            <span class="triangle">▶</span>
-                        </button>
-                        <ul class="professor-names hidden">
-                            <li class="professor-name">성지하</li>
-                            <li class="professor-name">김민영</li>
-                            <li class="professor-name">이노아</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <button class="department-button">
-                            중어중문학과
-                            <span class="triangle">▶</span>
-                        </button>
-                        <ul class="professor-names hidden">
-                            <li class="professor-name">주영현</li>
-                            <li class="professor-name">유일한</li>
-                            <li class="professor-name">부지영</li>
-                        </ul>
-                    </div>
+<%--                    <div>--%>
+<%--                        <button class="department-button">--%>
+<%--                            국사학과--%>
+<%--                            <span class="triangle">▶</span>--%>
+<%--                        </button>--%>
+<%--                        <ul class="professor-names hidden">--%>
+<%--                            <li class="professor-name">김지은</li>--%>
+<%--                            <li class="professor-name">안정이</li>--%>
+<%--                            <li class="professor-name">김종섭</li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
                 </div>
             </div>
 
@@ -127,41 +61,6 @@
         </form>
     </div>
     
-    <script>
-        // Toggle department professors
-        $(document).on("click", ".department-button", function () {
-            const $professorList = $(this).next(".professor-names");
-            $professorList.toggleClass("hidden");
-            const $triangle = $(this).find(".triangle");
-            $triangle.text($professorList.hasClass("hidden") ? "▶" : "▼");
-        });
-
-        // Highlight selected professor
-        $(document).on("click", ".professor-name", function () {
-            $(".professor-name").removeClass("selected");
-            $(this).addClass("selected");
-        });
-
-        // Set hidden input values and submit form
-        $(".select-button").on("click", function (e) {
-            e.preventDefault(); // 기본 제출 동작 방지
-
-            const $selectedProfessor = $(".professor-name.selected");
-            const professorName = $selectedProfessor.text();
-            const professorId ="30000010";
-
-            if (!professorName || !professorId) {
-                alert("선택된 교수가 없습니다.");
-                return;
-            }
-
-            // 숨겨진 input 필드에 값 설정
-            $("#professorId").val(professorId);
-            $("#professorName").val(professorName);
-
-            // 폼 제출
-            $("#professorForm").submit();
-        });
-    </script>
+    <script src="<c:url value="/js/selectProf.js" />"></script>
 </body>
 </html>
