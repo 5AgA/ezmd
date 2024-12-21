@@ -9,14 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/schedule/CategoryListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/CategoryListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/schedule/ScheduleViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/ScheduleViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/editSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/editSchedule.js" afterDir="false" />
-    </list>
+    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
