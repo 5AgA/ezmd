@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/css/reservation.css">
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reservation.css">
 <title>면담 예약</title>
 <script>
@@ -67,7 +67,7 @@
         <form action="<%=request.getContextPath()%>/interview-submit" method="post">
           <input type="hidden" name="selectedDate" id="selectedDate" value="">
           <input type="hidden" name="selectedTime" id="selectedTime" value="">
-
+		  <input type="hidden" name="professorId" id="professorId" value=30000010>
           <div class="reservation-section">
             <div class="calendar-wrapper">
               <h3 class="calendar-title">면담 날짜 선택</h3>
@@ -105,8 +105,8 @@
             <div class="time-selector-wrapper">
               <h3 class="time-selector-title">면담 시간 선택</h3>
               <div class="time-grid">
-                <button type="button" class="time-button">9:00</button>
-                <button type="button" class="time-button">9:30</button>
+                <button type="button" class="time-button">09:00</button>
+                <button type="button" class="time-button">09:30</button>
                 <button type="button" class="time-button">10:00</button>
                 <button type="button" class="time-button">10:30</button>
                 <button type="button" class="time-button">11:00</button>

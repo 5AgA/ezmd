@@ -13,12 +13,11 @@ public class InterviewDAO {
 	}
 	
 	//면담 예약 생성
-	public boolean createInterview(Interview interview) {
-		String sql = "INSERT INTO interview(interview_id, requested_date, interview_category, interview_note, interview_status, is_completed, created_at, updated_at, student_id, professor_id)" 
-				+ "VALUES (INTERVIEW_SEQ.NEXTVAL, ?, ?, ?, 'pending', 'N', SYSTIMESTAMP, SYSTIMESTAMP, ?, ?)";
-		
+	public int createInterview(Interview interview) {
+		String sql = "INSERT INTO interview(requested_date, interview_category, interview_note, interview_status, is_completed, created_at, updated_at, student_id, professor_id) VALUES (?, ?, ?, 'pending', 'N', SYSTIMESTAMP, SYSTIMESTAMP, ?, ?)";
+		int result = 0;
 		Object[] params = {
-				interview.getRequestedDate(),
+				Timestamp.valueOf(interview.getRequestedDate()),
 				interview.getInterviewCategory(),
 				interview.getInterviewNote(),
 				interview.getStudentId(),
@@ -26,17 +25,17 @@ public class InterviewDAO {
 		};
 		jdbcUtil.setSqlAndParameters(sql,  params);
 		try {
-			int result = jdbcUtil.executeUpdate();
+			result = jdbcUtil.executeUpdate();
 			jdbcUtil.commit();
 			
-			return result > 0;
+			return result;
 		} catch (Exception e) {
 			jdbcUtil.rollback();
 			e.printStackTrace();
 		} finally {
 			jdbcUtil.close();
 		}
-		return false;
+		return result;
 	}
 	//특정 학생 면담 다 불러오기
 	public List<Interview> getInterviewListByStudentId(int studentId){
@@ -44,6 +43,37 @@ public class InterviewDAO {
 		String sql = "SELECT * FROM interview WHERE student_id = ?";
 		
 		Object[] params = { studentId };
+		
+		jdbcUtil.setSqlAndParameters(sql, params);
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			while(rs.next()) {
+				interviews.add( new Interview(
+						rs.getInt("interview_id"),
+						rs.getTimestamp("requested_date").toLocalDateTime(),
+						rs.getString("interview_category"),
+						rs.getString("interview_note"),
+						rs.getString("interview_status"),
+						rs.getString("is_completed"),
+						rs.getInt("student_id"),
+						rs.getInt("professor_id")
+					));
+			}
+		} catch(Exception e) {
+			jdbcUtil.rollback();
+			e.printStackTrace();;
+		} finally {
+			jdbcUtil.close();
+		}
+		return interviews;
+	}
+	
+	//특정 교수 면담 다 불러오기
+	public List<Interview> getInterviewListByProfessorId(int professorId){
+		List<Interview> interviews = new ArrayList<>();
+		String sql = "SELECT * FROM interview WHERE student_id = ?";
+		
+		Object[] params = { professorId };
 		
 		jdbcUtil.setSqlAndParameters(sql, params);
 		try {
@@ -98,7 +128,7 @@ public class InterviewDAO {
 		return null;
 	}
 	//면담신청 수정
-	public boolean updatedInterview(Interview interview) {
+	public boolean updateInterview(Interview interview) {
 		String sql = "UPDATE interview SET requested_date = ?, interview_category = ?, interview_note = ?, updated_at = SYSTIMESTAMP "
 				+ "WHERE interview_id = ?";
 		
@@ -165,8 +195,8 @@ public class InterviewDAO {
 	}
 	//교수의 면담 신청 반려
 	public boolean rejectInterview (int interviewId) {
-		String sql = "UPDATE interview SETinterview_status = 'rejected', update_at = SYSTIMESTAMP"
-				+ "WHERE interview_id = ?";
+		String sql = "UPDATE interview SET interview_status = 'rejected', updated_at = SYSTIMESTAMP "
+		           + "WHERE interview_id = ?";
 		Object[] params = { interviewId };
 		
 		jdbcUtil.setSqlAndParameters(sql, params);
@@ -175,6 +205,7 @@ public class InterviewDAO {
 			jdbcUtil.commit();
 			return result > 0;
 		} catch (Exception e) {
+			jdbcUtil.rollback();
 			e.printStackTrace();
 		} finally {
 			jdbcUtil.close();

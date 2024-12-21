@@ -16,7 +16,7 @@
 			<li class="<%= "schedule".equals(currentPage) ? "active" : "" %>"><a
 				href="<c:url value='/schedule'/>">일정 관리</a></li>
 			<li class="<%= "meeting".equals(currentPage) ? "active" : "" %>"><a
-				href="<c:url value='/interview'/>">면담 관리</a></li>
+				href="<c:url value='/select-prof'/>">면담 관리</a></li>
 			<li class="<%= "mypage".equals(currentPage) ? "active" : "" %>"><a
 				href="<c:url value='/myPage'/>">마이페이지</a></li>
 		</ul>
