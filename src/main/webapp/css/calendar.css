@@ -179,7 +179,7 @@ div.selected p {
     margin: 30px;
     border-radius: 15px;
     box-shadow: 4px 7px 20px rgba(0,0,0,0.25);
-    height: 150px;
+    height: 200px;
 }
 
 .schedule-item:hover {
@@ -210,6 +210,15 @@ div.selected p {
 
 .schedule-place p {
     margin: 0;
+}
+
+.category-btn {
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    margin: 10px 0;
+    width: 5vw;
+    font-size: 0.8vw;
 }
 
 .add-schedule-btn {

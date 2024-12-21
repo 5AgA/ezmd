@@ -7,6 +7,16 @@ let currentMonth = new Date().getMonth(); // 0: 1월, 1: 2월...
 // 월 이름 배열
 const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 
+let categories = []; // 카테고리 정보를 저장할 배열
+
+// 카테고리 데이터를 서버에서 가져옵니다.
+fetch('/schedule/categories')
+    .then(response => response.json())
+    .then(data => {
+        categories = data; // 카테고리 정보를 배열로 저장
+    })
+    .catch(error => console.error('Error fetching categories:', error));
+
 // 날짜에 해당하는 스케줄을 가져오는 함수
 function getScheduleForDate(date) {
     const todayInfo = document.querySelector('.today-info');
@@ -17,15 +27,22 @@ function getScheduleForDate(date) {
         .then(data => {
             // 일정 정보 표시
             if (data.length > 0) {
-                todayInfo.innerHTML = data.map(schedule => `
-                                <div class="schedule-item" data-sid="${schedule.scheduleId}">
-                                    <h3>${schedule.scheduleTitle}</h3>
-                                    <p id="schedule-date">${schedule.scheduleStart} ~ ${schedule.scheduleEnd}</p>
-                                    <div class="schedule-place">
-                                        <img src="../images/place-icon.svg"><p>${schedule.schedulePlace}</p>
-                                    </div>
-                                </div>
-                            `).join('');
+                todayInfo.innerHTML = data.map(schedule => {
+                    // schedule.categoryId로 해당 카테고리 정보 찾기
+                    const category = categories.find(cat => cat.categoryId === schedule.categoryId);
+
+                    return `
+                        <div class="schedule-item" data-sid="${schedule.scheduleId}">
+                            <h3>${schedule.scheduleTitle}</h3>
+                            <p id="schedule-date">${schedule.scheduleStart} ~ ${schedule.scheduleEnd}</p>
+                            <div class="schedule-place">
+                                <img src="../images/place-icon.svg"><p>${schedule.schedulePlace}</p>
+                            </div>
+                            <input type="button" class="category-btn" data-category-id="${schedule.categoryId}" 
+                            value="${category.categoryName}" style="background-color: ${category ? category.categoryColor : ''};">
+                        </div>
+                    `;
+                }).join('');
             } else {
                 todayInfo.innerHTML = "<p class=\"no-schedule\">해당 날짜에는 일정이 없습니다.</p>";
             }
@@ -35,6 +52,7 @@ function getScheduleForDate(date) {
             console.error(error);
         });
 }
+
 
 // 날짜를 클릭했을 때 실행될 함수
 function handleClick(event) {
