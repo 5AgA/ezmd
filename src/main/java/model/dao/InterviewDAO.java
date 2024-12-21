@@ -98,7 +98,36 @@ public class InterviewDAO {
 		}
 		return interviews;
 	}
-	
+	//특정 교수의 비승인 면담 다 불러오기
+	public List<Interview> getInterviewListByProfessorIdAndStatus(int professorId){
+		List<Interview> interviews = new ArrayList<>();
+		String sql = "SELECT * FROM interview WHERE professor_id = ? AND interview_status = 'pending'";
+		
+		Object[] params = { professorId };
+		
+		jdbcUtil.setSqlAndParameters(sql, params);
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			while(rs.next()) {
+				interviews.add( new Interview(
+						rs.getInt("interview_id"),
+						rs.getTimestamp("requested_date").toLocalDateTime(),
+						rs.getString("interview_category"),
+						rs.getString("interview_note"),
+						rs.getString("interview_status"),
+						rs.getString("is_completed"),
+						rs.getInt("student_id"),
+						rs.getInt("professor_id")
+					));
+			}
+		} catch(Exception e) {
+			jdbcUtil.rollback();
+			e.printStackTrace();;
+		} finally {
+			jdbcUtil.close();
+		}
+		return interviews;
+	}
 	//인터뷰 한개 불러오기
 	public Interview getInterviewById(int interviewId) {
 		String sql = "SELECT * FROM interview WHERE interview_id = ?";

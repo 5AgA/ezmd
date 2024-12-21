@@ -69,7 +69,44 @@ public class StudentDAO {
         }
         return null;
     }
-
+ // Read - ID로 학생 이름
+    public String getStudentNameById(int studentId) throws SQLException {
+        String sql = "SELECT name FROM student WHERE student_id=?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{studentId});
+        String name;
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+            	name = rs.getString("name");
+                return name;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
+    
+    // Read - ID로 학생 전공
+    public String getStudentMajorById(int studentId) throws SQLException {
+        String sql = "SELECT dept FROM student WHERE student_id=?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{studentId});
+        String major;
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+            	major = rs.getString("dept");
+                return major;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
+    
     // Read - 전체 학생 조회
     public List<Student> findAllStudents() throws SQLException {
         String sql = "SELECT student_id, name, email, password, phone, dept, grade, deleted FROM student ORDER BY student_id";

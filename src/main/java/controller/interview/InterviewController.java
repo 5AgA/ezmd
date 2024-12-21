@@ -1,6 +1,7 @@
 package controller.interview;
 
 import model.domain.Interview;
+import model.dto.InterviewDTO;
 import model.manager.interview.InterviewManager;
 
 import javax.servlet.ServletException;
@@ -55,6 +56,8 @@ public class InterviewController extends HttpServlet implements Controller{
                 return getInterviewListByStudentId(request, response);
             case "getByProfessorId":
                 return getInterviewListByProfessorId(request, response);
+            case "getByProfessorIdAndStatus":
+            	return getInterviewListByProfessorIdAndStatus(request, response);
             case "getById":
                 return getInterviewById(request, response);
             case "update":
@@ -67,7 +70,7 @@ public class InterviewController extends HttpServlet implements Controller{
                 return rejectInterview(request, response);
             default:
                 request.setAttribute("errorMessage", "Invalid action");
-                return "error.jsp";
+                return "/home";
         }
     }
     //면담생성 컨트롤러
@@ -133,6 +136,23 @@ public class InterviewController extends HttpServlet implements Controller{
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 목록 조회 중 오류 발생: " + e.getMessage());
+            return "/home";
+        }
+    }
+    
+    private String getInterviewListByProfessorIdAndStatus(HttpServletRequest request, HttpServletResponse response) {
+        try {            
+        	String professorIdParam = request.getParameter("professorId");
+            System.out.println(professorIdParam);
+            int professorId = Integer.parseInt(request.getParameter("professorId"));
+
+            List<InterviewDTO> interviews = interviewManager.getInterviewListByProfessorIdAndStatus(professorId);
+            request.setAttribute("interviews", interviews);
+            return "/interview-check";
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "교수의 비승인 면담 목록 조회 중 오류 발생: " + e.getMessage());
             return "/home";
         }
     }

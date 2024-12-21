@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,7 +11,7 @@
 <body>
   <!-- 헤더 include -->
   <jsp:include page="/WEB-INF/header.jsp">
-    <jsp:param name="currentPage" value="reservation" />
+    <jsp:param name="currentPage" value="meeting" />
   </jsp:include>
 
 <div class="page-wrapper">
@@ -32,53 +31,30 @@
     </div>
 
     <!-- 메인 컨텐츠 -->
+    <form id="getPendingInterviewForm" action="<%=request.getContextPath()%>/api/interview" method="get">
+      <input type="hidden" name="action" value="getByProfessorIdAndStatus" />
+      <input type="hidden" name="professorId" value="30000010" />
+    </form>
     <div class="content-wrapper">
       <!-- 좌측 섹션 -->
       <div class="left-section">
         <div class="list-title">신청 대기 명단</div>
         <div class="list-container">
-          <div class="list-item selected">
-            <div class="student-name">이연(컴퓨터학, 20210193)</div>
-            <div class="button-group">
-              <button class="accept-button">수락</button>
-              <button class="reject-button">거절</button>
-            </div>
-          </div>
+        <c:forEach var="interview" items="${interviews}">
           <div class="list-item">
-            <div class="student-name">임승언(컴퓨터학, 20210808)</div>
+            <div class="student-name">${interview.studentName}(${interview.studentMajor}, ${interview.studentId})
+            <br/><br/>    ${fn:replace(interview.requestedDate, 'T', ' ')}
+
+</div>
             <div class="button-group">
               <button class="accept-button">수락</button>
               <button class="reject-button">거절</button>
             </div>
           </div>
-          <div class="list-item">
-            <div class="student-name">이세미(컴퓨터학, 20210670)</div>
-            <div class="button-group">
-              <button class="accept-button">수락</button>
-              <button class="reject-button">거절</button>
-            </div>
-          </div>
-          <div class="list-item">
-            <div class="student-name">오은아(컴퓨터학, 20220783)</div>
-            <div class="button-group">
-              <button class="accept-button">수락</button>
-              <button class="reject-button">거절</button>
-            </div>
-          </div>
-          <div class="list-item">
-            <div class="student-name">아무개(컴퓨터학, 20220000)</div>
-            <div class="button-group">
-              <button class="accept-button">수락</button>
-              <button class="reject-button">거절</button>
-            </div>
-          </div>
-          <div class="list-item">
-            <div class="student-name">아무개(컴퓨터학, 20220000)</div>
-            <div class="button-group">
-              <button class="accept-button">수락</button>
-              <button class="reject-button">거절</button>
-            </div>
-          </div>
+          </c:forEach>
+<c:if test="${empty interviews}">
+  <span>신청 대기 명단이 없습니다.</span>
+</c:if>
         </div>
       </div>
 
@@ -86,17 +62,26 @@
       <div class="right-section">
         <div class="right-list-title">신청 확정 명단</div>
         <div class="right-list-container">
-          <div class="confirmed-item">이연(컴퓨터학, 20210193)</div>
-          <div class="confirmed-item">임승언(컴퓨터학, 20210808)</div>
-          <div class="confirmed-item">이세미(컴퓨터학, 20210670)</div>
-          <div class="confirmed-item">오은아(컴퓨터학, 20220783)</div>
-          <div class="confirmed-item">아무개(컴퓨터학, 20220000)</div>
-          <div class="confirmed-item">아무개(컴퓨터학, 20220000)</div>
+          <div class="confirmed-item">이연(컴퓨터학, 20210193)<br/><br/>24-12-25 15:00</div>
+          <div class="confirmed-item">임승연(컴퓨터학, 20210808)<br/><br/>24-12-25 15:00</div>
+          <div class="confirmed-item">이세미(컴퓨터학, 20210670)<br/><br/>24-12-25 15:00</div>
+          <div class="confirmed-item">오은아(컴퓨터학, 20220783)<br/><br/>24-12-25 15:00</div>
+          <div class="confirmed-item">아무개(컴퓨터학, 20220000)<br/><br/>24-12-25 15:00</div>
+          <div class="confirmed-item">아무개(컴퓨터학, 20220000)<br/><br/>24-12-25 15:00</div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
+
+<!-- 자바스크립트는 페이지 맨 아래에서 실행 -->
+<script>
+window.onload = function() {
+    if (!sessionStorage.getItem("formSubmitted")) {
+        document.getElementById("getPendingInterviewForm").submit();
+        sessionStorage.setItem("formSubmitted", "true");
+    }
+};
+</script>
 </body>
 </html>

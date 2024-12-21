@@ -46,7 +46,7 @@
 
 <!-- 헤더 -->
  <jsp:include page="/WEB-INF/header.jsp">
-    	<jsp:param name="currentPage" value="reservation" />
+    	<jsp:param name="currentPage" value="meeting" />
 	</jsp:include>
 
 
