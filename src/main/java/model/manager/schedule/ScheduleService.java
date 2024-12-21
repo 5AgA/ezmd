@@ -52,11 +52,11 @@ public class ScheduleService {
 
             if (result > 0) {
                 sqlSession.commit(); // 트랜잭션 커밋
+                sqlSession.close();
                 Schedule insertedSchedule = scheduleMapper.getScheduleById(schedule.getScheduleId()); // 삽입된 데이터 조회
-                System.out.println("삽입된 스케줄: " + insertedSchedule);
             } else {
                 sqlSession.rollback(); // 삽입 실패 시 롤백
-                System.out.println("스케줄 삽입 실패");
+                sqlSession.close();
             }
 
             return result;
@@ -67,6 +67,7 @@ public class ScheduleService {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             int result = scheduleMapper.updateSchedule(schedule);
             sqlSession.commit();
+            sqlSession.close();
             return result;
         }
     }
@@ -75,6 +76,7 @@ public class ScheduleService {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             int result = scheduleMapper.deleteSchedule(scheduleId);
             sqlSession.commit();
+            sqlSession.close();
             return result;
         }
     }

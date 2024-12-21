@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById('editSchedule-modal');
     const categoryContainer = document.querySelector(".edit-category");
     let selectedCategory = ''; // 카테고리 ID
+    let sId = ''; // 수정할 일정 ID
 
     // 카테고리 데이터 가져오기
     fetch("/schedule/categories")
@@ -70,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById('edit-edate').value = schedule.scheduleEnd;
                 document.getElementById('edit-place').value = schedule.schedulePlace;
                 document.getElementById('edit-memo').value = schedule.scheduleMemo;
+                sId = scheduleId;
 
                 // 카테고리 버튼에서 선택된 카테고리 ID를 찾아 selected 클래스 추가
                 const selectedCategoryButton = document.querySelector(`.edit-category-btn[data-category-id="${schedule.categoryId}"]`);
@@ -100,8 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
             button.style.border = ''; // 회색 테두리 제거
         });
 
-        // 선택된 카테고리 초기화
         selectedCategory = '';
+        sId = '';
     }
 
     // 모달 외부 클릭 시 모달 닫기
@@ -110,6 +112,31 @@ document.addEventListener("DOMContentLoaded", () => {
             closeModal();
         }
     }
+
+    // 삭제 버튼 클릭 시 일정 삭제
+    document.getElementById('delete').addEventListener('click', function () {
+        if (confirm('정말 이 일정을 삭제하시겠습니까?')) {
+            fetch(`/schedule/delete?id=${sId}`, {
+                method: 'DELETE',  // HTTP DELETE 메서드 사용
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status == "success") {
+                        alert('일정이 삭제되었습니다.');
+                        setTimeout(() => {
+                            closeModal();  // 모달 닫기
+                        }, 1000);
+                        // 페이지 갱신 또는 일정 목록을 새로고침하는 로직 추가 가능
+                    } else {
+                        alert('일정 삭제에 실패했습니다.');
+                        setTimeout(() => {
+                            closeModal();  // 모달 닫기
+                        }, 1000);
+                    }
+                })
+                .catch(error => console.error('Error deleting schedule:', error));
+        }
+    });
 
     // 일정 수정 폼 제출
     document.getElementById('editSchedule-form').addEventListener('submit', function (event) {
@@ -144,9 +171,14 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 if (data.success) {
                     alert('일정이 성공적으로 수정되었습니다.');
-                    closeModal();
+                    setTimeout(() => {
+                        closeModal();  // 모달 닫기
+                    }, 1000);
                 } else {
                     alert('일정 수정에 실패했습니다.');
+                    setTimeout(() => {
+                        closeModal();  // 모달 닫기
+                    }, 1000);
                 }
             })
             .catch(error => console.error('Error updating schedule:', error));

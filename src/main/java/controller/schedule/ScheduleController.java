@@ -23,7 +23,6 @@ public class ScheduleController implements Controller {
         if (idParam == null) {
             System.out.println("id 파라미터가 없습니다.");
         } else {
-            System.out.println("받은 id: " + idParam);
             scheduleId = Integer.parseInt(idParam);
         }
 

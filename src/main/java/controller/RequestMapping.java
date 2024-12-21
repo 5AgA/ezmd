@@ -3,10 +3,7 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.schedule.AddScheduleController;
-import controller.schedule.CategoryListController;
-import controller.schedule.ScheduleController;
-import controller.schedule.ScheduleViewController;
+import controller.schedule.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +31,7 @@ public class RequestMapping {
         mappings.put("/schedule/info", new ScheduleController());
         mappings.put("/schedule/categories", new CategoryListController());
         mappings.put("/schedule/add", new AddScheduleController());
+        mappings.put("/schedule/delete", new DeleteScheduleController());
 
         logger.info("Initialized Request Mapping!");
     }

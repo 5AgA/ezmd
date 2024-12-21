@@ -120,6 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     }, 100);
                 } else {
                     alert('일정 추가에 실패했습니다.');
+                    setTimeout(() => {
+                        modal.style.display = "none";
+                        selectedCategory = '';
+                    }, 100);
                 }
             })
             .catch(error => console.error('Error:', error));

@@ -122,8 +122,8 @@ input[type="datetime-local"] {
 .edit-button {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 3px;
+    justify-content: flex-end;
+    gap: 20px;
     width: 100%;
     margin-top: 20px;
 }
