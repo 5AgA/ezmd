@@ -5,6 +5,7 @@
 <configuration>
     <settings>
         <setting name="cacheEnabled" value="false"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <typeAliases>
         <typeAlias type="model.domain.Professor" alias="Professor" />
@@ -24,7 +25,6 @@
         </environment>
     </environments>
     <mappers>
-<!--        <mapper resource="model/dao/mybatis/mapper/CommunityMapper.xml" />-->
         <mapper class="model.dao.mybatis.mapper.ProfessorMapper" />
         <mapper class="model.dao.mybatis.mapper.ScheduleMapper" />
         <mapper class="model.dao.mybatis.mapper.ScheduleCategoryMapper" />

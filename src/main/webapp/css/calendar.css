@@ -201,6 +201,7 @@ div.selected p {
     justify-content: flex-start;
     gap: 3px;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .schedule-place img {
@@ -216,7 +217,6 @@ div.selected p {
     border-radius: 10px;
     border: none;
     padding: 5px 10px;
-    margin: 10px 0;
     width: 5vw;
     font-size: 0.8vw;
 }

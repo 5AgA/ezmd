@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const scheduleTitle = document.getElementById('title').value;
-        const scheduleStart = new Date(document.getElementById('sdate').value).toISOString().slice(0, 16).replace('T', ' ');
-        const scheduleEnd = new Date(document.getElementById('edate').value).toISOString().slice(0, 16).replace('T', ' ');
+        const scheduleStart = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}-${startDate.getDate().toString().padStart(2, '0')} ${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
+        const scheduleEnd = `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate.getDate().toString().padStart(2, '0')} ${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
         const schedulePlace = document.getElementById('place').value;
         const scheduleMemo = document.getElementById('memo').value;
         const categoryId = selectedCategory; // 이미 선택된 카테고리 ID

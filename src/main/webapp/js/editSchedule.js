@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById('edit-title').value = schedule.scheduleTitle;
                 document.getElementById('edit-sdate').value = schedule.scheduleStart;
                 document.getElementById('edit-edate').value = schedule.scheduleEnd;
-                document.getElementById('edit-place').value = schedule.schedulePlace;
+                document.getElementById('edit-place').value = schedule.schedulePlace ? schedule.schedulePlace : '';
                 document.getElementById('edit-memo').value = schedule.scheduleMemo;
                 sId = scheduleId;
 
@@ -187,8 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
             categoryId: categoryId,
             userId: '20210670' // 예시로 1을 사용. 실제 사용자 ID로 변경 필요.
         };
-
-        console.log(scheduleData);
 
         fetch('/schedule/update', {
             method: 'POST',

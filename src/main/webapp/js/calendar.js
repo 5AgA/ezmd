@@ -34,9 +34,10 @@ function getScheduleForDate(date) {
                         <div class="schedule-item" data-sid="${schedule.scheduleId}">
                             <h3>${schedule.scheduleTitle}</h3>
                             <p id="schedule-date">${schedule.scheduleStart} ~ ${schedule.scheduleEnd}</p>
+                            ${schedule.schedulePlace ? `
                             <div class="schedule-place">
                                 <img src="../images/place-icon.svg"><p>${schedule.schedulePlace}</p>
-                            </div>
+                            </div>` : ''}
                             <input type="button" class="category-icon" data-category-id="${schedule.categoryId}" 
                             value="${category.categoryName}" style="background-color: ${category ? category.categoryColor : ''};">
                         </div>

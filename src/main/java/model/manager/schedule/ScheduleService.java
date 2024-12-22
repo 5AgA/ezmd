@@ -51,6 +51,9 @@ public class ScheduleService {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             ScheduleMapper scheduleMapper = sqlSession.getMapper(ScheduleMapper.class);
             int result = scheduleMapper.insertSchedule(schedule);
+            System.out.println("삽입 성공, 트랜잭션 커밋 전 상태: " + result);
+            sqlSession.commit();
+            System.out.println("트랜잭션 커밋 완료");
             return result;
         } catch (Exception e) {
             e.printStackTrace();
