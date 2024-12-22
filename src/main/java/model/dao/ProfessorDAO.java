@@ -18,13 +18,12 @@ public class ProfessorDAO {
 
     // Create - 교수 추가
     public int createProfessor(Professor professor) {
-        String sql = "INSERT INTO professor (professor_id, name, email, password, phone, dept, professor_office, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO professor (professor_id, name, email, password, dept, professor_office, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] params = {
             professor.getProfessorId(),
             professor.getName(),
             professor.getEmail(),
             professor.getPassword(),
-            professor.getPhone(),
             professor.getDept(),
             professor.getProfessorOffice(),
             professor.getDeleted()
@@ -45,7 +44,7 @@ public class ProfessorDAO {
 
     // Read - ID로 교수 조회
     public Professor findProfessorById(int professorId) throws SQLException {
-        String sql = "SELECT professor_id, name, email, password, phone, dept, professor_office, deleted "
+        String sql = "SELECT professor_id, name, email, password, dept, professor_office, deleted "
                    + "FROM professor WHERE professor_id=?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{professorId});
 
@@ -57,7 +56,6 @@ public class ProfessorDAO {
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getString("phone"),
                     rs.getString("dept"),
                     rs.getString("professor_office"),
                     rs.getString("deleted").charAt(0)
@@ -73,7 +71,7 @@ public class ProfessorDAO {
 
     // Read - 전체 교수 조회
     public List<Professor> findAllProfessors() throws SQLException {
-        String sql = "SELECT professor_id, name, email, password, phone, dept, professor_office, deleted FROM professor ORDER BY professor_id";
+        String sql = "SELECT professor_id, name, email, password, dept, professor_office, deleted FROM professor ORDER BY professor_id";
         jdbcUtil.setSqlAndParameters(sql, null);
 
         List<Professor> professorList = new ArrayList<>();
@@ -85,7 +83,6 @@ public class ProfessorDAO {
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getString("phone"),
                     rs.getString("dept"),
                     rs.getString("professor_office"),
                     rs.getString("deleted").charAt(0)
@@ -101,12 +98,11 @@ public class ProfessorDAO {
 
     // Update - 교수 정보 수정
     public int updateProfessor(Professor professor) {
-        String sql = "UPDATE professor SET name=?, email=?, password=?, phone=?, dept=?, professor_office=?, deleted=? WHERE professor_id=?";
+        String sql = "UPDATE professor SET name=?, email=?, password=?, dept=?, professor_office=?, deleted=? WHERE professor_id=?";
         Object[] params = {
             professor.getName(),
             professor.getEmail(),
             professor.getPassword(),
-            professor.getPhone(),
             professor.getDept(),
             professor.getProfessorOffice(),
             professor.getDeleted(),
@@ -150,7 +146,7 @@ public class ProfessorDAO {
     
     
     public Professor findProfessorByEmail(String email) throws SQLException {
-        String sql = "SELECT professor_id, name, email, password, phone, dept, professor_office, deleted FROM professor WHERE email=?";
+        String sql = "SELECT professor_id, name, email, password, dept, professor_office, deleted FROM professor WHERE email=?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
 
         try {
@@ -161,7 +157,6 @@ public class ProfessorDAO {
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getString("phone"),
                     rs.getString("dept"),
                     rs.getString("professor_office"),
                     rs.getString("deleted").charAt(0)

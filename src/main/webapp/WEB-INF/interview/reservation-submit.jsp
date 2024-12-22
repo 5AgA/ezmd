@@ -1,17 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reservation-submit.css">
-<title>면담 신청 제출</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reservation-submit.css">
+    <title>면담 신청 제출</title>
 </head>
 <body>
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/header.jsp">
     <jsp:param name="currentPage" value="meeting" />
 </jsp:include>
+
+<%
+    // 전달된 파라미터 추출
+    String professorId = request.getParameter("professorId");
+    String professorName = request.getParameter("professorName");
+%>
 
 <div class="app-wrapper">
     <!-- Sidebar -->
@@ -26,10 +32,10 @@
         <form action="<%=request.getContextPath()%>/api/interview" method="post">
             <input type="hidden" name="action" value="create"/>
             <!-- 날짜/시간 합쳐서 ISO_LOCAL_DATE_TIME 형태로 변환 (예: "2024-12-20T11:00") -->
-            <input type="hidden" name="requestedDate" value="${param.selectedDate}T${param.selectedTime}" />
+            <input type="hidden" name="requestedDate" value="${param.selectedDate}T${param.selectedTime}"/>
             <!-- 교수 ID, 학생 ID 등 필요한 값 -->
-            <input type="hidden" name="professorId" value="${param.professorId}" />
-            <input type="hidden" name="studentId" value="20210193" />
+            <input type="hidden" name="professorId" value="<%= professorId%>">
+            <input type="hidden" name="studentId" value="20210193"/>
 
             <div class="left-aligned-wrapper">
                 <div class="title">상담 주제 기입</div>
@@ -54,7 +60,7 @@
             <textarea class="text-area" name="interviewNote" placeholder="상담 내용을 입력해주세요."></textarea>
             <div class="notice">아래 예약 정보가 맞는지 확인해주세요.</div>
             <div class="reservation-details">
-                <div class="professor-info">박창섭 교수님</div>
+                <div class="professor-info"><%= professorName%> 교수님</div>
                 <div>${param.selectedDate}</div>
                 <div>${param.selectedTime}</div>
             </div>

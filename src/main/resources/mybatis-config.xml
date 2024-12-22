@@ -7,6 +7,7 @@
         <setting name="cacheEnabled" value="false"/>
     </settings>
     <typeAliases>
+        <typeAlias type="model.domain.Professor" alias="Professor" />
         <typeAlias type="model.domain.Schedule" alias="Schedule" />
         <typeAlias type="model.domain.ScheduleCategory" alias="ScheduleCategory" />
         <typeAlias type="model.domain.Interview" alias="Interview" />
@@ -24,6 +25,7 @@
     </environments>
     <mappers>
 <!--        <mapper resource="model/dao/mybatis/mapper/CommunityMapper.xml" />-->
+        <mapper class="model.dao.mybatis.mapper.ProfessorMapper" />
         <mapper class="model.dao.mybatis.mapper.ScheduleMapper" />
         <mapper class="model.dao.mybatis.mapper.ScheduleCategoryMapper" />
         <mapper class="model.dao.mybatis.mapper.InterviewMapper" />
