@@ -14,6 +14,7 @@ public class Interview {
     private LocalDateTime updatedAt;
     private int studentId;
     private int professorId;
+    private String professorName;
 
     // 기본 생성자
     public Interview() {}
@@ -42,6 +43,13 @@ public class Interview {
     	this.isCompleted = isCompleted.charAt(0);
     	this.studentId = studentId;
     	this.professorId = professorId;
+    }
+    public Interview(int interviewId, LocalDateTime requestedDate, int studentId, int professorId, String professorName) {
+        this.interviewId = interviewId;
+        this.requestedDate = requestedDate;
+        this.studentId = studentId;
+        this.professorId = professorId;
+        this.professorName = professorName;
     }
 
     // Getters and Setters
@@ -77,4 +85,8 @@ public class Interview {
 
     public int getProfessorId() { return professorId; }
     public void setProfessorId(int professorId) { this.professorId = professorId; }
+
+    public String getProfessorName() { return professorName; }
+    public void setProfessorName(String professorName) { this.professorName = professorName; }
+
 }

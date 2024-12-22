@@ -2,6 +2,7 @@ package model.dao;
 
 import java.sql.ResultSet;
 import model.domain.InterviewResult;
+import model.domain.ProfessorReview;
 
 public class InterviewResultDAO {
     private JDBCUtil jdbcUtil = null;
@@ -11,22 +12,82 @@ public class InterviewResultDAO {
     }
 
     // 면담 결과 생성
-    public int createInterviewResult(String interviewTopic, String interviewSummary) {
+    public int createInterviewResult(int interviewId, String interviewTopic, String interviewSummary, String reviewOfInterview, int reviewRating) {
         int result = 0;
-        String query = "INSERT INTO InterviewResult (interview_topic, interview_summary, created_time) VALUES (?, ?, SYSTIMESTAMP, SYSTIMESTAMP)";
-        Object[] params = {interviewTopic, interviewSummary};
+     // 첫 번째 INSERT 쿼리
+        String insertInterviewResultQuery = "BEGIN"
+        		+ " INSERT INTO interview_result (interview_id, interview_topic, interview_summary, created_at)"
+        		+ " VALUES (?, ?, ?, systimestamp);"
+        		+ " INSERT INTO professor_review (interview_id, review_of_interview, review_rating, created_at)"
+        		+ " VALUES (?, ?, ?, systimestamp);"
+        		+ "END;";
         
-        jdbcUtil.setSqlAndParameters(query, params);
-        
+        // 두 번째 INSERT 쿼리
+        //String insertProfessorReviewQuery = "INSERT INTO professor_review (interview_id, review_of_interview, review_rating, created_at) VALUES (?, ?, ?, systimestamp)";
         try {
-            result = jdbcUtil.executeUpdate();
-            jdbcUtil.commit(); // 트랜잭션 커밋
+            // 첫 번째 INSERT 쿼리 실행
+            jdbcUtil.setSqlAndParameters(insertInterviewResultQuery, new Object[] {interviewId, interviewTopic, interviewSummary, interviewId, reviewOfInterview, reviewRating});
+            result += jdbcUtil.executeUpdate();
+            System.out.println("첫 번째 INSERT 완료");
+            // 두 번째 INSERT 쿼리 실행
+          //  System.out.println("두 번째 INSERT 실행 준비: " + insertProfessorReviewQuery);
+            //jdbcUtil.setSqlAndParameters(insertProfessorReviewQuery, new Object[] {interviewId, reviewOfInterview, reviewRating});
+            //result += jdbcUtil.executeUpdate();
+           // System.out.println("두 번째 INSERT 완료");
+            // 커밋
+            //jdbcUtil.commit();
+            //System.out.println("트랜잭션 커밋 완료");
         } catch (Exception ex) {
-            jdbcUtil.rollback(); // 예외 발생 시 롤백
+            // 롤백
+            jdbcUtil.rollback();
             ex.printStackTrace();
+            result = 0; // 오류 발생 시 결과 초기화
         } finally {
-            jdbcUtil.close(); // 자원 반환
+        	jdbcUtil.commit();
+            jdbcUtil.close();
         }
+
+        return result;
+    }
+    
+ // 면담 결과 생성
+    public int updateInterviewResult(int interviewId, String interviewTopic, String interviewSummary, String reviewOfInterview, int reviewRating) {
+        int result = 0;
+     // 첫 번째 INSERT 쿼리
+        String updateInterviewResultQuery =  "BEGIN "
+        	    + "UPDATE interview_result "
+        	    + "SET interview_topic = ?, interview_summary = ?, updated_at = systimestamp "
+        	    + "WHERE interview_id = ?; "
+        	    + "UPDATE professor_review "
+        	    + "SET review_of_interview = ?, review_rating = ?, updated_at = systimestamp "
+        	    + "WHERE interview_id = ?; "
+        	    + "END;";
+        
+        // 두 번째 INSERT 쿼리
+        //String insertProfessorReviewQuery = "INSERT INTO professor_review (interview_id, review_of_interview, review_rating, created_at) VALUES (?, ?, ?, systimestamp)";
+        try {
+            // 첫 번째 INSERT 쿼리 실행
+            jdbcUtil.setSqlAndParameters(updateInterviewResultQuery, new Object[] {interviewTopic, interviewSummary, interviewId, reviewOfInterview, reviewRating, interviewId});
+            result += jdbcUtil.executeUpdate();
+            System.out.println("첫 번째 INSERT 완료");
+            // 두 번째 INSERT 쿼리 실행
+          //  System.out.println("두 번째 INSERT 실행 준비: " + insertProfessorReviewQuery);
+            //jdbcUtil.setSqlAndParameters(insertProfessorReviewQuery, new Object[] {interviewId, reviewOfInterview, reviewRating});
+            //result += jdbcUtil.executeUpdate();
+           // System.out.println("두 번째 INSERT 완료");
+            // 커밋
+            //jdbcUtil.commit();
+            //System.out.println("트랜잭션 커밋 완료");
+        } catch (Exception ex) {
+            // 롤백
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+            result = 0; // 오류 발생 시 결과 초기화
+        } finally {
+        	jdbcUtil.commit();
+            jdbcUtil.close();
+        }
+
         return result;
     }
 
@@ -56,43 +117,36 @@ public class InterviewResultDAO {
         return null;
     }
 
-    // 기존 면담 결과 수정
-    public int updateInterviewResult(int interviewId, String interviewTopic, String interviewSummary) {
-        int result = 0;
-        String query = "UPDATE InterviewResult SET interview_topic = ?, interview_summary = ?, updated_at = SYSTIMESTAMP WHERE interview_id = ?";
-        Object[] params = {interviewTopic, interviewSummary};
-        
+    public InterviewResult getSavedData(int interviewId) {
+    	String query = "SELECT ir.interview_id, ir.interview_topic, ir.interview_summary, "
+                + "pr.review_of_interview, pr.review_rating "
+                + "FROM interview_result ir "
+                + "JOIN professor_review pr "
+                + "ON ir.interview_id = pr.interview_id "
+                + "WHERE ir.interview_id = ?";
+
+        Object[] params = {interviewId};
+
         jdbcUtil.setSqlAndParameters(query, params);
-        
+
         try {
-            result = jdbcUtil.executeUpdate();
-            jdbcUtil.commit(); // 커밋
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                // Create and populate InterviewResult object with the retrieved data
+                InterviewResult interviewResult = new InterviewResult();
+                interviewResult.setInterviewId(rs.getInt("interview_id"));
+                interviewResult.setInterviewTopic(rs.getString("interview_topic"));
+                interviewResult.setInterviewSummary(rs.getString("interview_summary"));
+                interviewResult.setReviewOfInterview(rs.getString("review_of_interview"));
+                interviewResult.setReviewRating(rs.getInt("review_rating"));
+                return interviewResult;
+            }
         } catch (Exception ex) {
-            jdbcUtil.rollback(); // 롤백
             ex.printStackTrace();
         } finally {
             jdbcUtil.close();
         }
-        return result;
+        return null;
     }
 
-    // 면담 결과 삭제
-    public int deleteInterviewResult(int interviewId) {
-        int result = 0;
-        String query = "DELETE FROM InterviewResult WHERE interview_id = ?";
-        Object[] params = {interviewId};
-        
-        jdbcUtil.setSqlAndParameters(query, params);
-        
-        try {
-            result = jdbcUtil.executeUpdate();
-            jdbcUtil.commit();
-        } catch (Exception ex) {
-            jdbcUtil.rollback();
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.close();
-        }
-        return result;
-    }
 }

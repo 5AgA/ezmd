@@ -1,6 +1,8 @@
 package model.dao;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import model.domain.Interview;
@@ -242,6 +244,42 @@ public class InterviewDAO {
 		return false;
 	}
 	
+	//면담 완료 리스트 조회
+	public List<Interview> getCompletedInterviewsByStudentId(int studentId){
+		List<Interview> interviews = new ArrayList<>();
+		String sql = "SELECT i.interview_id, i.requested_date, p.name AS professor_name, p.professor_id"
+				+ " FROM interview i" 
+				+ " JOIN professor p ON i.professor_id = p.professor_id"
+				+ " WHERE i.student_id = ? AND TRIM(i.is_completed) = 'Y'";
+
+		
+		Object[] params = {studentId};
+		
+		jdbcUtil.setSqlAndParameters(sql, params);
+		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			 if (!rs.isBeforeFirst()) { // 데이터가 있는지 확인
+			        System.out.println("No rows returned from the query.");
+			    }
+				while (rs.next()) {
+				    interviews.add(new Interview(
+				        rs.getInt("interview_id"),
+				        rs.getTimestamp("requested_date").toLocalDateTime(),
+				        studentId,
+				        rs.getInt("professor_id"),
+				        rs.getString("professor_name")
+				    ));
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+			 System.out.println("Error Message: " + e.getMessage());
+		} finally {
+			jdbcUtil.close();
+		}
+		return interviews;
+	
+	}
 	//학과별 교수 리스트 조회
 	/*
 	public List<Professor> getAllProfessors() {
