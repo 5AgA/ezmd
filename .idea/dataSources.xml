@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Oracle" uuid="3689f3c1-e060-46d8-ae7d-8adce428a1bf">
+    <data-source source="LOCAL" name="dbp" uuid="56571b08-982d-46d6-ae80-ba0d27c714bb">
       <driver-ref>oracle.19</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>

@@ -25,8 +25,6 @@ public class InterviewController extends HttpServlet implements Controller{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-        	System.out.println("디버깅");
-        	
             String view = execute(request, response);
             request.getRequestDispatcher(view).forward(request, response);
         } catch (Exception e) {
@@ -70,9 +68,10 @@ public class InterviewController extends HttpServlet implements Controller{
                 return rejectInterview(request, response);
             default:
                 request.setAttribute("errorMessage", "Invalid action");
-                return "/home";
+                return "/interview";
         }
     }
+
     //면담생성 컨트롤러
     private String createInterview(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -102,16 +101,14 @@ public class InterviewController extends HttpServlet implements Controller{
 
             if (success != 0) {
                 request.setAttribute("message", "면담이 성공적으로 생성되었습니다.");
-                return "/home";
-            } else {
-                request.setAttribute("errorMessage", "면담 생성 실패");
-                return "/home";
+                return "/interview";
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 생성 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
+        return "/interview";
     }
     
     private String getInterviewListByStudentId(HttpServletRequest request, HttpServletResponse response) {
@@ -119,11 +116,11 @@ public class InterviewController extends HttpServlet implements Controller{
             int studentId = Integer.parseInt(request.getParameter("studentId"));
             List<Interview> interviews = interviewManager.getInterviewListByStudentId(studentId);
             request.setAttribute("interviews", interviews);
-            return "/home";
+            return "/interview";
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 목록 조회 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
     }
     
@@ -132,11 +129,11 @@ public class InterviewController extends HttpServlet implements Controller{
             int professorId = Integer.parseInt(request.getParameter("professorId"));
             List<Interview> interviews = interviewManager.getInterviewListByStudentId(professorId);
             request.setAttribute("interviews", interviews);
-            return "/home";
+            return "/interview";
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 목록 조회 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
     }
     
@@ -153,7 +150,7 @@ public class InterviewController extends HttpServlet implements Controller{
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "교수의 비승인 면담 목록 조회 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview-check";
         }
     }
     
@@ -163,15 +160,15 @@ public class InterviewController extends HttpServlet implements Controller{
             Interview interview = interviewManager.getInterviewById(interviewId);
             if (interview != null) {
                 request.setAttribute("interview", interview);
-                return "/home";
+                return "/interview";
             } else {
                 request.setAttribute("errorMessage", "해당 인터뷰를 찾을 수 없습니다.");
-                return "/home";
+                return "/interview";
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 조회 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
     }
     private String updateInterview(HttpServletRequest request, HttpServletResponse response) {
@@ -192,15 +189,15 @@ public class InterviewController extends HttpServlet implements Controller{
             boolean success = interviewManager.updateInterview(interview);
             if (success) {
                 request.setAttribute("message", "면담이 성공적으로 업데이트되었습니다.");
-                return "/home";
+                return "/interview";
             } else {
                 request.setAttribute("errorMessage", "면담 업데이트 실패");
-                return "/home";
+                return "/interview";
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 업데이트 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
     }
     private String deleteInterview(HttpServletRequest request, HttpServletResponse response) {
@@ -209,15 +206,15 @@ public class InterviewController extends HttpServlet implements Controller{
             boolean success = interviewManager.deleteInterview(interviewId);
             if (success) {
                 request.setAttribute("message", "면담이 성공적으로 삭제되었습니다.");
-                return "/home";
+                return "/interview";
             } else {
                 request.setAttribute("errorMessage", "면담 삭제 실패");
-                return "/home";
+                return "/interview";
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 삭제 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
     }
     
@@ -227,15 +224,15 @@ public class InterviewController extends HttpServlet implements Controller{
             boolean success = interviewManager.approveInterview(interviewId);
             if (success) {
                 request.setAttribute("message", "면담이 승인되었습니다.");
-                return "/home";
+                return "/interview";
             } else {
                 request.setAttribute("errorMessage", "면담 승인 실패");
-                return "/home";
+                return "/interview";
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 승인 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
     }
     
@@ -245,15 +242,15 @@ public class InterviewController extends HttpServlet implements Controller{
             boolean success = interviewManager.rejectInterview(interviewId);
             if (success) {
                 request.setAttribute("message", "면담이 반려되었습니다.");
-                return "/home";
+                return "/interview";
             } else {
                 request.setAttribute("errorMessage", "면담 반려 실패");
-                return "/home";
+                return "/interview";
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 반려 중 오류 발생: " + e.getMessage());
-            return "/home";
+            return "/interview";
         }
     }
 }

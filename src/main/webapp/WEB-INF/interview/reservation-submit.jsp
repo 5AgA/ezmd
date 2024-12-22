@@ -10,7 +10,7 @@
 <body>
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/header.jsp">
-    <jsp:param name="currentPage" value="meeting" />
+    <jsp:param name="currentPage" value="meeting"/>
 </jsp:include>
 
 <%
