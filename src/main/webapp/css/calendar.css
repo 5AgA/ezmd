@@ -93,17 +93,17 @@ body {
 
 /* 요일 헤더 */
 .day-name {
-  text-align: center;
-  color: grey;
-  font-size:small;
-  margin-bottom: 10px;
+    text-align: center;
+    color: grey;
+    font-size:small;
+    margin-bottom: 10px;
 }
 
 .day-cell {
-  padding: 10px;
-  border: 1px solid #ddd;
-  margin: 0px;
-  box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 0px;
+    box-sizing: border-box;
     cursor: pointer;
     height: 13vh;
     display: flex;
@@ -212,7 +212,7 @@ div.selected p {
     margin: 0;
 }
 
-.category-btn {
+.category-icon {
     border-radius: 10px;
     border: none;
     padding: 5px 10px;

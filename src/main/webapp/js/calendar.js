@@ -37,7 +37,7 @@ function getScheduleForDate(date) {
                             <div class="schedule-place">
                                 <img src="../images/place-icon.svg"><p>${schedule.schedulePlace}</p>
                             </div>
-                            <input type="button" class="category-btn" data-category-id="${schedule.categoryId}" 
+                            <input type="button" class="category-icon" data-category-id="${schedule.categoryId}" 
                             value="${category.categoryName}" style="background-color: ${category ? category.categoryColor : ''};">
                         </div>
                     `;
@@ -123,16 +123,12 @@ function renderCalendar(year, month) {
         const pElement = document.createElement('p');
 
         // 날짜 계산 및 클래스 추가
-        let categoryColor = '';
-
-        // 날짜 계산 및 클래스 추가
         if (i <= firstDay) {
             // 이전 달
             pElement.textContent = prevLastDate - firstDay + i;
             dayElement.classList.add('prev-month');
         } else if (i <= firstDay + lastDate) {
             // 현재 달
-            const day = i - firstDay;
             pElement.textContent = i - firstDay;
             if (year === todayYear && month === todayMonth && i - firstDay === todayDate) {
                 dayElement.classList.add('today');
