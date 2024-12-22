@@ -6,11 +6,7 @@ import java.util.Map;
 import controller.interview.ApproveInterviewController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import controller.user.StudentLoginController;
-import controller.user.ProfessorLoginController;
-import controller.user.LogoutController;
-import controller.user.StudentSignupController;
-import controller.user.ProfessorSignupController;
+import controller.user.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
