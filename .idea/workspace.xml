@@ -6,24 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="NONE" />
+    <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/sideMenu.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/sideMenu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation-submit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation-submit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/selectProf.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/selectProf.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interviewManager_clear/interviewClearList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interviewManager_clear/interviewClearList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/chooseProf.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/interviewClearList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/interviewClearList.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/selectProf.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/selectProf.css" afterDir="false" />
-    </list>
+    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,8 +18,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
+        <option value="Interface" />
         <option value="CSS File" />
+        <option value="Jsp File" />
+        <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -68,9 +57,6 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -92,18 +78,18 @@
     "Maven.ezmd [clean,install].executor": "Run",
     "Maven.ezmd [clean].executor": "Run",
     "Maven.ezmd [install].executor": "Run",
+    "Maven.ezmd [test].executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "TomEE 서버.Tomcat 9.0.96.executor": "Run",
+    "TomEE 서버.ezmd.executor": "Run",
     "Tomcat 서버.Tomcat 9.0.96.executor": "Run",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "interview",
+    "git-widget-placeholder": "schedule",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/agor/Documents/eclipse/ezmd/src/main/resources",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -113,10 +99,22 @@
     "project.structure.last.edited": "아티팩트",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.27816093",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/test/resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="model.dao.mybatis" />
+      <recent name="model.dao" />
+      <recent name="model.dao.mybatis.mapper" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.96" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.96" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
@@ -128,7 +126,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="60ac2b5e-1ba0-4ec2-bbc8-fdaf133078c4" />
+        <option name="BASE_DIRECTORY_NAME" value="3121f02d-92ac-4088-8727-292a5258b8a1" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -136,7 +134,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="51517" />
+        <option name="DEBUG_PORT" value="50920" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -224,7 +222,16 @@
       <updated>1733049689184</updated>
       <workItem from="1733049690342" duration="2627000" />
       <workItem from="1733052323754" duration="6534000" />
-      <workItem from="1733058879786" duration="4438000" />
+      <workItem from="1733058879786" duration="5042000" />
+      <workItem from="1733202905945" duration="6228000" />
+      <workItem from="1734088424563" duration="376000" />
+      <workItem from="1733202905945" duration="5873000" />
+      <workItem from="1734616665702" duration="21192000" />
+      <workItem from="1734616665702" duration="21192000" />
+      <workItem from="1734700666863" duration="859000" />
+      <workItem from="1734705677976" duration="914000" />
+      <workItem from="1734706777668" duration="34036000" />
+      <workItem from="1734760004145" duration="2924000" />
     </task>
     <servers />
   </component>

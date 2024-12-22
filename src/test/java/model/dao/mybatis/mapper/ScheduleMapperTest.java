@@ -1,12 +1,15 @@
 //package model.dao.mybatis.mapper;
 //
+//import model.domain.Schedule;
 //import org.apache.ibatis.session.SqlSession;
 //import org.apache.ibatis.session.SqlSessionFactory;
 //import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 //import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
 //
 //import java.io.InputStream;
+//import java.util.List;
 //
 //public class ScheduleMapperTest {
 //
@@ -34,13 +37,23 @@
 //    }
 //
 ////    @Test
+////    public void testGetSchedulesByDate() {
+////        // 특정 날짜에 해당하는 스케줄 가져오기
+////        String startDate = "2024-12-02 00:00";
+////        String endDate = "2024-12-02 23:59";
+////
+////        // 특정 날짜에 해당하는 스케줄 가져오기
+////        List<Schedule> schedules = scheduleMapper.getSchedulesByDate(userId, Schedule.parseDateTime(startDate), Schedule.parseDateTime(endDate));
+////        schedules.forEach(schedule -> System.out.println(schedule));
+////    }
+//
+////    @Test
 ////    public void testInsertSchedule() {
 ////        // 새로운 스케줄 데이터 생성
 ////        Schedule newSchedule = new Schedule();
 ////        newSchedule.setScheduleTitle("Test Schedule");
 ////        newSchedule.setScheduleStart(Schedule.parseDateTime("2024-12-19 10:00"));
 ////        newSchedule.setScheduleEnd(Schedule.parseDateTime("2024-12-19 12:00"));
-////        newSchedule.setScheduleRepeat(0);
 ////        newSchedule.setSchedulePlace("Test Place");
 ////        newSchedule.setScheduleMemo("Test Memo");
 ////        newSchedule.setCategoryId(2);
@@ -158,6 +171,15 @@
 ////        // 삭제가 성공적으로 이루어졌는지 확인
 ////        assertEquals(1, result);
 ////    }
+//
+//    // 종료 시 세션 닫기
+//    @AfterEach
+//    public void tearDown() {
+//        if (session != null) {
+////            session.commit();
+//            session.close();
+//        }
+//    }
 //
 //    // 종료 시 세션 닫기
 //    @AfterEach

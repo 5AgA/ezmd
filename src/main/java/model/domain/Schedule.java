@@ -9,9 +9,8 @@ public class Schedule {
 
     private Integer scheduleId; // 스케줄 ID
     private String scheduleTitle; // 스케줄 제목
-    private LocalDateTime scheduleStart; // 시작 시간
-    private LocalDateTime scheduleEnd; // 종료 시간
-    private Integer scheduleRepeat; // 반복 요일 비트 값
+    private String scheduleStart; // 시작 시간
+    private String scheduleEnd; // 종료 시간
     private String schedulePlace; // 장소
     private String scheduleMemo; // 메모
     private Integer categoryId; // 카테고리 ID
@@ -21,13 +20,12 @@ public class Schedule {
     public Schedule() {}
 
     // **전체 필드를 포함한 생성자**
-    public Schedule(int scheduleId, String scheduleTitle, LocalDateTime scheduleStart, LocalDateTime scheduleEnd,
-                    int scheduleRepeat, String schedulePlace, String scheduleMemo, int categoryId, int userId) {
+    public Schedule(int scheduleId, String scheduleTitle, String scheduleStart, String scheduleEnd,
+                    String schedulePlace, String scheduleMemo, int categoryId, int userId) {
         this.scheduleId = scheduleId;
         this.scheduleTitle = scheduleTitle;
         this.scheduleStart = scheduleStart;
         this.scheduleEnd = scheduleEnd;
-        this.scheduleRepeat = scheduleRepeat;
         this.schedulePlace = schedulePlace;
         this.scheduleMemo = scheduleMemo;
         this.categoryId = categoryId;
@@ -38,7 +36,7 @@ public class Schedule {
     @Override
     public String toString() {
         return "Schedule [scheduleId=" + scheduleId + ", scheduleTitle=" + scheduleTitle
-                + ", scheduleStart=" + scheduleStart + ", scheduleEnd=" + scheduleEnd + ", scheduleRepeat=" + scheduleRepeat
+                + ", scheduleStart=" + scheduleStart + ", scheduleEnd=" + scheduleEnd
                 + ", schedulePlace=" + schedulePlace + ", scheduleMemo=" + scheduleMemo + ", categoryId=" + categoryId
                 + ", userId=" + userId + "]";
     }
@@ -55,40 +53,9 @@ public class Schedule {
         return LocalDateTime.parse(dateTimeStr, formatter);
     }
 
-    // **요일 관련 유틸리티 메서드**
-    public static int convertRepeatDayToInt(List<String> repeatedDays) {
-        int repeatDay = 0;
-        if (repeatedDays == null) return repeatDay;
-
-        for (String day : repeatedDays) {
-            switch (day) {
-                case "일": repeatDay |= 1; break;
-                case "월": repeatDay |= 2; break;
-                case "화": repeatDay |= 4; break;
-                case "수": repeatDay |= 8; break;
-                case "목": repeatDay |= 16; break;
-                case "금": repeatDay |= 32; break;
-                case "토": repeatDay |= 64; break;
-            }
-        }
-        return repeatDay;
-    }
-
-    public static List<String> getRepeatedDays(int scheduleRepeat) {
-        List<String> repeatedDays = new ArrayList<>();
-        if ((scheduleRepeat & 1) > 0) repeatedDays.add("일");
-        if ((scheduleRepeat & 2) > 0) repeatedDays.add("월");
-        if ((scheduleRepeat & 4) > 0) repeatedDays.add("화");
-        if ((scheduleRepeat & 8) > 0) repeatedDays.add("수");
-        if ((scheduleRepeat & 16) > 0) repeatedDays.add("목");
-        if ((scheduleRepeat & 32) > 0) repeatedDays.add("금");
-        if ((scheduleRepeat & 64) > 0) repeatedDays.add("토");
-        return repeatedDays;
-    }
-
     // **Getter 및 Setter**
     public int getScheduleId() {
-        return scheduleId;
+        return this.scheduleId;
     }
 
     public void setScheduleId(int scheduleId) {
@@ -104,27 +71,19 @@ public class Schedule {
     }
 
     public LocalDateTime getScheduleStart() {
-        return scheduleStart;
+        return parseDateTime(scheduleStart);
     }
 
     public void setScheduleStart(LocalDateTime scheduleStart) {
-        this.scheduleStart = scheduleStart;
+        this.scheduleStart = formatDateTime(scheduleStart);
     }
 
     public LocalDateTime getScheduleEnd() {
-        return scheduleEnd;
+        return parseDateTime(scheduleEnd);
     }
 
     public void setScheduleEnd(LocalDateTime scheduleEnd) {
-        this.scheduleEnd = scheduleEnd;
-    }
-
-    public int getScheduleRepeat() {
-        return scheduleRepeat;
-    }
-
-    public void setScheduleRepeat(int scheduleRepeat) {
-        this.scheduleRepeat = scheduleRepeat;
+        this.scheduleEnd = formatDateTime(scheduleEnd);
     }
 
     public String getSchedulePlace() {
