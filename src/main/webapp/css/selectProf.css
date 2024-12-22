@@ -11,17 +11,14 @@ body {
 }
 
 .global-wrapper {
-    display: flex;
-    justify-content: center;
-    padding: 40px;
+    margin-left: 200px;
 }
 
 /* Main Container */
 .container {
-    margin-left: 200px;
     display: flex;
-    width: 1200px;
-    border-radius: 10px;
+    justify-content: center;
+    padding-top: 40px;
 }
 
 /* Professor List Styles */
@@ -31,13 +28,13 @@ body {
     max-width: 671px;
     height: 613px;
     padding: 45px;
+    margin-top: 30px;
     border-radius: 10px;
     background-color: #ECECEC;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 80px;
 }
 
 .professor-list-wrapper::-webkit-scrollbar {
@@ -124,6 +121,7 @@ li.professor-name.selected {
     background-color: #ffffff;
     border-radius: 10px;
     margin-left: 50px;
+    margin-top: 50px;
 }
 
 .name-search-title {
