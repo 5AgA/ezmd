@@ -24,13 +24,25 @@
     		}
     	}
 
+		// 알림 메시지 표시 함수
+		function showAlert() {
+			const params = new URLSearchParams(window.location.search);
+			const alertMessage = params.get("alert");
+			if (alertMessage) {
+				alert("로그인이 필요한 서비스입니다. 로그인을 해주세요.");
+			}
+		}
+
 		window.onload = function(){
 			updateFormAction();
+			showAlert()
 		}
+
+
     </script>
 </head>
-<body>
 
+<body>
     <!-- 상단 바 -->
     <div class="header-bar"></div>
 

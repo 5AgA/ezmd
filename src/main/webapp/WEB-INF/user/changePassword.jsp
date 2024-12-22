@@ -12,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/header.jsp">
-    	<jsp:param name="currentPage" value="myPage" />
+    	<jsp:param name="currentPage" value="mypage" />
 	</jsp:include>
 
     <div class="container">
@@ -33,7 +33,7 @@
 		</c:if>
 
         
-        <form action="<c:url value='/myPage/update/info'/>" method="post">
+        <form action="<c:url value='/mypage/update/info'/>" method="post">
             <div class="form-group">
                 <label class="label1" for="currentPassword">현재 비밀번호</label>
                 <input type="password" id="currentPassword" name="currentPassword" required>
@@ -50,7 +50,7 @@
             </div>
             <div class="action-buttons">
                 <button type="submit">비밀번호 변경</button>
-                <button type="button" onclick="window.location.href='<c:url value='/ezmd/myPage' />'">취소</button>
+                <button type="button" onclick="window.location.href='<c:url value='/mypage' />'">취소</button>
             </div>
         </form>
     </div>

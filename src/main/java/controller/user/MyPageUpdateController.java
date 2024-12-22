@@ -16,7 +16,7 @@ import model.dao.StudentDAO;
 import model.domain.Professor;
 import model.domain.Student;
 
-@WebServlet("/myPage/update")
+@WebServlet("/mypage/update")
 public class MyPageUpdateController extends HttpServlet implements Controller {
 
     @Override
@@ -43,7 +43,7 @@ public class MyPageUpdateController extends HttpServlet implements Controller {
         Object user = session.getAttribute("user");
 
         if (user == null) {
-            return "redirect:/ezmd/login/form";
+            return "redirect:/login/form";
         }
 
         // 교수 또는 학생 구분
@@ -75,7 +75,7 @@ public class MyPageUpdateController extends HttpServlet implements Controller {
         }
 
         // 업데이트 후 메시지 표시용 또는 마이페이지 재로드
-        return "redirect:/ezmd/myPage";
+        return "redirect:/mypage";
     }
 }
 

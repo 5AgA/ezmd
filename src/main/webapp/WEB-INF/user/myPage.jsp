@@ -57,7 +57,7 @@
 			<c:choose>
 				<c:when test="${sessionScope.user ne null && sessionScope.userType eq 'professor' }">
 					<!-- 교수 정보 폼 -->
-					<form class="user-info-form" action="<c:url value='/myPage/update'/>" method="post" id="infoForm">
+					<form class="user-info-form" action="<c:url value='/mypage/update'/>" method="post" id="infoForm">
 						<div class="form-group">
 							<label for="professorId">교수 번호</label>
 							<input type="text" id="professorId" name="professorId" value="${sessionScope.user.professorId}" readonly>
@@ -86,7 +86,7 @@
 	            </c:when>
 	            <c:when test="${sessionScope.user ne null && sessionScope.userType eq 'student'}">
 	                <!-- 학생 정보 폼 -->
-	                <form class="user-info-form" action="<c:url value='/myPage/update'/>" method="post" id="infoForm">
+	                <form class="user-info-form" action="<c:url value='/mypage/update'/>" method="post" id="infoForm">
 	                    <!-- studentId -->
 	                    <div class="form-group">
 	                        <label for="studentId">학번</label>
@@ -141,7 +141,7 @@
         }
 
         function changePassword() {
-        	window.location.href = '<c:url value="/myPage/update/password" />';
+        	window.location.href = '<c:url value="/mypage/update/password" />';
         }
     </script>
 

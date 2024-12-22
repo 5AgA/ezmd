@@ -110,13 +110,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>jakarta.servlet</groupId>
-			<artifactId>jakarta.servlet-api</artifactId>
-			<version>5.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Gson 라이브러리 -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

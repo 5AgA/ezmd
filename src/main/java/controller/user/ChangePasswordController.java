@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/myPage/update/info")
+@WebServlet("/mypage/update/info")
 public class ChangePasswordController extends HttpServlet implements Controller {
 
     @Override
@@ -20,7 +20,7 @@ public class ChangePasswordController extends HttpServlet implements Controller 
         // 세션에서 사용자 정보 가져오기
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
-            response.sendRedirect("/ezmd/login/form");
+            response.sendRedirect("/login/form");
             return;
         }
 
@@ -31,7 +31,7 @@ public class ChangePasswordController extends HttpServlet implements Controller 
         } else if ("Student".equalsIgnoreCase(userType)) {
             userId = ((model.domain.Student) session.getAttribute("user")).getStudentId();
         } else {
-            response.sendRedirect("/ezmd/login/form");
+            response.sendRedirect("/login/form");
             return;
         }
 
@@ -42,7 +42,7 @@ public class ChangePasswordController extends HttpServlet implements Controller 
         // 비밀번호 확인
         if (!newPassword.equals(confirmPassword)) {
             request.setAttribute("errorMessage", "새 비밀번호가 일치하지 않습니다.");
-            RequestDispatcher rd = request.getRequestDispatcher("/myPage/update/password");
+            RequestDispatcher rd = request.getRequestDispatcher("/mypage/update/password");
             rd.forward(request, response);
             return;
         }
@@ -51,16 +51,16 @@ public class ChangePasswordController extends HttpServlet implements Controller 
             boolean isChanged = changePasswordManager.changePassword(userType, userId, currentPassword, newPassword);
             if (isChanged) {
                 session.setAttribute("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
-                response.sendRedirect("/ezmd/myPage");
+                response.sendRedirect("/mypage");
             } else {
                 request.setAttribute("errorMessage", "현재 비밀번호가 일치하지 않거나 변경에 실패했습니다.");
-                RequestDispatcher rd = request.getRequestDispatcher("/myPage/update/password");
+                RequestDispatcher rd = request.getRequestDispatcher("/mypage/update/password");
                 rd.forward(request, response);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "비밀번호 변경 중 오류가 발생했습니다.");
-            RequestDispatcher rd = request.getRequestDispatcher("/myPage/update/password");
+            RequestDispatcher rd = request.getRequestDispatcher("/mypage/update/password");
             rd.forward(request, response);
         }
     }

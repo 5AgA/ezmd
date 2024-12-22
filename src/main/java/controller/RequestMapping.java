@@ -37,10 +37,10 @@ public class RequestMapping {
 
         // 사용자 관련 페이지
         mappings.put("/home", new ForwardController("/user/home.jsp"));
-        mappings.put("/myPage", new ForwardController("/user/myPage.jsp"));
-        mappings.put("/myPage/update", new MyPageUpdateController());
-        mappings.put("/myPage/update/password", new ForwardController("/user/changePassword.jsp"));
-        mappings.put("/myPage/update/info", new ChangePasswordController());
+        mappings.put("/mypage", new ForwardController("/user/myPage.jsp"));
+        mappings.put("/mypage/update", new MyPageUpdateController());
+        mappings.put("/mypage/update/password", new ForwardController("/user/changePassword.jsp"));
+        mappings.put("/mypage/update/info", new ChangePasswordController());
 
         // 스케줄
         mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));

@@ -19,6 +19,10 @@
 			<param-value>utf-8</param-value>
 		</init-param>
 	</filter>
+	<filter>
+		<filter-name>Authentication Filter</filter-name>
+		<filter-class>filter.AuthenticationFilter</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>Resource Filter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -27,6 +31,11 @@
 		<filter-name>Encoding Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Authentication Filter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+
 	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<servlet-class>controller.DispatcherServlet</servlet-class>
