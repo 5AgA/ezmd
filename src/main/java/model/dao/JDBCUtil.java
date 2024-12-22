@@ -17,8 +17,7 @@ public class JDBCUtil {
 	private int resultSetType = ResultSet.TYPE_FORWARD_ONLY, resultSetConcurrency = ResultSet.CONCUR_READ_ONLY;
 
 	// 기본 생성자
-	public JDBCUtil() {
-	}
+	public JDBCUtil() {}
 
 	/*
 	 * // 매개변수 없는 query를 전달받아 query를 설정하는 생성자 public JDBCUtil(String sql) {
@@ -63,28 +62,28 @@ public class JDBCUtil {
 		this.resultSetConcurrency = ResultSet.CONCUR_READ_ONLY;
 	}
 
-	// sql 및 Object[], resultSetType, resultSetConcurrency 변수 setter
-	public void setSqlAndParameters(String sql, Object[] parameters, int resultSetType, int resultSetConcurrency) {
-		this.sql = sql;
-		this.parameters = parameters;
-		this.resultSetType = resultSetType;
-		this.resultSetConcurrency = resultSetConcurrency;
-	}
+   // sql 및 Object[], resultSetType, resultSetConcurrency 변수 setter
+   public void setSqlAndParameters(String sql, Object[] parameters, int resultSetType, int resultSetConcurrency) {
+      this.sql = sql;
+      this.parameters = parameters;
+      this.resultSetType = resultSetType;
+      this.resultSetConcurrency = resultSetConcurrency;
+   }
 
-	// 현재의 PreparedStatement를 반환
-	private PreparedStatement getPreparedStatement() throws SQLException {
-		System.out.println("매개변수: " + Arrays.toString(parameters));
-		
-		if (conn == null) {
-			conn = connMan.getConnection();
-			conn.setAutoCommit(false);
-		}
-		if (pstmt != null)
-			pstmt.close();
-		pstmt = conn.prepareStatement(sql, resultSetType, resultSetConcurrency);
-		// JDBCUtil.printDataSourceStats(ds);
-		return pstmt;
-	}
+   // 현재의 PreparedStatement를 반환
+   private PreparedStatement getPreparedStatement() throws SQLException {
+      System.out.println("매개변수: " + Arrays.toString(parameters));
+
+      if (conn == null) {
+         conn = connMan.getConnection();
+         conn.setAutoCommit(false);
+      }
+      if (pstmt != null)
+         pstmt.close();
+      pstmt = conn.prepareStatement(sql, resultSetType, resultSetConcurrency);
+      // JDBCUtil.printDataSourceStats(ds);
+      return pstmt;
+   }
 
 	// JDBCUtil의 쿼리와 매개변수를 이용해 executeQuery를 수행하는 메소드
 	public ResultSet executeQuery() {
@@ -114,7 +113,7 @@ public class JDBCUtil {
 
 			return rs;
 		} catch (Exception ex) {
-			
+
 			ex.printStackTrace();
 		}
 		return null;
@@ -124,7 +123,7 @@ public class JDBCUtil {
 	public int executeUpdate() throws SQLException, Exception {
 		System.out.println("실행 쿼리: " + sql);
 		System.out.println("매개변수: " + Arrays.toString(parameters));
-		
+
 		pstmt = getPreparedStatement();
 		int parameterSize = getParameterSize();
 		for (int i = 0; i < parameterSize; i++) {
@@ -134,47 +133,47 @@ public class JDBCUtil {
 				pstmt.setObject(i + 1, getParameter(i));
 			}
 		}
-		 int result = pstmt.executeUpdate(); 
+		 int result = pstmt.executeUpdate();
 	    System.out.println("쿼리 성공적으로 실행됨. 반환 값: " + result);
 	    return result;
-	    
+
 	}
 
-	// 현재의 CallableStatement를 반환
-	private CallableStatement getCallableStatement() throws SQLException {
-		if (conn == null) {
-			conn = connMan.getConnection();
-			conn.setAutoCommit(false);
-		}
-		if (cstmt != null)
-			cstmt.close();
-		cstmt = conn.prepareCall(sql);
-		return cstmt;
-	}
+   // 현재의 CallableStatement를 반환
+   private CallableStatement getCallableStatement() throws SQLException {
+      if (conn == null) {
+         conn = connMan.getConnection();
+         conn.setAutoCommit(false);
+      }
+      if (cstmt != null)
+         cstmt.close();
+      cstmt = conn.prepareCall(sql);
+      return cstmt;
+   }
 
-	// JDBCUtil의 쿼리와 매개변수를 이용해 CallableStatement의 execute를 수행하는 메소드
-	public boolean execute(JDBCUtil source) throws SQLException, Exception {
-		cstmt = getCallableStatement();
-		for (int i = 0; i < source.getParameterSize(); i++) {
-			cstmt.setObject(i + 1, source.getParameter(i));
-		}
-		return cstmt.execute();
-	}
+   // JDBCUtil의 쿼리와 매개변수를 이용해 CallableStatement의 execute를 수행하는 메소드
+   public boolean execute(JDBCUtil source) throws SQLException, Exception {
+      cstmt = getCallableStatement();
+      for (int i = 0; i < source.getParameterSize(); i++) {
+         cstmt.setObject(i + 1, source.getParameter(i));
+      }
+      return cstmt.execute();
+   }
 
-	// PK 컬럼 이름 배열을 이용하여 PreparedStatement를 생성 (INSERT문에서 Sequence를 통해 PK 값을 생성하는
-	// 경우)
-	private PreparedStatement getPreparedStatement(String[] columnNames) throws SQLException {
-		
-		System.out.println("매개변수: " + Arrays.toString(parameters));
-		if (conn == null) {
-			conn = connMan.getConnection();
-			conn.setAutoCommit(false);
-		}
-		if (pstmt != null)
-			pstmt.close();
-		pstmt = conn.prepareStatement(sql, columnNames);
-		return pstmt;
-	}
+   // PK 컬럼 이름 배열을 이용하여 PreparedStatement를 생성 (INSERT문에서 Sequence를 통해 PK 값을 생성하는
+   // 경우)
+   private PreparedStatement getPreparedStatement(String[] columnNames) throws SQLException {
+
+      System.out.println("매개변수: " + Arrays.toString(parameters));
+      if (conn == null) {
+         conn = connMan.getConnection();
+         conn.setAutoCommit(false);
+      }
+      if (pstmt != null)
+         pstmt.close();
+      pstmt = conn.prepareStatement(sql, columnNames);
+      return pstmt;
+   }
 
 	// 위 메소드를 이용하여 PreparedStatement를 생성한 후 executeUpdate 실행
 	public int executeUpdate(String[] columnNames) throws SQLException, Exception {
@@ -200,41 +199,41 @@ public class JDBCUtil {
 		return null;
 	}
 
-	// 자원 반환
-	public void close() {
-		if (rs != null) {
-			try {
-				rs.close();
-				rs = null;
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-				pstmt = null;
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		if (cstmt != null) {
-			try {
-				cstmt.close();
-				cstmt = null;
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		if (conn != null) {
-			try {
-				conn.close();
-				conn = null;
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
+   // 자원 반환
+   public void close() {
+      if (rs != null) {
+         try {
+            rs.close();
+            rs = null;
+         } catch (SQLException ex) {
+            ex.printStackTrace();
+         }
+      }
+      if (pstmt != null) {
+         try {
+            pstmt.close();
+            pstmt = null;
+         } catch (SQLException ex) {
+            ex.printStackTrace();
+         }
+      }
+      if (cstmt != null) {
+         try {
+            cstmt.close();
+            cstmt = null;
+         } catch (SQLException ex) {
+            ex.printStackTrace();
+         }
+      }
+      if (conn != null) {
+         try {
+            conn.close();
+            conn = null;
+         } catch (SQLException ex) {
+            ex.printStackTrace();
+         }
+      }
+   }
 
 	public void commit() {
 		   try {

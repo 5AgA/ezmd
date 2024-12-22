@@ -1,7 +1,7 @@
 package model.domain;
 
 public class Professor {
-    private Integer professorId;
+    private int professorId;
     private String name;
     private String email;
     private String password;
@@ -12,7 +12,7 @@ public class Professor {
     public Professor() {}
 
     public Professor(int professorId, String name, String email, String password, 
-                        String dept, String professorOffice, char deleted) {
+                         String dept, String professorOffice, char deleted) {
         this.professorId = professorId;
         this.name = name;
         this.email = email;

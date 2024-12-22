@@ -2,6 +2,7 @@ package controller.user;
 
 import controller.Controller;
 
+import model.domain.Student;
 import model.manager.user.StudentLoginManager;
 
 import javax.servlet.ServletException;
@@ -9,8 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.SQLException;
+
 
 @WebServlet("/login/student")
 public class StudentLoginController extends HttpServlet implements Controller {
@@ -22,10 +26,10 @@ public class StudentLoginController extends HttpServlet implements Controller {
 
         // 로그인 매니저에서 처리
         StudentLoginManager studentLoginManager = new StudentLoginManager();
-        Object user = null;
+        Student user;
 
         try {
-            user = studentLoginManager.authenticate(email, password);
+            user = (Student) studentLoginManager.authenticate(email, password);
         } catch (SQLException e) {
             System.out.println("학생 로그인 중 오류 발생");
             e.printStackTrace();
@@ -35,12 +39,14 @@ public class StudentLoginController extends HttpServlet implements Controller {
         // 로그인 결과에 따라 이동할 URL 반환
         if (user != null) {
             // 로그인 성공; 세션에 사용자 정보를 저장
+        	HttpSession session = request.getSession();
             request.getSession().setAttribute("user", user);
-            return "home.jsp";
+            request.getSession().setAttribute("userType", "student");
+            return "redirect:/ezmd/home";
         } else {
             // 로그인 실패
-            request.setAttribute("errorMessage", "Invalid credentials");
-            return "login.jsp";
+            request.setAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다.");
+            return "form";
         }
     }
 
@@ -50,8 +56,8 @@ public class StudentLoginController extends HttpServlet implements Controller {
         try {
             // execute 메서드 호출 후 반환된 URL로 이동
             String view = execute(request, response);
-            if (view.equals("home.jsp")) {
-                response.sendRedirect(view);
+            if (view.startsWith("redirect:")) {
+                response.sendRedirect(view.substring("redirect:".length()));
             } else {
                 request.getRequestDispatcher(view).forward(request, response);
             }

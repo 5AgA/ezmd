@@ -19,9 +19,31 @@
             <div class="profile">
                 <img src="<%= request.getContextPath() %>/images/profile-icon.png" alt="Profile">
                 <div class="profile-info">
-                    <p><b>김동덕</b></p>
-                    <p>동덕여자대학교</p>
-                    <p>컴퓨터학과 22학번 3학년</p>
+                    <c:if test="${not empty user}">
+                        <p><b>${user.name}</b></p>
+                        <p>${user.dept}</p>
+                        <c:choose>
+                            <c:when test="${userType == 'professor'}">
+                                <p>교수 ID: ${user.professorId}</p>
+                            </c:when>
+                            <c:when test="${userType == 'student'}">
+                                <p>학번: ${user.studentId}</p>
+                            </c:when>
+                            <c:otherwise>
+                                <p>ID: N/A</p>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
+                    <c:if test="${empty user}">
+                        <p><b>게스트</b></p>
+                        <p>N/A</p>
+                        <p>ID: N/A</p>
+                    </c:if>
+
+<%--                    <p><b>김동덕</b></p>--%>
+<%--                    <p>동덕여자대학교</p>--%>
+<%--                    <p>컴퓨터학과 22학번 3학년</p>--%>
+
                 </div>
             </div>
 

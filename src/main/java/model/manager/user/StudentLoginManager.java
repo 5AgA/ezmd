@@ -4,10 +4,14 @@ package model.manager.user;
 import java.sql.SQLException;
 
 import model.dao.StudentDAO;
+import model.dao.ProfessorDAO;
 import model.domain.Student;
+import model.domain.Professor;
+import model.domain.Student;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class StudentLoginManager {
-	private StudentDAO studentDAO;
+	private final StudentDAO studentDAO;
 	
 	public StudentLoginManager() {
 		studentDAO = new StudentDAO();
@@ -15,12 +19,12 @@ public class StudentLoginManager {
 	
 	//이메일과 비밀번호로 로그인 인증
 	public Object authenticate(String email, String password) throws SQLException {
-		//학생과 테이블에서 이메일을 이용해서 사용자 확인
-		Student student = studentDAO.findStudentByEmail(email);
-		if (student != null && student.getPassword().equals(password)) {
-			return student;
+		Student student = studentDAO.findStudPwdByEmail(email);
+		if(student !=null){
+			if (BCrypt.checkpw(password, student.getPassword())) {
+				return student;
+			}
 		}
-		
 		return null;
 	}
 }

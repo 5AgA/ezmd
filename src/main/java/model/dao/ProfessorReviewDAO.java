@@ -1,11 +1,11 @@
 package model.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import model.domain.Professor;
 import model.domain.ProfessorReview;
-import model.domain.Student;
-import java.sql.*;
+
 public class ProfessorReviewDAO {
     private JDBCUtil jdbcUtil = null;
 

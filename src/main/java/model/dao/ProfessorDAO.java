@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,6 +9,8 @@ import java.util.List;
 
 import model.domain.Professor;
 import model.domain.Student;
+
+import static java.sql.DriverManager.getConnection;
 
 public class ProfessorDAO {
 
@@ -18,9 +22,8 @@ public class ProfessorDAO {
 
     // Create - 교수 추가
     public int createProfessor(Professor professor) {
-        String sql = "INSERT INTO professor (professor_id, name, email, password, dept, professor_office, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO professor (name, email, password, dept, professor_office, deleted) VALUES (?, ?, ?, ?, ?, ?)";
         Object[] params = {
-            professor.getProfessorId(),
             professor.getName(),
             professor.getEmail(),
             professor.getPassword(),
@@ -143,24 +146,47 @@ public class ProfessorDAO {
         }
         return 0;
     }
+
+
+    public boolean findUserByEmail(String email) throws SQLException {
+    	String sql = "SELECT COUNT(*) as count FROM ("
+    	           + "SELECT email FROM STUDENT WHERE email = ? "
+    	           + "UNION "
+    	           + "SELECT email FROM PROFESSOR WHERE email = ?"
+    	           + ")";
+
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{email, email});
+        try{
+        	ResultSet rs= jdbcUtil.executeQuery();
+        	if(rs.next()) {
+        		return rs.getInt("count") > 0;
+        	}
+
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            jdbcUtil.close();
+        }
+        return false;
+    }
     
-    
-    public Professor findProfessorByEmail(String email) throws SQLException {
-        String sql = "SELECT professor_id, name, email, password, dept, professor_office, deleted FROM professor WHERE email=?";
+    public Professor findProfPwdByEmail(String email){
+        String sql = "SELECT * FROM professor WHERE email = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{email});
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();
             if (rs.next()) {
-                return new Professor(
-                    rs.getInt("professor_id"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("dept"),
-                    rs.getString("professor_office"),
-                    rs.getString("deleted").charAt(0)
+                Professor professor = new Professor(
+                        rs.getInt("professor_id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("dept"),
+                        rs.getString("professor_office"),
+                        rs.getString("deleted").charAt(0)
                 );
+                return professor;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -168,5 +194,23 @@ public class ProfessorDAO {
             jdbcUtil.close();
         }
         return null;
+    }
+
+    public int updatePassword(int professorId, String newPassword) {
+    	String sql = "UPDATE professor SET password=? WHERE professor_id=?";
+
+    	Object[] params = {newPassword, professorId};
+        jdbcUtil.setSqlAndParameters(sql, params);
+
+        try {
+            return jdbcUtil.executeUpdate();
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close();
+        }
+        return 0;
     }
 }

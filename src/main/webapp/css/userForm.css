@@ -42,7 +42,7 @@ body {
 }
 
 /* 로그인 박스 */
-.login-box {
+.login-box{
 	width: 500px;
 	/* 고정된 너비 설정 (500px) */
 	height: auto;
@@ -121,7 +121,16 @@ body {
 	margin-top: 20px;
 }
 
-/* 회원가입 */
+.sign-up-link {
+	color: #00A3FF;
+	text-decoration: none;
+}
+
+.find-password-link {
+	color: #00A3FF;
+	text-decoration: none;
+}
+/* 로그인 창에서 회원가입 박스*/
 .sign-up {
 	font-size: 15px;
 	/* 고정된 폰트 크기 */
@@ -135,35 +144,4 @@ body {
 	/* 배경 제거 (필요하면 추가) */
 	cursor: pointer;
 	/* 버튼처럼 보이도록 커서 변경 */
-}
-
-.sign-up-link {
-	color: #00A3FF;
-	text-decoration: none;
-}
-
-.find-password-link {
-	color: #00A3FF;
-	text-decoration: none;
-}
-
-/* 이메일 그룹 스타일 */
-.email-group {
-	display: flex;
-	align-items: center;
-}
-
-.input-field-email {
-	width: 70%;
-	height: 40px;
-	border: 0.5px solid #969696;
-	border-radius: 5px;
-	padding-left: 10px;
-	font-size: 16px;
-}
-
-.email-domain {
-	margin-left: 5px;
-	font-size: 16px;
-	color: #000000;
 }
