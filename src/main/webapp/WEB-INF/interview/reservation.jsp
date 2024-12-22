@@ -16,6 +16,11 @@
     <jsp:param name="currentPage" value="meeting"/>
 </jsp:include>
 
+<!-- 사이드 메뉴 -->
+<jsp:include page="/WEB-INF/sideMenu.jsp">
+    <jsp:param name="currentMenu" value="interviewResrv"/>
+</jsp:include>
+
 <%
     // 전달된 파라미터 추출
     String professorId = request.getParameter("professorId");
@@ -23,10 +28,6 @@
 %>
 
 <div class="reservation-page-wrapper">
-    <div class="sidebar-wrapper">
-        <div class="menu-item">면담 신청</div>
-        <div class="menu-item">면담 관리</div>
-    </div>
     <div class="main-content">
         <div class="header-wrapper">
             <div class="profile-wrapper">
@@ -36,7 +37,7 @@
             <button class="review-button">면담 후기</button>
         </div>
         <div class="sub-content">
-            <form action="<%=request.getContextPath()%>/interview-submit" method="post">
+            <form action="<%=request.getContextPath()%>/interview/reservation/submit" method="post">
                 <input type="hidden" name="selectedDate" id="selectedDate" value="">
                 <input type="hidden" name="selectedTime" id="selectedTime" value="">
                 <input type="hidden" name="professorId" id="professorId" value="<%= professorId %>">

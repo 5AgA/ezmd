@@ -6,7 +6,6 @@
 	<c:set var="currentPage" value="${pageName}" />
 	<%
 		String currentPage = request.getParameter("currentPage");
-		System.out.println(currentPage);
 	%>
 	<nav class="navbar">
 		<ul>
@@ -19,10 +18,10 @@
 				<a href="<c:url value='/schedule'/>">일정 관리</a>
 			</li>
 			<li class="<%= "meeting".equals(currentPage) ? "active" : "" %>">
-				<a href="<c:url value='/meeting'/>">면담 관리</a>
+				<a href="<c:url value='/interview'/>">면담 관리</a>
 			</li>
 			<li class="<%= "mypage".equals(currentPage) ? "active" : "" %>">
-				<a href="<c:url value='/myPage'/>">마이페이지</a>
+				<a href="<c:url value='/mypage'/>">마이페이지</a>
 			</li>
 		</ul>
 	</nav>

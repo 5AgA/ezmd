@@ -1,4 +1,4 @@
-package controller.Interview;
+package controller.interview;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +15,7 @@ import model.dao.InterviewResultDAO;
 import model.domain.Interview;
 import model.domain.InterviewResult;
 
-@WebServlet("/interviewResult/clear")
+@WebServlet("/interview/result")
 public class InterviewClearListController extends HttpServlet {
 
     private InterviewDAO interviewDAO = new InterviewDAO();
@@ -116,11 +116,11 @@ public class InterviewClearListController extends HttpServlet {
             if (result > 0) {
                 // 성공 메시지 세션에 저장
                 request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 저장되었습니다.");
-                response.sendRedirect(request.getContextPath() + "/interviewResult/clear");
+                response.sendRedirect(request.getContextPath() + "/interview/result");
             } else {
                 // 실패 메시지 세션에 저장
                 request.getSession().setAttribute("errorMessage", "면담 결과 저장에 실패했습니다.");
-                response.sendRedirect(request.getContextPath() + "/interviewResult/clear");
+                response.sendRedirect(request.getContextPath() + "/interview/result");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,11 +148,11 @@ public class InterviewClearListController extends HttpServlet {
             if (result > 0) {
                 // 성공 메시지 세션에 저장
                 request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 수정되었습니다.");
-                response.sendRedirect(request.getContextPath() + "/interviewResult/clear");
+                response.sendRedirect(request.getContextPath() + "/interview/result");
             } else {
                 // 실패 메시지 세션에 저장
                 request.getSession().setAttribute("errorMessage", "면담 결과 수정에 실패했습니다.");
-                response.sendRedirect(request.getContextPath() + "/interviewResult/clear");
+                response.sendRedirect(request.getContextPath() + "/interview/result");
             }
         } catch (Exception e) {
             e.printStackTrace();

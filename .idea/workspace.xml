@@ -10,12 +10,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/interviewResult/InterviewResultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/interviewResult/InterviewResultController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/sideMenu.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/sideMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation-submit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation-submit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/reservation.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/selectProf.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/selectProf.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interviewManager_clear/interviewClearList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interviewManager_clear/interviewClearList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/chooseProf.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/interviewClearList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/interviewClearList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/selectProf.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/selectProf.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jsp File" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -58,6 +78,9 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2pbzgbF8J8OhhJtS4y84OS8IalG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -67,6 +90,8 @@
     "Downloaded.Files.Path.Enabled": "false",
     "Maven.ezmd [clean, install].executor": "Run",
     "Maven.ezmd [clean,install].executor": "Run",
+    "Maven.ezmd [clean].executor": "Run",
+    "Maven.ezmd [install].executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -77,8 +102,9 @@
     "TomEE 서버.Tomcat 9.0.96.executor": "Run",
     "Tomcat 서버.Tomcat 9.0.96.executor": "Run",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "schedule",
+    "git-widget-placeholder": "interview",
     "kotlin-language-version-configured": "true",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -94,7 +120,6 @@
   <component name="RunManager">
     <configuration name="Tomcat 9.0.96" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.96" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
-      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="ezmd:war exploded">
           <settings>

@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controller.user.*;
-import controller.interview.ApproveInterviewController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import controller.Interview.InterviewClearListController;
 
 public class RequestMapping {
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -19,36 +17,29 @@ public class RequestMapping {
 		// 각 uri에 대응되는 controller 객체를 생성 및 저장
 		mappings.put("/", new ForwardController("/index/index.jsp"));
 		mappings.put("/login/form", new ForwardController("/user/loginForm.jsp"));
-//        mappings.put("/login", new LoginController());
-//        mappings.put("/logout", new LogoutController());
-//        mappings.put("/user/list", new ListUserController());
-//        mappings.put("/user/view", new ViewUserController());
-
-		// 회원 가입 폼 요청과 가입 요청 처리 병합 (폼에 커뮤니티 선택 메뉴 추가를 위함)
-		// mappings.put("/register", new SignupController());
-
-        // 사용자 정보 수정 폼 요청과 수정 요청 처리 병합
-//      mappings.put("/user/update/form", new UpdateUserFormController());
-//      mappings.put("/user/update", new UpdateUserController());        
-//        mappings.put("/user/update", new UpdateUserController());
-//        mappings.put("/user/delete", new DeleteUserController());
 
 		// 페이지 이동
 		mappings.put("/home", new ForwardController("/user/home.jsp"));
-		mappings.put("/myPage", new ForwardController("/user/mypage.jsp"));
+		mappings.put("/mypage", new ForwardController("/user/mypage.jsp"));
 		mappings.put("/schedule", new ForwardController("/schedule/schedule.jsp"));
 
 		mappings.put("/register/form", new ForwardController("/user/registerForm.jsp"));
 
-		mappings.put("/interviewResult/clear", new ForwardController("/interviewManager_clear/interviewClearList.jsp"));
+		// 면담 신청 (학생)
+        mappings.put("/interview", new ForwardController("/interview/selectProf.jsp"));
+        mappings.put("/interview/reservation", new ForwardController("/interview/reservation.jsp"));
+        mappings.put("/interview/reservation/submit", new ForwardController("/interview/reservation-submit.jsp"));
+
+		// 교수 목록 조회/검색
+		mappings.put("/profs/view", new ProfessorsViewController());
+		mappings.put("/profs/search", new SearchProfController());
+
+		// 면담 결과 (학생)
+		mappings.put("/interview/result", new ForwardController("/interviewManager_clear/interviewClearList.jsp"));
 		mappings.put("/interviewResult/management", new ForwardController("/interviewManager_clear/interviewResultManagement.jsp"));
 		//mappings.put("/interviewResult/create", new InterviewResultController());
 
-        mappings.put("/select-prof", new ForwardController("/interview/selectProf.jsp"));
-        mappings.put("/profs/view", new ProfessorsViewController());
-        mappings.put("/profs/search", new SearchProfController());
-        mappings.put("/interview", new ForwardController("/interview/reservation.jsp"));
-        mappings.put("/interview-submit", new ForwardController("/interview/reservation-submit.jsp"));
+		// 면담 승인 (교수)
         mappings.put("/interview-check", new ForwardController("/interview/interview-check.jsp"));
 
         logger.info("Initialized Request Mapping!");

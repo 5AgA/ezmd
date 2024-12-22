@@ -1,0 +1,38 @@
+/* Sidebar Styles */
+.sidebar {
+    width: 200px;
+    padding: 20px;
+    position: fixed; /* Fixes the sidebar */
+    left: 0; /* Aligns the sidebar to the left edge */
+    top: 200px; /* Adjust this value to the height of your header */
+    height: calc(100% - 200px);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px 5px;
+    transition: background-color 0.3s, font-weight 0.3s;
+    font-weight: normal;
+}
+
+.sidebar li:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar li a {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar li.active a {
+    font-weight: bold;
+}

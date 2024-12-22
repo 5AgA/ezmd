@@ -13,6 +13,11 @@
     <jsp:param name="currentPage" value="meeting"/>
 </jsp:include>
 
+<!-- 사이드 메뉴 -->
+<jsp:include page="/WEB-INF/sideMenu.jsp">
+    <jsp:param name="currentMenu" value="interviewResrv"/>
+</jsp:include>
+
 <%
     // 전달된 파라미터 추출
     String professorId = request.getParameter("professorId");
@@ -20,12 +25,6 @@
 %>
 
 <div class="app-wrapper">
-    <!-- Sidebar -->
-    <div class="sidebar-wrapper">
-        <div class="menu-item">면담 신청</div>
-        <div class="menu-item">면담 관리</div>
-    </div>
-
     <!-- Main Content -->
     <div class="main-content">
         <!-- 폼을 통해 라디오 선택 값(interviewCategory)과 textarea 내용(interviewNote)을 전송 -->
