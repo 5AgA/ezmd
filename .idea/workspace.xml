@@ -91,6 +91,7 @@
     "Maven.ezmd [clean].executor": "Run",
     "Maven.ezmd [install].executor": "Run",
     "Maven.ezmd [test].executor": "Run",
+    "Maven.ezmd [validate].executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
