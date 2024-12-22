@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let sId = ''; // 수정할 일정 ID
 
     // 카테고리 데이터 가져오기
-    fetch("/schedule/categories?userId=20210670")
+    fetch("/schedule/categories")
         .then(response => response.json())
         .then(categories => {
             categories.forEach(category => {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById('edit-sdate').value = schedule.scheduleStart;
                 document.getElementById('edit-edate').value = schedule.scheduleEnd;
                 document.getElementById('edit-place').value = schedule.schedulePlace ? schedule.schedulePlace : '';
-                document.getElementById('edit-memo').value = schedule.scheduleMemo;
+                document.getElementById('edit-memo').value = schedule.scheduleMemo ? schedule.scheduleMemo : '';
                 sId = scheduleId;
 
                 // 카테고리 버튼에서 선택된 카테고리 ID를 찾아 selected 클래스 추가
@@ -184,8 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scheduleEnd: scheduleEnd,
             schedulePlace: schedulePlace,
             scheduleMemo: scheduleMemo,
-            categoryId: categoryId,
-            userId: '20210670' // 예시로 1을 사용. 실제 사용자 ID로 변경 필요.
+            categoryId: categoryId
         };
 
         fetch('/schedule/update', {

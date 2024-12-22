@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
             schedulePlace: schedulePlace,
             scheduleMemo: scheduleMemo,
             categoryId: categoryId,
-            userId: '20210670' // 예시로 1을 사용. 실제 사용자 ID로 변경 필요.
+            userId: uid
         };
 
         fetch('/schedule/add', {

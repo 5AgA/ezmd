@@ -18,15 +18,7 @@ public class CategoryListController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String userIdParam = request.getParameter("userId");
-        int userId;
-
-        if (userIdParam == null || userIdParam.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid 'userId' parameter");
-            return null;
-        }
-
-        userId = Integer.parseInt(userIdParam);
+        int userId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
 
         // 사용자 카테고리 가져오기
         List<ScheduleCategory> categories = categoryService.getCategoriesByUserId(userId);

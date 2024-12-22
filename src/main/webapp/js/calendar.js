@@ -10,7 +10,7 @@ const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8�
 let categories = []; // 카테고리 정보를 저장할 배열
 // 카테고리 데이터를 서버에서 가져옵니다.
 if (window.location.pathname === '/schedule') {
-    fetch('/schedule/categories?userId=20210670')
+    fetch(`/schedule/categories`)
         .then(response => response.json())
         .then(data => {
             categories = data; // 카테고리 정보를 배열로 저장

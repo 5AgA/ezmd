@@ -37,11 +37,14 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
 
         if (user != null) {
             // 로그인 성공; 세션에 사용자 정보를 저장
-        	HttpSession session = request.getSession();
-            request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("userType", "professor");
-            // 성공 시 홈 페이지로 이동
-            return "redirect:/home";
+        	HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
+            session.setAttribute("userType", "professor");
+            session.setAttribute("userId", user.getProfessorId());
+
+            // 로그인 성공 시 홈으로 리다이렉트
+            response.sendRedirect(request.getContextPath() + "/home");
+            return null;  // 리다이렉트 후 더 이상 실행되지 않도록 null 반환
         } else {
             // 로그인 실패 시 로그인 페이지로 이동하며 에러 메시지 설정
             request.setAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다.");
