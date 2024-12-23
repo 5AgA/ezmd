@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const smodal = document.querySelector(".schedule-modal");
     const smodalBtn = document.getElementById("schedule-modal-btn");
+    const actionButtons = document.querySelector(".action-buttons");
     let selectedCategory = ''; // 선택된 카테고리를 저장할 변수
 
     // 스케줄 모달 열기
     smodalBtn.addEventListener("click", () => {
         smodal.style.display = "flex";
+        actionButtons.style.display = "none";
         document.getElementById("title").focus();
     });
 
@@ -77,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (selectedCategory === '') {
             // 카테고리가 선택되지 않은 경우 경고 메시지 출력
             const errorElement = document.createElement('p');
+            errorElement.className = 'error-message';
             errorElement.textContent = '카테고리를 선택해주세요.';
             errorElement.style.color = 'red';
             document.querySelector('.category').appendChild(errorElement);
@@ -114,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // 일정 추가 후 alert 확인 버튼을 누르면 모달을 닫음
                     setTimeout(() => {
                         closeModal();
-                        handleClick({ target: document.querySelector('.selected') });
+                        handleClick({target: document.querySelector('.today')});
                     }, 0);
                 } else {
                     alert('일정 추가에 실패했습니다.');
@@ -145,10 +148,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         selectedCategory = '';
-        sId = '';
         if(document.querySelector('.error-message')) {
             document.querySelector('.error-message').remove(); // 에러 메시지 삭제
         }
+        location.reload();
     }
 
     // 모달 밖을 클릭하면 모달 닫기

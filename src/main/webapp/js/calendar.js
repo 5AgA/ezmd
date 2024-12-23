@@ -19,45 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching categories:', error));
     }
 
-// 날짜에 해당하는 스케줄을 가져오는 함수
-    function getScheduleForDate(date) {
-        const todayInfo = document.querySelector('.today-info');
-
-        const url = `/schedule/view?date=${date}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                // 일정 정보 표시
-                if (data.length > 0) {
-                    todayInfo.innerHTML = data.map(schedule => {
-                        // schedule.categoryId로 해당 카테고리 정보 찾기
-                        const category = categories.find(cat => cat.categoryId === schedule.categoryId);
-
-                        return `
-                        <div class="schedule-item" data-sid="${schedule.scheduleId}">
-                            <h3>${schedule.scheduleTitle}</h3>
-                            <p id="schedule-date">${schedule.scheduleStart} ~ ${schedule.scheduleEnd}</p>
-                            ${schedule.schedulePlace ? `
-                            <div class="schedule-place">
-                                <img src="../images/place-icon.svg"><p>${schedule.schedulePlace}</p>
-                            </div>` : ''}
-                            <input type="button" class="category-icon" data-category-id="${schedule.categoryId}" 
-                            value="${category.categoryName}" style="background-color: ${category ? category.categoryColor : ''};">
-                        </div>
-                    `;
-                    }).join('');
-                } else {
-                    todayInfo.innerHTML = "<p class=\"no-schedule\">해당 날짜에는 일정이 없습니다.</p>";
-                }
-            })
-            .catch(error => {
-                todayInfo.innerHTML = "<p class=\"no-schedule\">일정을 불러오는데 실패했습니다.</p>";
-                console.error(error);
-            });
-    }
-
-
-// 날짜를 클릭했을 때 실행될 함수
+    // 날짜를 클릭했을 때 실행될 함수
     function handleClick(event) {
         const clickedElement = event.target.closest('.day-cell');
 
@@ -90,6 +52,44 @@ document.addEventListener("DOMContentLoaded", () => {
             getScheduleForDate(formattedDate);
         }
     }
+
+    // 날짜에 해당하는 스케줄을 가져오는 함수
+    function getScheduleForDate(date) {
+        const todayInfo = document.querySelector('.today-info');
+
+        const url = `/schedule/view?date=${date}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                // 일정 정보 표시
+                if (data.length > 0) {
+                    todayInfo.innerHTML = data.map(schedule => {
+                        // schedule.categoryId로 해당 카테고리 정보 찾기
+                        const category = categories.find(cat => cat.categoryId === schedule.categoryId);
+
+                        return `
+                        <div class="schedule-item" data-sid="${schedule.scheduleId}">
+                            <h3>${schedule.scheduleTitle}</h3>
+                            <p id="schedule-date">${schedule.scheduleStart} ~ ${schedule.scheduleEnd}</p>
+                            ${schedule.schedulePlace ? `
+                            <div class="schedule-place">
+                                <img src="../images/place-icon.svg"><p>${schedule.schedulePlace}</p>
+                            </div>` : ''}
+                            <input type="button" class="category-icon" data-category-id="${schedule.categoryId}"
+                            value="${category.categoryName}" style="background-color: ${category ? category.categoryColor : ''};">
+                        </div>
+                    `;
+                    }).join('');
+                } else {
+                    todayInfo.innerHTML = "<p class=\"no-schedule\">해당 날짜에는 일정이 없습니다.</p>";
+                }
+            })
+            .catch(error => {
+                todayInfo.innerHTML = "<p class=\"no-schedule\">일정을 불러오는데 실패했습니다.</p>";
+                console.error(error);
+            });
+    }
+
 
 // 월간 달력을 표시하는 함수
     function renderCalendar(year, month) {
@@ -194,15 +194,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const addBtn = document.querySelector(".add-btn");
     const actionButtons = document.querySelector(".action-buttons");
 
-    addBtn.addEventListener("click", () => {
-        if(actionButtons.style.display === "block") {
-            actionButtons.style.display = "none";
-            return;
-        } else {
-            actionButtons.style.display = "block";
-        }
+    if (addBtn) {
+        addBtn.addEventListener("click", () => {
+            if (actionButtons.style.display === "block") {
+                actionButtons.style.display = "none";
+                return;
+            } else {
+                actionButtons.style.display = "block";
+            }
 
-    });
+        });
+    }
+
 
 // 초기 달력 표시
     renderCalendar(currentYear, currentMonth);

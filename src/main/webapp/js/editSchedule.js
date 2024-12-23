@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.querySelector('.error-message')) {
             document.querySelector('.error-message').remove(); // 에러 메시지 삭제
         }
+        location.reload();
     }
 
     // 모달 외부 클릭 시 모달 닫기
@@ -200,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert('일정이 성공적으로 수정되었습니다.');
                     setTimeout(() => {
                         closeModal();  // 모달 닫기
-                        handleClick({ target: document.querySelector('.selected') });
                     }, 0);
                 } else {
                     alert('일정 수정에 실패했습니다.');

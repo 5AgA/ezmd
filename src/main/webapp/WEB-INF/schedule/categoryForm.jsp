@@ -11,8 +11,10 @@
     <div class="category-form-modal-content">
         <form id="category-form">
             <input type="text" id="category-name" name="categoryName" placeholder="카테고리 이름을 입력하세요" required>
-            <label for="colorPicker">Choose a color:</label>
-            <input type="color" id="colorPicker" name="categoryColor" value="#ff0000" required>
+            <div class="colorPick">
+                <label for="category-color">카테고리 테마 색상</label>
+                <input type="color" id="category-color" name="categoryColor" value="#ffffff" required>
+            </div>
             <button type="submit">추가</button>
         </form>
     </div>

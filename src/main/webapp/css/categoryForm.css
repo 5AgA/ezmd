@@ -1,47 +1,62 @@
 .category-form-modal {
     display: none;
     position: fixed;
-    z-index: 1;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5); /* 배경을 반투명하게 */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
 .category-form-modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%;
+    background-color: white;
+    border-radius: 15px;
+    width: 500px;
+    padding: 50px;
+
+}
+
+#category-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .category-form-modal-content input[type="text"] {
     width: 100%;
-    padding: 12px 20px;
+    padding: 3px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
     box-sizing: border-box;
+    font-size: 1.3vw;
+    outline: none;
+    border: none;
+}
+
+.category-form-modal-content input[type="text"]:focus {
+    border-bottom: 1px solid #969696 !important;
 }
 
 .category-form-modal-content input[type="color"] {
     width: 100%;
-    padding: 12px 20px;
+    height: 50px;
     margin: 8px 0;
+    padding: 0;
     display: inline-block;
-    border: 1px solid #ccc;
     box-sizing: border-box;
+    border: none;
 }
 
 .category-form-modal-content button {
-    background-color: #4CAF50;
+    background-color: #8B2942;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
 }
