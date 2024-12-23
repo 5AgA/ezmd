@@ -14,7 +14,6 @@ public class InterviewResultDAO {
     // 면담 결과 생성
     public int createInterviewResult(int interviewId, String interviewTopic, String interviewSummary, String reviewOfInterview, int reviewRating) {
         int result = 0;
-     // 첫 번째 INSERT 쿼리
         String insertInterviewResultQuery = "BEGIN"
         		+ " INSERT INTO interview_result (interview_id, interview_topic, interview_summary, created_at)"
         		+ " VALUES (?, ?, ?, systimestamp);"
@@ -22,21 +21,10 @@ public class InterviewResultDAO {
         		+ " VALUES (?, ?, ?, systimestamp);"
         		+ "END;";
         
-        // 두 번째 INSERT 쿼리
-        //String insertProfessorReviewQuery = "INSERT INTO professor_review (interview_id, review_of_interview, review_rating, created_at) VALUES (?, ?, ?, systimestamp)";
-        try {
-            // 첫 번째 INSERT 쿼리 실행
+          try {
             jdbcUtil.setSqlAndParameters(insertInterviewResultQuery, new Object[] {interviewId, interviewTopic, interviewSummary, interviewId, reviewOfInterview, reviewRating});
             result += jdbcUtil.executeUpdate();
-            System.out.println("첫 번째 INSERT 완료");
-            // 두 번째 INSERT 쿼리 실행
-          //  System.out.println("두 번째 INSERT 실행 준비: " + insertProfessorReviewQuery);
-            //jdbcUtil.setSqlAndParameters(insertProfessorReviewQuery, new Object[] {interviewId, reviewOfInterview, reviewRating});
-            //result += jdbcUtil.executeUpdate();
-           // System.out.println("두 번째 INSERT 완료");
-            // 커밋
-            //jdbcUtil.commit();
-            //System.out.println("트랜잭션 커밋 완료");
+        
         } catch (Exception ex) {
             // 롤백
             jdbcUtil.rollback();
@@ -53,7 +41,6 @@ public class InterviewResultDAO {
  // 면담 결과 생성
     public int updateInterviewResult(int interviewId, String interviewTopic, String interviewSummary, String reviewOfInterview, int reviewRating) {
         int result = 0;
-     // 첫 번째 INSERT 쿼리
         String updateInterviewResultQuery =  "BEGIN "
         	    + "UPDATE interview_result "
         	    + "SET interview_topic = ?, interview_summary = ?, updated_at = systimestamp "
@@ -63,21 +50,11 @@ public class InterviewResultDAO {
         	    + "WHERE interview_id = ?; "
         	    + "END;";
         
-        // 두 번째 INSERT 쿼리
-        //String insertProfessorReviewQuery = "INSERT INTO professor_review (interview_id, review_of_interview, review_rating, created_at) VALUES (?, ?, ?, systimestamp)";
         try {
-            // 첫 번째 INSERT 쿼리 실행
+           
             jdbcUtil.setSqlAndParameters(updateInterviewResultQuery, new Object[] {interviewTopic, interviewSummary, interviewId, reviewOfInterview, reviewRating, interviewId});
             result += jdbcUtil.executeUpdate();
-            System.out.println("첫 번째 INSERT 완료");
-            // 두 번째 INSERT 쿼리 실행
-          //  System.out.println("두 번째 INSERT 실행 준비: " + insertProfessorReviewQuery);
-            //jdbcUtil.setSqlAndParameters(insertProfessorReviewQuery, new Object[] {interviewId, reviewOfInterview, reviewRating});
-            //result += jdbcUtil.executeUpdate();
-           // System.out.println("두 번째 INSERT 완료");
-            // 커밋
-            //jdbcUtil.commit();
-            //System.out.println("트랜잭션 커밋 완료");
+         
         } catch (Exception ex) {
             // 롤백
             jdbcUtil.rollback();
@@ -147,6 +124,26 @@ public class InterviewResultDAO {
             jdbcUtil.close();
         }
         return null;
+    }
+    public boolean isInterviewResultExists(int interviewId) {
+        String query = "SELECT COUNT(*) AS count FROM interview_result WHERE interview_id = ?";
+        Object[] params = {interviewId};
+
+        jdbcUtil.setSqlAndParameters(query, params);
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                System.out.println("isInterviewResultExists - interviewId: " + interviewId + ", count: " + count); // 디버깅 로그
+                return count > 0;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return false;
     }
 
 }

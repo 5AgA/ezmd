@@ -87,9 +87,7 @@ public class InterviewClearListController extends HttpServlet {
             try {
                 int interviewId = Integer.parseInt(request.getParameter("interviewId"));
                 InterviewResult savedData = interviewResultDAO.getSavedData(interviewId);
-                // DB에서 interview_category 조회
-                //InterviewResult interviewSavedData = interviewResultDAO.getSavedData(interviewId);
-
+               
                 if (savedData != null) {
                     // 조회된 데이터를 JSON 형식으로 응답
                 	String jsonResponse = String.format(
@@ -129,45 +127,50 @@ public class InterviewClearListController extends HttpServlet {
 
     private void saveInterviewResult(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-        	 System.out.println("Received Data: ");
-             System.out.println("interviewId: " + request.getParameter("interviewId"));
-             System.out.println("title: " + request.getParameter("title"));
-             System.out.println("summary: " + request.getParameter("summary"));
-             System.out.println("rating: " + request.getParameter("rating"));
-             System.out.println("feedback: " + request.getParameter("feedback"));
+            // 클라이언트에서 받은 데이터
             int interviewId = Integer.parseInt(request.getParameter("interviewId"));
             String interviewTopic = request.getParameter("title");
             String summary = request.getParameter("summary");
             int rating = Integer.parseInt(request.getParameter("rating"));
             String feedback = request.getParameter("feedback");
 
-            int result = interviewResultDAO.createInterviewResult(interviewId, interviewTopic, summary, feedback, rating);
+    
+            // 데이터베이스에 데이터 존재 여부 확인
+            boolean isExisting = interviewResultDAO.isInterviewResultExists(interviewId);
+            System.out.println("isExisting: " + isExisting); // 디버깅 로그
 
-            if (result > 0) {
-                // 성공 메시지 세션에 저장
-                request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 저장되었습니다.");
-                response.sendRedirect(request.getContextPath() + "/interview/result");
+            int result;
+            if (isExisting) {
+                // 데이터가 존재하면 update 수행
+                result = interviewResultDAO.updateInterviewResult(interviewId, interviewTopic, summary, feedback, rating);
+                if (result > 0) {
+                    request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 수정되었습니다.");
+                } else {
+                    request.getSession().setAttribute("errorMessage", "면담 결과 수정에 실패했습니다.");
+                }
             } else {
-                // 실패 메시지 세션에 저장
-                request.getSession().setAttribute("errorMessage", "면담 결과 저장에 실패했습니다.");
-                response.sendRedirect(request.getContextPath() + "/interview/result");
+                // 데이터가 존재하지 않으면 insert 수행
+                result = interviewResultDAO.createInterviewResult(interviewId, interviewTopic, summary, feedback, rating);
+                if (result > 0) {
+                    request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 저장되었습니다.");
+                } else {
+                    request.getSession().setAttribute("errorMessage", "면담 결과 저장에 실패했습니다.");
+                }
             }
+
+            response.sendRedirect(request.getContextPath() + "/interview/result");
+
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{ \"error\": \"An error occurred while saving interview result\" }");
         }
     }
+
             
     private void updateInterviewResult(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-        	 System.out.println("Received Data: ");
-             System.out.println("interviewId: " + request.getParameter("interviewId"));
-             System.out.println("title: " + request.getParameter("title"));
-             System.out.println("summary: " + request.getParameter("summary"));
-             System.out.println("rating: " + request.getParameter("rating"));
-             System.out.println("feedback: " + request.getParameter("feedback"));
-            int interviewId = Integer.parseInt(request.getParameter("interviewId"));
+                  int interviewId = Integer.parseInt(request.getParameter("interviewId"));
             String interviewTopic = request.getParameter("title");
             String summary = request.getParameter("summary");
             int rating = Integer.parseInt(request.getParameter("rating"));

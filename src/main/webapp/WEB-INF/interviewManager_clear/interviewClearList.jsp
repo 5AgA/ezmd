@@ -24,43 +24,40 @@
             <% } %>
 
             // 결과 저장
-            $(document).on("click", ".save-button", function (event) {
-                event.preventDefault();
+        $(document).on("click", ".save-button", function (event) {
+    event.preventDefault();
 
-                const currentData = {
-                    interviewId: $("#interviewId").val(),
-                    interviewTopic: $("#title").val(),
-                    interviewSummary: $("#summary").val(),
-                    reviewOfInterview: $("#feedback").val(),
-                    reviewRating: $("#rating-input").val()
-                };
+    const currentData = {
+        interviewId: $("#interviewId").val(),
+        interviewTopic: $("#title").val(),
+        interviewSummary: $("#summary").val(),
+        reviewOfInterview: $("#feedback").val(),
+        reviewRating: $("#rating-input").val()
+    };
 
-                // 변경 사항이 있는지 확인
-                if (JSON.stringify(originalData) !== JSON.stringify(currentData)) {
-                    // 데이터가 변경된 경우 AJAX로 update 요청 전송
-                    $.ajax({
-                        url: "<%= request.getContextPath() %>/interview/result",
-                        method: "POST",
-                        data: {
-                            action: "update",
-                            interviewId: currentData.interviewId,
-                            title: currentData.interviewTopic,
-                            summary: currentData.interviewSummary,
-                            feedback: currentData.reviewOfInterview,
-                            rating: currentData.reviewRating
-                        },
-                        success: function (response) {
-                            alert("면담 결과가 성공적으로 업데이트되었습니다.");
-                            location.reload(); // 페이지를 새로고침
-                        },
-                        error: function () {
-                            alert("데이터를 업데이트하는 중 오류가 발생했습니다.");
-                        }
-                    });
-                } else {
-                    alert("변경된 내용이 없습니다.");
-                }
-            });
+    $.ajax({
+        url: "<%= request.getContextPath() %>/interview/result",
+        method: "POST",
+        data: {
+            action: "save", // 항상 save로 요청
+            interviewId: currentData.interviewId,
+            title: currentData.interviewTopic,
+            summary: currentData.interviewSummary,
+            feedback: currentData.reviewOfInterview,
+            rating: currentData.reviewRating
+        },
+        success: function (response) {
+            alert("면담 결과가 성공적으로 처리되었습니다.");
+            location.reload(); // 페이지를 새로고침
+        },
+        error: function () {
+            alert("데이터를 저장하는 중 오류가 발생했습니다.");
+        }
+    });
+});
+
+
+
 
             // 화살표 버튼 클릭 시 동적 박스 추가/삭제
             $(".arrow-button").click(function () {
@@ -205,11 +202,16 @@
         </div>
     </main>
 
-    <!-- 오른쪽 화살표 버튼 -->
+ <!-- 오른쪽 화살표 버튼 -->
+<c:if test="${viewType == 'student'}">
+    <!-- 교수 계정인 경우 화살표 버튼과 결과 관리 섹션을 렌더링하지 않습니다 -->
+</c:if>
+<c:if test="${viewType == 'professor'}">
     <div class="arrow-container">
         <button class="arrow-button">▶</button>
     </div>
 
+   
     <div class="result-management">
         <div class="form-container">
             <form method="post" action="<%= request.getContextPath() %>/interview/result">
@@ -240,6 +242,7 @@
             </form>
         </div>
     </div>
+</c:if>
 </div>
 </body>
 </html>
