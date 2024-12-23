@@ -1,4 +1,4 @@
-package controller.interview;
+package controller.Interview;
 
 import java.io.IOException;
 import java.util.List;

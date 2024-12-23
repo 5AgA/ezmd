@@ -33,7 +33,7 @@
     <!-- 메인 컨텐츠 -->
     <form id="getPendingInterviewForm" action="<%=request.getContextPath()%>/api/interview" method="get">
       <input type="hidden" name="action" value="getByProfessorIdAndStatus" />
-      <input type="hidden" name="professorId" value="30000010" />
+      <input type="hidden" name="professorId" value="" />
     </form>
     <div class="content-wrapper">
       <!-- 좌측 섹션 -->

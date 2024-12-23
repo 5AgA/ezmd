@@ -2,6 +2,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css'/>">
 
+<%
+    // 세션에서 userType 가져오기
+     HttpSession curSession = request.getSession(false);
+        if (curSession == null || curSession.getAttribute("user") == null || curSession.getAttribute("userType") == null) {
+            response.sendRedirect("/login/form");
+            return;
+        }
+        String userType = (String) curSession.getAttribute("userType");
+%>
+
 <div class="menu">
 	<c:set var="currentPage" value="${pageName}" />
 	<%
@@ -17,9 +27,24 @@
 			<li class="<%= "schedule".equals(currentPage) ? "active" : "" %>">
 				<a href="<c:url value='/schedule'/>">일정 관리</a>
 			</li>
+			
+		<%
+          if ("Student".equalsIgnoreCase(userType)) {
+        %>
 			<li class="<%= "meeting".equals(currentPage) ? "active" : "" %>">
 				<a href="<c:url value='/interview'/>">면담 관리</a>
 			</li>
+			
+		<%
+            } else if ("Professor".equalsIgnoreCase(userType)) {
+        %>
+        <li class="<%= "meeting".equals(currentPage) ? "active" : "" %>">
+                <a href="<c:url value='/interview-check'/>">면담 관리</a>
+            </li>
+        <%
+            }
+        %>
+        
 			<li class="<%= "mypage".equals(currentPage) ? "active" : "" %>">
 				<a href="<c:url value='/mypage'/>">마이페이지</a>
 			</li>
