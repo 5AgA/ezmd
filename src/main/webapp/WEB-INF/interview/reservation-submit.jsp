@@ -34,7 +34,7 @@
             <input type="hidden" name="requestedDate" value="${param.selectedDate}T${param.selectedTime}"/>
             <!-- 교수 ID, 학생 ID 등 필요한 값 -->
             <input type="hidden" name="professorId" value="<%= professorId%>">
-            <input type="hidden" name="studentId" value="20210193"/>
+            <input type="hidden" name="studentId" value="${userId}"/>
 
             <div class="left-aligned-wrapper">
                 <div class="title">상담 주제 기입</div>

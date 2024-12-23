@@ -9,19 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/schedule/AddCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/schedule/ScheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/schedule/categoryForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/schedule/categoryForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/categoryForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/categoryForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/interview-check.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/interview-check.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/categoryForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/categoryForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/createSchedule.js" afterDir="false" />
-    </list>
+    <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
