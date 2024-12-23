@@ -13,6 +13,7 @@ public class Interview {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int studentId;
+    private String studentName;
     private int professorId;
     private String professorName;
 
@@ -44,12 +45,19 @@ public class Interview {
     	this.studentId = studentId;
     	this.professorId = professorId;
     }
-    public Interview(int interviewId, LocalDateTime requestedDate, int studentId, int professorId, String professorName) {
+    public Interview(int interviewId, LocalDateTime requestedDate,int professorId, int studentId, String professorName) {
         this.interviewId = interviewId;
         this.requestedDate = requestedDate;
         this.studentId = studentId;
         this.professorId = professorId;
         this.professorName = professorName;
+    }
+    public Interview(int interviewId, LocalDateTime requestedDate, int studentId, String studentName,int professorId) {
+        this.interviewId = interviewId;
+        this.requestedDate = requestedDate;
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.professorId = professorId;
     }
 
     // Getters and Setters
@@ -82,6 +90,9 @@ public class Interview {
 
     public int getStudentId() { return studentId; }
     public void setStudentId(int studentId) { this.studentId = studentId; }
+    
+    public String getStudentName() { return studentName; }
+    public void setStudentName(String studentName) { this.studentName = studentName; }
 
     public int getProfessorId() { return professorId; }
     public void setProfessorId(int professorId) { this.professorId = professorId; }
