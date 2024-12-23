@@ -10,14 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Interview/InterviewListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Interview/InterviewListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RequestMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/domain/Interview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/domain/Interview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/interview-check.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interview/interview-check.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interviewManager_clear/interviewClearList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/interviewManager_clear/interviewClearList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Interview/ApproveInterviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Interview/ApproveInterviewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +243,7 @@
       <workItem from="1734706777668" duration="34036000" />
       <workItem from="1734760004145" duration="2924000" />
       <workItem from="1734868805694" duration="6892000" />
-      <workItem from="1734941697894" duration="19786000" />
+      <workItem from="1734941697894" duration="21024000" />
     </task>
     <servers />
   </component>
