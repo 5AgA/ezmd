@@ -1,4 +1,4 @@
-package controller.interview;
+package controller.Interview;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.dao.InterviewDAO;
 import model.dao.InterviewResultDAO;
@@ -24,14 +25,39 @@ public class InterviewClearListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	// 세션에서 사용자 정보 가져오기
+    	  HttpSession session = request.getSession(false);
+          if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
+              response.sendRedirect("/login/form");
+              return;
+          }
+          String userType = (String) session.getAttribute("userType");
+          int userId;
+          List<Interview> completedInterviews = null;
         // action 파라미터로 요청 구분
         String action = request.getParameter("action");
 
         if (action == null || action.isEmpty()) {
             // 첫 번째 화면: 면담 완료 리스트 가져오기
-            int studentId = 20210670; // 세션에서 studentId 가져오는 로직 대신 임시 값 사용
-            List<Interview> completedInterviews = interviewDAO.getCompletedInterviewsByStudentId(studentId);
+        	   // HttpSession session = request.getSession();
+            // int studentId = (int) session.getAttribute("studentId");
+         
+           // int studentId = 20210670; // 세션에서 studentId 가져오는 로직 대신 임시 값 사용
+            //List<Interview> completedInterviews = interviewDAO.getCompletedInterviewsByStudentId(studentId);
 
+        	 if ("Professor".equalsIgnoreCase(userType)) {
+                 userId = ((model.domain.Professor) session.getAttribute("user")).getProfessorId();
+                 // 교수 계정: 교수 ID로 면담 완료 리스트 조회
+                 completedInterviews = interviewDAO.getCompletedInterviewsByProfessorId(userId);
+                 request.setAttribute("viewType", "student"); // JSP에서 학생 이름 표시
+             } else if ("Student".equalsIgnoreCase(userType)) {
+                 userId = ((model.domain.Student) session.getAttribute("user")).getStudentId();
+                 // 학생 계정: 학생 ID로 면담 완료 리스트 조회
+                 completedInterviews = interviewDAO.getCompletedInterviewsByStudentId(userId);
+                 request.setAttribute("viewType", "professor"); // JSP에서 교수 이름 표시
+             } else {
+            	 System.out.println("교수도 아니고 학생도 아님");
+             }
             // 디버깅 로그 출력
             System.out.println("완료된 면담 개수: " + completedInterviews.size());
             if (completedInterviews.isEmpty()) {
@@ -39,6 +65,10 @@ public class InterviewClearListController extends HttpServlet {
             } else {
                 for (Interview interview : completedInterviews) {
                     System.out.println("교수 ID: " + interview.getProfessorId());
+                    System.out.println("교수 Name: " + interview.getProfessorName());
+                    System.out.println("학생 ID: " + interview.getStudentId());
+                    System.out.println("학생 Name: " + interview.getStudentName());
+                    
                     System.out.println("날짜: " + interview.getRequestedDate().toLocalDate());
                     System.out.println("시간: " + interview.getRequestedDate().toLocalTime());
                     System.out.println("-----------------------------");

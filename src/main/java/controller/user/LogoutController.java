@@ -30,7 +30,7 @@ public class LogoutController extends HttpServlet implements Controller {
 	        logoutManager.logout(session);
 
 	        // 로그아웃 후 이동할 페이지 (로그인 페이지)
-	        return "/";
+	        return "/ezmd/login/form";
 	    }
 
 	    @Override

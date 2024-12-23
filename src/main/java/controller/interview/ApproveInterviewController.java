@@ -1,4 +1,4 @@
-package controller.interview;
+package controller.Interview;
 
 import controller.Controller;
 import model.manager.interview.InterviewService;

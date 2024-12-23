@@ -75,6 +75,27 @@
                 }
             });
 
+            // 수정 버튼 클릭 시 폼 활성화
+            $(".edit-button").click(function () {
+                $("#title").prop("disabled", false);
+                $("#summary").prop("disabled", false);
+                $("#feedback").prop("disabled", false);
+                $("#rating-input").prop("disabled", false);
+                $(".rating").removeClass("disabled");
+            });
+            
+            // 별점 클릭 이벤트
+            $(".star").click(function () {
+                var rating = $(this).data("value");
+                $(".star").each(function () {
+                    if ($(this).data("value") <= rating) {
+                        $(this).addClass("selected");
+                    } else {
+                        $(this).removeClass("selected");
+                    }
+                });
+                $("#rating-input").val(rating);
+            });
             // 박스 클릭 시 데이터 불러오기 및 화살표 버튼 효과 호출
             $(".interview-box").click(function () {
                 var interviewId = $(this).data("id");
@@ -151,22 +172,26 @@
         </div>
 
         <!-- 면담 완료 리스트 -->
-        <div class="interview-grid">
+      <div class="interview-grid">
+    <%
+        List<Interview> interviewList = (List<Interview>) request.getAttribute("interviewList");
+        String viewType = (String) request.getAttribute("viewType"); // professor 또는 student
+        if (interviewList != null && !interviewList.isEmpty()) {
+            for (Interview interview : interviewList) {
+    %>
+    <div class="interview-box" data-id="<%=interview.getInterviewId()%>">
+        <h3>
             <%
-                List<Interview> interviewList = (List<Interview>) request.getAttribute("interviewList");
-                if (interviewList != null && !interviewList.isEmpty()) {
-                    for (Interview interview : interviewList) {
+            if ("professor".equalsIgnoreCase(viewType)) {
+                out.print(interview.getProfessorName() + " 교수님");
+            } else {
+                out.print(interview.getStudentName() + " 학생");
+            }
             %>
-            <div class="interview-box"
-                 data-id="<%=interview.getInterviewId()%>">
-                <h3><%=interview.getProfessorName()%>
-                    교수님
-                </h3>
-                <p><%=interview.getRequestedDate().toLocalDate()%>
-                </p>
-                <p><%=interview.getRequestedDate().toLocalTime()%>
-                </p>
-            </div>
+        </h3>
+        <p><%=interview.getRequestedDate().toLocalDate()%></p>
+        <p><%=interview.getRequestedDate().toLocalTime()%></p>
+    </div>
             <%
                 }
             } else {
