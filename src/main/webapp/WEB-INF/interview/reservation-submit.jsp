@@ -36,6 +36,7 @@
             <input type="hidden" name="professorId" value="<%= professorId%>">
             <input type="hidden" name="studentId" value="${userId}"/>
 
+
             <div class="left-aligned-wrapper">
                 <div class="title">상담 주제 기입</div>
                 <div class="radio-group">
