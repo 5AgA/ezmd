@@ -224,6 +224,8 @@
                     <%
                         if ("professor".equalsIgnoreCase(viewType)) {
                             out.print(interview.getProfessorName() + " 교수님");
+                            if (interview.getInterviewStatus() != null)
+                                out.print("(" + interview.getInterviewStatus() +")");
                         } else {
                             out.print(interview.getStudentName() + " 학생");
                         }

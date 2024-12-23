@@ -1,9 +1,12 @@
 package controller.Interview;
 
 import controller.Controller;
+import model.dao.StudentDAO;
 import model.domain.Interview;
 import model.manager.interview.InterviewService;
+import model.manager.user.ProfessorService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -11,9 +14,11 @@ import java.util.List;
 
 public class InterviewListController implements Controller {
     private InterviewService interviewService;
+    private StudentDAO studentDAO;
 
     public InterviewListController() {
         this.interviewService = new InterviewService();
+        this.studentDAO = new StudentDAO();
     }
 
     @Override
@@ -32,22 +37,45 @@ public class InterviewListController implements Controller {
         }
 
         for (Interview interview : interviewList) {
-            if (interview.getInterviewStatus() == "approved") {
+            interview.setStudentName(studentDAO.findStudentById(interview.getStudentId()).getName());
+            interview.setStudentMajor(studentDAO.findStudentById(interview.getStudentId()).getDept());
+            interview.setProfessorName(new ProfessorService().getProfessorById(interview.getProfessorId()).getName());
+
+            if ("approved".equals(interview.getInterviewStatus())) {
                 approvedList.add(interview);
-            } else if (interview.getInterviewStatus() == "pending") {
+            } else if ("pending".equals(interview.getInterviewStatus())) {
                 pendingList.add(interview);
-            } else if (interview.getInterviewStatus() == "rejected") {
+            } else if ("rejected".equals(interview.getInterviewStatus())) {
                 rejectedList.add(interview);
             }
         }
 
-        System.out.println(approvedList);
-        System.out.println(pendingList);
-        System.out.println(rejectedList);
+        if (approvedList.size() == 0) {
+            request.setAttribute("approvedList", null);
+        } else {
+            request.setAttribute("approvedList", approvedList);
+        }
+        if (pendingList.size() == 0) {
+            request.setAttribute("pendingList", null);
+        } else {
+            request.setAttribute("pendingList", pendingList);
+        }
+        if (rejectedList.size() == 0) {
+            request.setAttribute("rejectedList", null);
+        } else {
+            request.setAttribute("rejectedList", rejectedList);
+        }
 
-        request.setAttribute("approvedList", approvedList);
-        request.setAttribute("pendingList", pendingList);
-        request.setAttribute("rejectedList", rejectedList);
-        return "/interview/interview-check.jsp";
+        // RequestDispatcher를 이용해 포워딩
+        String requestUri = request.getRequestURI();
+        RequestDispatcher dispatcher;
+        if (requestUri.contains("/home")) {
+            dispatcher = request.getRequestDispatcher("/WEB-INF/user/home.jsp");  // /home으로 포워딩
+        } else {
+            dispatcher = request.getRequestDispatcher("/WEB-INF/interview/interview-check.jsp");
+        }
+        dispatcher.forward(request, response);  // 포워딩
+
+        return null;  // 포워딩이 되므로 return null로 종료
     }
 }

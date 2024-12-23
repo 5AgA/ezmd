@@ -35,7 +35,7 @@ public class RequestMapping {
         mappings.put("/signup/professor", new ProfessorSignupController()); // 교수 회원가입 처리
 
         // 사용자 관련 페이지
-        mappings.put("/home", new ForwardController("/user/home.jsp"));
+        mappings.put("/home", new InterviewListController());
         mappings.put("/mypage", new ForwardController("/user/myPage.jsp"));
         mappings.put("/mypage/update", new MyPageUpdateController());
         mappings.put("/mypage/update/password", new ForwardController("/user/changePassword.jsp"));

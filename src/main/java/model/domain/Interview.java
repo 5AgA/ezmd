@@ -1,5 +1,7 @@
 package model.domain;
 
+import model.dao.StudentDAO;
+
 import java.time.LocalDateTime;
 
 public class Interview {
@@ -16,6 +18,7 @@ public class Interview {
     private int professorId;
     private String studentName;
     private String professorName;
+    private String studentMajor;
 
     // 기본 생성자
     public Interview() {}
@@ -97,4 +100,7 @@ public class Interview {
 
     public String getProfessorName() { return professorName; }
     public void setProfessorName(String professorName) { this.professorName = professorName; }
+
+    public String getStudentMajor() { return studentMajor; }
+    public void setStudentMajor(String studentMajor) { this.studentMajor = studentMajor; }
 }
