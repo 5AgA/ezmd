@@ -30,7 +30,8 @@ public class StudentSignupManager {
 			return true;
 		}else {
 			return false;
-		}	}
+		}	
+	}
 
 	public boolean registerStudent(Student student) throws SQLException {
 		// 비밀번호 해싱

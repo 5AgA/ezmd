@@ -161,7 +161,6 @@ public class ProfessorDAO {
         	if(rs.next()) {
         		return rs.getInt("count") > 0;
         	}
-
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{

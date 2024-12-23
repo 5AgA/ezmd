@@ -1,4 +1,4 @@
-/*package controller.interviewResult;
+package controller.interviewResult;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -59,4 +59,3 @@ public class InterviewResultController extends HttpServlet implements Controller
 		return null;
 	}
 }
-*/

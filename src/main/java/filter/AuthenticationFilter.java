@@ -17,7 +17,9 @@ public class AuthenticationFilter implements Filter {
     private static final List<Pattern> ALLOWED_PATTERNS = Arrays.asList(
             Pattern.compile("^/$"),
             Pattern.compile("^/login(/.*)?$"),
-            Pattern.compile("^/register(/.*)?$")
+            Pattern.compile("^/register(/.*)?$"),
+            Pattern.compile("^/checkEmail$"),
+            Pattern.compile("^/signup(/.*)?$")
     );
 
     @Override

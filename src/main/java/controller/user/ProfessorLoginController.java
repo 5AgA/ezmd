@@ -56,9 +56,9 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
 		  try {
 	            // execute 메서드를 호출하여 반환된 URL로 리다이렉트 또는 포워드
 	            String view = execute(request, response);
-	            if (view.startsWith("redirect:")) {
+	            if (view!=null && view.startsWith("redirect:")) {
                     response.sendRedirect(view.substring("redirect:".length()));
-	            } else {
+	            } else if(view!=null){
 	                request.getRequestDispatcher(view).forward(request, response);
 	            }
 	        } catch (Exception e) {

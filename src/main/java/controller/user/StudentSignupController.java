@@ -49,22 +49,7 @@ public class StudentSignupController extends HttpServlet implements Controller {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // CSRF 토큰 검증
-			/*
-			 * String sessionCsrfToken = (String)
-			 * request.getSession().getAttribute("csrfToken"); String formCsrfToken =
-			 * request.getParameter("csrfToken");
-			 *
-			 * // System.out.println("Session CSRF Token: " + sessionCsrfToken); //
-			 * System.out.println("Form CSRF Token: " + formCsrfToken);
-			 *
-			 * if (sessionCsrfToken == null || !sessionCsrfToken.equals(formCsrfToken)) {
-			 * response.sendError(HttpServletResponse.SC_FORBIDDEN, "유효하지 않은 CSRF 토큰입니다.");
-			 * return; }
-			 *
-			 * // CSRF 토큰을 세션에서 제거하여 재사용 방지
-			 * request.getSession().removeAttribute("csrfToken");
-			 */
+            
             // execute 메서드 호출 후 반환된 URL로 이동
             String view = execute(request, response);
             if (view.startsWith("redirect:")) {
@@ -157,7 +142,7 @@ public class StudentSignupController extends HttpServlet implements Controller {
         }
 
         if (result) {
-            return "redirect:/login/form?signupSuccess=true";
+            return "redirect:/ezmd/login/form?signupSuccess=true";
         } else {
             request.setAttribute("errorMessage", "학생 회원가입 중 문제가 발생했습니다.");
             return "/register/form/stud"; // 실패 시 회원가입 페이지로 이동
