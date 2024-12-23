@@ -39,7 +39,6 @@ public class AuthenticationFilter implements Filter {
         HttpSession session = httpRequest.getSession(true);  // 세션이 없으면 새로 생성
         Object user = session.getAttribute("user");
         String userType = (String) session.getAttribute("userType");
-        System.out.println("User: " + user + ", UserType: " + userType);
 
         // 로그인 여부 및 허용된 URI 확인
         boolean isLoggedIn = (user != null && userType != null);

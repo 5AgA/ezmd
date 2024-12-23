@@ -4,12 +4,14 @@
 <head>
     <title>일정 추가</title>
     <link rel="stylesheet" href="<c:url value='/css/createSchedule.css'/>">
+    <script>
+        const uid = ${userId};
+    </script>
 </head>
 <body>
 <div class="schedule-modal" id="schedule-modal">
     <div class="modal-content">
         <form id="schedule-form">
-
             <input type="text" id="title" name="scheduleTitle" placeholder="스케줄 이름을 입력하세요" required>
 
             <div class="date">

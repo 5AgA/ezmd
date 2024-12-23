@@ -42,9 +42,7 @@ public class StudentLoginController extends HttpServlet implements Controller {
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
             session.setAttribute("userType", "student");
-
-            System.out.println("User saved in session: " + user);
-            System.out.println("UserType saved in session: student");
+            session.setAttribute("userId", user.getStudentId());
 
             // 로그인 성공 시 홈으로 리다이렉트
             response.sendRedirect(request.getContextPath() + "/home");
