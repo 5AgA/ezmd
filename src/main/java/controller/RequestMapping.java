@@ -3,12 +3,11 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.Interview.InterviewListController;
 import controller.schedule.*;
 import controller.user.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import controller.ForwardController;
 
 public class RequestMapping {
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -68,7 +67,7 @@ public class RequestMapping {
 		mappings.put("/interviewResult/management", new ForwardController("/interviewManager_clear/interviewResultManagement.jsp"));
 
 		// 면담 승인 (교수)
-        mappings.put("/interview-check", new ForwardController("/interview/interview-check.jsp"));
+        mappings.put("/interview/check", new InterviewListController());
 
         logger.info("Initialized Request Mapping!");
     }

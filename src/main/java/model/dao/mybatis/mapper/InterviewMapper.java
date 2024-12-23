@@ -24,6 +24,23 @@ public interface InterviewMapper {
     })
     List<Interview> getInterviewsByStudentId(int studentId);
 
+    // 특정 교수의 인터뷰 가져오기
+    @Select("SELECT * FROM interview WHERE professor_id = #{professorId}")
+    @Results({
+            @Result(property = "interviewId", column = "interview_id"),
+            @Result(property = "requestedDate", column = "requested_date"),
+            @Result(property = "interviewCategory", column = "interview_category"),
+            @Result(property = "interviewNote", column = "interview_note"),
+            @Result(property = "interviewStatus", column = "interview_status"),
+            @Result(property = "interviewNotice", column = "interview_notice"),
+            @Result(property = "isCompleted", column = "is_completed"),
+            @Result(property = "createdAt", column = "created_at"),
+            @Result(property = "updatedAt", column = "updated_at"),
+            @Result(property = "studentId", column = "student_id"),
+            @Result(property = "professorId", column = "professor_id")
+    })
+    List<Interview> getInterviewsByProfId(int professorId);
+
     // 인터뷰 ID로 가져오기
     @Select("SELECT * FROM interview WHERE interview_id = #{interviewId}")
     @Results({

@@ -39,7 +39,7 @@
             } else if ("Professor".equalsIgnoreCase(userType)) {
         %>
         <li class="<%= "meeting".equals(currentPage) ? "active" : "" %>">
-                <a href="<c:url value='/interview-check'/>">면담 관리</a>
+                <a href="<c:url value='/interview/check'/>">면담 관리</a>
             </li>
         <%
             }

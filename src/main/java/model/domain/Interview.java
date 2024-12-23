@@ -13,8 +13,8 @@ public class Interview {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int studentId;
-    private String studentName;
     private int professorId;
+    private String studentName;
     private String professorName;
 
     // 기본 생성자
@@ -50,13 +50,11 @@ public class Interview {
         this.requestedDate = requestedDate;
         this.studentId = studentId;
         this.professorId = professorId;
-        this.professorName = professorName;
     }
     public Interview(int interviewId, LocalDateTime requestedDate, int studentId, String studentName,int professorId) {
         this.interviewId = interviewId;
         this.requestedDate = requestedDate;
         this.studentId = studentId;
-        this.studentName = studentName;
         this.professorId = professorId;
     }
 
@@ -90,14 +88,13 @@ public class Interview {
 
     public int getStudentId() { return studentId; }
     public void setStudentId(int studentId) { this.studentId = studentId; }
-    
-    public String getStudentName() { return studentName; }
-    public void setStudentName(String studentName) { this.studentName = studentName; }
 
     public int getProfessorId() { return professorId; }
     public void setProfessorId(int professorId) { this.professorId = professorId; }
 
+    public String getStudentName() { return studentName; }
+    public void setStudentName(String studentName) { this.studentName = studentName; }
+
     public String getProfessorName() { return professorName; }
     public void setProfessorName(String professorName) { this.professorName = professorName; }
-
 }

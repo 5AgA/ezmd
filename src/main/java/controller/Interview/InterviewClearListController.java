@@ -1,6 +1,7 @@
 package controller.Interview;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import model.dao.InterviewDAO;
 import model.dao.InterviewResultDAO;
+import model.dao.ProfessorDAO;
+import model.dao.StudentDAO;
 import model.domain.Interview;
 import model.domain.InterviewResult;
+import model.domain.Professor;
 
 @WebServlet("/interview/result")
 public class InterviewClearListController extends HttpServlet {
@@ -34,6 +38,7 @@ public class InterviewClearListController extends HttpServlet {
           String userType = (String) session.getAttribute("userType");
           int userId;
           List<Interview> completedInterviews = null;
+          List<Interview> notCompletedInterviews = null;
         // action 파라미터로 요청 구분
         String action = request.getParameter("action");
 
@@ -49,34 +54,59 @@ public class InterviewClearListController extends HttpServlet {
                  userId = ((model.domain.Professor) session.getAttribute("user")).getProfessorId();
                  // 교수 계정: 교수 ID로 면담 완료 리스트 조회
                  completedInterviews = interviewDAO.getCompletedInterviewsByProfessorId(userId);
+                 notCompletedInterviews = interviewDAO.getNotCompletedInterviewsByProfessorId(userId);
                  request.setAttribute("viewType", "student"); // JSP에서 학생 이름 표시
              } else if ("Student".equalsIgnoreCase(userType)) {
                  userId = ((model.domain.Student) session.getAttribute("user")).getStudentId();
                  // 학생 계정: 학생 ID로 면담 완료 리스트 조회
                  completedInterviews = interviewDAO.getCompletedInterviewsByStudentId(userId);
+                 notCompletedInterviews = interviewDAO.getNotCompletedInterviewsByStudentId(userId);
                  request.setAttribute("viewType", "professor"); // JSP에서 교수 이름 표시
              } else {
             	 System.out.println("교수도 아니고 학생도 아님");
              }
-            // 디버깅 로그 출력
+
+             if (notCompletedInterviews.isEmpty()) {
+                 System.out.println("미완료된 면담이 없습니다.");
+             } else {
+                 for (Interview interview : notCompletedInterviews) {
+                     try {
+                         interview.setProfessorName(new ProfessorDAO().findProfessorById(interview.getProfessorId()).getName());
+                     } catch (SQLException e) {
+                         throw new RuntimeException(e);
+                     }
+                     try {
+                         interview.setStudentName(new StudentDAO().findStudentById(interview.getStudentId()).getName());
+                     } catch (SQLException e) {
+                         throw new RuntimeException(e);
+                     }
+                 }
+             }
+
             System.out.println("완료된 면담 개수: " + completedInterviews.size());
             if (completedInterviews.isEmpty()) {
                 System.out.println("완료된 면담이 없습니다.");
             } else {
                 for (Interview interview : completedInterviews) {
-                    System.out.println("교수 ID: " + interview.getProfessorId());
-                    System.out.println("교수 Name: " + interview.getProfessorName());
-                    System.out.println("학생 ID: " + interview.getStudentId());
-                    System.out.println("학생 Name: " + interview.getStudentName());
-                    
-                    System.out.println("날짜: " + interview.getRequestedDate().toLocalDate());
-                    System.out.println("시간: " + interview.getRequestedDate().toLocalTime());
-                    System.out.println("-----------------------------");
+                    try {
+                        interview.setProfessorName(new ProfessorDAO().findProfessorById(interview.getProfessorId()).getName());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        interview.setStudentName(new StudentDAO().findStudentById(interview.getStudentId()).getName());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 
             // JSP로 데이터 전달
             request.setAttribute("interviewList", completedInterviews);
+            request.setAttribute("notCompletedInterviewList", notCompletedInterviews);
+
+            System.out.println("완료된 면담 개수: " + completedInterviews.size());
+            System.out.println("미완료된 면담 개수: " + notCompletedInterviews.size());
 
             // JSP로 포워드
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/interviewManager_clear/interviewClearList.jsp");

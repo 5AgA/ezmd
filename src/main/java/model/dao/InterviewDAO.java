@@ -130,6 +130,69 @@ public class InterviewDAO {
 		}
 		return interviews;
 	}
+
+	// 교수의 비완료 인터뷰 불러오기
+	public List<Interview> getNotCompletedInterviewsByProfessorId(int professorId){
+		List<Interview> interviews = new ArrayList<>();
+		String sql = "SELECT * FROM interview WHERE professor_id = ? AND is_completed = 'N'";
+
+		Object[] params = { professorId };
+
+		jdbcUtil.setSqlAndParameters(sql, params);
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			while(rs.next()) {
+				interviews.add( new Interview(
+						rs.getInt("interview_id"),
+						rs.getTimestamp("requested_date").toLocalDateTime(),
+						rs.getString("interview_category"),
+						rs.getString("interview_note"),
+						rs.getString("interview_status"),
+						rs.getString("is_completed"),
+						rs.getInt("student_id"),
+						rs.getInt("professor_id")
+					));
+			}
+		} catch(Exception e) {
+			jdbcUtil.rollback();
+			e.printStackTrace();;
+		} finally {
+			jdbcUtil.close();
+		}
+		return interviews;
+	}
+
+	// 학생의 비완료 인터뷰 불러오기
+	public List<Interview> getNotCompletedInterviewsByStudentId(int studentId){
+		List<Interview> interviews = new ArrayList<>();
+		String sql = "SELECT * FROM interview WHERE student_id = ? AND is_completed = 'N'";
+
+		Object[] params = { studentId };
+
+		jdbcUtil.setSqlAndParameters(sql, params);
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			while(rs.next()) {
+				interviews.add( new Interview(
+						rs.getInt("interview_id"),
+						rs.getTimestamp("requested_date").toLocalDateTime(),
+						rs.getString("interview_category"),
+						rs.getString("interview_note"),
+						rs.getString("interview_status"),
+						rs.getString("is_completed"),
+						rs.getInt("student_id"),
+						rs.getInt("professor_id")
+					));
+			}
+		} catch(Exception e) {
+			jdbcUtil.rollback();
+			e.printStackTrace();;
+		} finally {
+			jdbcUtil.close();
+		}
+		return interviews;
+	}
+
 	//인터뷰 한개 불러오기
 	public Interview getInterviewById(int interviewId) {
 		String sql = "SELECT * FROM interview WHERE interview_id = ?";

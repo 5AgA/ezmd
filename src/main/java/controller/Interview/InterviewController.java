@@ -1,7 +1,6 @@
 package controller.Interview;
 
 import model.domain.Interview;
-import model.dto.InterviewDTO;
 import model.manager.interview.InterviewManager;
 
 import javax.servlet.ServletException;
@@ -56,8 +55,6 @@ public class InterviewController extends HttpServlet implements Controller{
                 return getInterviewListByStudentId(request, response);
             case "getByProfessorId":
                 return getInterviewListByProfessorId(request, response);
-            case "getByProfessorIdAndStatus":
-                return getInterviewListByProfessorIdAndStatus(request, response);
             case "getById":
                 return getInterviewById(request, response);
             case "update":
@@ -147,44 +144,11 @@ public class InterviewController extends HttpServlet implements Controller{
             int professorId = Integer.parseInt(request.getParameter("professorId"));
             List<Interview> interviews = interviewManager.getInterviewListByStudentId(professorId);
             request.setAttribute("interviews", interviews);
-            return "/interview";
+            return "/interview/check";
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "면담 목록 조회 중 오류 발생: " + e.getMessage());
-            return "/interview";
-        }
-    }
-
-    private String getInterviewListByProfessorIdAndStatus(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            String professorIdParam = request.getParameter("professorId");
-            System.out.println(professorIdParam);
-            //int professorId = Integer.parseInt(request.getParameter("professorId"));
-            int professorId;
-            // 세션에서 사용자 정보 가져오기
-            HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
-                response.sendRedirect("/login/form");
-                return "/login/form";
-            }
-
-            String userType = (String) session.getAttribute("userType");
-            if ("Professor".equalsIgnoreCase(userType)) {
-                professorId = ((model.domain.Professor) session.getAttribute("user")).getProfessorId();
-            } else {
-                response.sendRedirect("/login/form");
-                return "/login/form";
-            }
-
-
-            List<InterviewDTO> interviews = interviewManager.getInterviewListByProfessorIdAndStatus(professorId);
-            request.setAttribute("interviews", interviews);
-            return "/interview-check";
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "교수의 비승인 면담 목록 조회 중 오류 발생: " + e.getMessage());
-            return "/interview-check";
+            return "/interview/check";
         }
     }
 

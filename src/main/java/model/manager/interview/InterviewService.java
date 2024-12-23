@@ -34,6 +34,13 @@ public class InterviewService {
         }
     }
 
+    public List<Interview> getInterviewsByProfId(int professorId) {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            InterviewMapper mapper = session.getMapper(InterviewMapper.class);
+            return mapper.getInterviewsByProfId(professorId);
+        }
+    }
+
     // 2. 인터뷰 ID로 특정 인터뷰 가져오기
     public Interview getInterviewById(int interviewId) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
