@@ -9,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 import controller.Controller;
 
@@ -79,25 +77,8 @@ public class InterviewController extends HttpServlet implements Controller{
         try {
             String requestedDateStr = request.getParameter("requestedDate");
             int professorId = Integer.parseInt(request.getParameter("professorId"));
-            //int studentId = Integer.parseInt(request.getParameter("studentId"));
             String interviewCategory = request.getParameter("interviewCategory");
             String interviewNote = request.getParameter("interviewNote");
-            int studentId;
-         // 세션에서 사용자 정보 가져오기
-            HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
-                response.sendRedirect("/login/form");
-                return "/login/form";
-            }
-
-            String userType = (String) session.getAttribute("userType");
-            if ("Student".equalsIgnoreCase(userType)) {
-                studentId = ((model.domain.Student) session.getAttribute("user")).getStudentId();
-            } else {
-                response.sendRedirect("/login/form");
-                return "/login/form";
-            }
-
 
             System.out.println("Requested date: " + requestedDateStr);
             System.out.println("Professor ID: " + professorId);
@@ -159,23 +140,6 @@ public class InterviewController extends HttpServlet implements Controller{
         try {            
         	String professorIdParam = request.getParameter("professorId");
             System.out.println(professorIdParam);
-            //int professorId = Integer.parseInt(request.getParameter("professorId"));
-            int professorId;
-            // 세션에서 사용자 정보 가져오기
-               HttpSession session = request.getSession(false);
-               if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
-                   response.sendRedirect("/login/form");
-                   return "/login/form";
-               }
-
-               String userType = (String) session.getAttribute("userType");
-               if ("Professor".equalsIgnoreCase(userType)) {
-            	   professorId = ((model.domain.Professor) session.getAttribute("user")).getProfessorId();
-               } else {
-                   response.sendRedirect("/login/form");
-                   return "/login/form";
-               }
-
 
             List<InterviewDTO> interviews = interviewManager.getInterviewListByProfessorIdAndStatus(professorId);
             request.setAttribute("interviews", interviews);

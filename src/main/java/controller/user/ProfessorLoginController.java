@@ -52,19 +52,19 @@ public class ProfessorLoginController extends HttpServlet implements Controller{
         }
    }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			   throws ServletException, IOException {
-			        try {
-			               // execute 메서드를 호출하여 반환된 URL로 리다이렉트 또는 포워드
-			               String view = execute(request, response);
-			               if (view!=null && view.startsWith("redirect:")) {
-			                    response.sendRedirect(view.substring("redirect:".length()));
-			               } else if(view!=null){
-			                   request.getRequestDispatcher(view).forward(request, response);
-			               }
-			           } catch (Exception e) {
-			               e.printStackTrace();
-			               response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "로그인 처리 중 오류 발생");
-			           }
-			   }
+	throws ServletException, IOException {
+		  try {
+	            // execute 메서드를 호출하여 반환된 URL로 리다이렉트 또는 포워드
+	            String view = execute(request, response);
+	            if (view!=null && view.startsWith("redirect:")) {
+                    response.sendRedirect(view.substring("redirect:".length()));
+	            } else if(view!=null){
+	                request.getRequestDispatcher(view).forward(request, response);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "로그인 처리 중 오류 발생");
+	        }
+	}
 	
 }

@@ -159,7 +159,7 @@ public class ProfessorSignupController extends HttpServlet implements Controller
         }
 
         if (result) {
-            return "redirect:/login/form?signupSuccess=true"; // 회원가입 성공 후 로그인 페이지로 이동
+            return "redirect:/ezmd/login/form?signupSuccess=true"; // 회원가입 성공 후 로그인 페이지로 이동
         } else {
             request.setAttribute("errorMessage", "교수 회원가입 중 문제가 발생했습니다.");
             return "/register/form/prof"; // 실패 시 회원가입 페이지로 이동

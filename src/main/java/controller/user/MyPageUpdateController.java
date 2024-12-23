@@ -75,7 +75,7 @@ public class MyPageUpdateController extends HttpServlet implements Controller {
         }
 
         // 업데이트 후 메시지 표시용 또는 마이페이지 재로드
-        return "redirect:/mypage";
+        return "/mypage";
     }
 }
 

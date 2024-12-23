@@ -32,7 +32,7 @@ public class CheckEmailServlet extends HttpServlet {
 
         try {
             //메일 존재 여부 확인
-            if (professorDAO.findUserByEmail(email)) {
+        	if (professorDAO.findUserByEmail(email)) {
             	exists = true;
                 message = "이미 사용 중인 이메일입니다.";
             }
