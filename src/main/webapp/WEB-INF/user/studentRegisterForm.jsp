@@ -69,7 +69,7 @@
                 <!-- 학년 -->
                 <div class="input-group">
                     <label class="input-label" for="grade">학년</label>
-                    <input type="number" id="grade" name="grade" placeholder="학년을 입력하세요" class="input-field" required min="1" max="4">
+                    <input type="number" id="grade" name="grade" placeholder="학년을 입력하세요" class="input-field" required min="1" max="5">
                 </div>
 
                 <!-- 가입하기 버튼 -->
@@ -244,4 +244,9 @@
         })
     </script>
 </body>
+<c:if test="${not empty errorMessage}">
+    <script>
+        alert('${errorMessage}');
+    </script>
+</c:if>
 </html>

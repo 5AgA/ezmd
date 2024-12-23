@@ -117,12 +117,14 @@ public class StudentSignupController extends HttpServlet implements Controller {
         Student student = new Student();
         try {
             int studentId = Integer.parseInt(studentIdStr);
+          
             student.setStudentId(studentId);
         } catch (NumberFormatException e) {
             errorMessage = "학번은 숫자여야 합니다.";
             request.setAttribute("errorMessage", errorMessage);
             return "studentRegisterForm.jsp";
         }
+        
         student.setName(name);
         student.setEmail(email);
         student.setPassword(password); // 비밀번호는 Manager에서 해싱
