@@ -51,7 +51,7 @@ public class ChangePasswordController extends HttpServlet implements Controller 
             boolean isChanged = changePasswordManager.changePassword(userType, userId, currentPassword, newPassword);
             if (isChanged) {
                 session.setAttribute("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
-                response.sendRedirect("/ezmd/mypage");
+                response.sendRedirect("/mypage");
             } else {
                 request.setAttribute("errorMessage", "현재 비밀번호가 일치하지 않거나 변경에 실패했습니다.");
                 RequestDispatcher rd = request.getRequestDispatcher("/mypage/update/password");
