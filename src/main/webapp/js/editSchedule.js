@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById('editSchedule-modal');
+    const emodal = document.getElementById('editSchedule-modal');
     const categoryContainer = document.querySelector(".edit-category");
     let selectedCategory = ''; // 카테고리 ID
     let sId = ''; // 수정할 일정 ID
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 일정 수정 모달 열기
     function openEditScheduleModal(scheduleId) {
-        modal.style.display = 'flex';
+        emodal.style.display = 'flex';
 
         // Ajax 요청을 통해 스케줄 데이터 로드
         fetch(`/schedule/info?id=${scheduleId}`)
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 모달 닫기
     function closeModal() {
-        modal.style.display = 'none';
+        emodal.style.display = 'none';
 
         // 폼 초기화
         document.getElementById('edit-title').value = '';
@@ -107,11 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.querySelector('.error-message')) {
             document.querySelector('.error-message').remove(); // 에러 메시지 삭제
         }
+        location.reload();
     }
 
     // 모달 외부 클릭 시 모달 닫기
     window.onclick = function (event) {
-        if (event.target === modal) {
+        if (event.target === emodal) {
             closeModal();
         }
     }
@@ -200,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert('일정이 성공적으로 수정되었습니다.');
                     setTimeout(() => {
                         closeModal();  // 모달 닫기
-                        handleClick({ target: document.querySelector('.selected') });
                     }, 0);
                 } else {
                     alert('일정 수정에 실패했습니다.');

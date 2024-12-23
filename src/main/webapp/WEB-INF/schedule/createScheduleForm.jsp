@@ -4,9 +4,6 @@
 <head>
     <title>일정 추가</title>
     <link rel="stylesheet" href="<c:url value='/css/createSchedule.css'/>">
-    <script>
-        const uid = ${userId};
-    </script>
 </head>
 <body>
 <div class="schedule-modal" id="schedule-modal">

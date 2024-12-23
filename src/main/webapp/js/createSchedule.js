@@ -1,18 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("schedule-modal");
-    const addBtn = document.querySelector(".add-schedule-btn");
-    const inputField = document.getElementById("title");
+    const smodal = document.querySelector(".schedule-modal");
+    const smodalBtn = document.getElementById("schedule-modal-btn");
+    const actionButtons = document.querySelector(".action-buttons");
     let selectedCategory = ''; // 선택된 카테고리를 저장할 변수
 
-    // 버튼을 클릭하면 모달 열기
-    addBtn.addEventListener("click", () => {
-        modal.style.display = "flex";
-        inputField.focus();
+    // 스케줄 모달 열기
+    smodalBtn.addEventListener("click", () => {
+        smodal.style.display = "flex";
+        actionButtons.style.display = "none";
+        document.getElementById("title").focus();
     });
 
     // 카테고리 데이터 가져오기
     const categoryContainer = document.querySelector(".category");
-    fetch("/schedule/categories?userId=20210670")
+    fetch("/schedule/categories")
         .then(response => response.json())
         .then(categories => {
             categories.forEach(category => {
@@ -78,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (selectedCategory === '') {
             // 카테고리가 선택되지 않은 경우 경고 메시지 출력
             const errorElement = document.createElement('p');
+            errorElement.className = 'error-message';
             errorElement.textContent = '카테고리를 선택해주세요.';
             errorElement.style.color = 'red';
             document.querySelector('.category').appendChild(errorElement);
@@ -115,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // 일정 추가 후 alert 확인 버튼을 누르면 모달을 닫음
                     setTimeout(() => {
                         closeModal();
-                        handleClick({ target: document.querySelector('.selected') });
+                        handleClick({target: document.querySelector('.today')});
                     }, 0);
                 } else {
                     alert('일정 추가에 실패했습니다.');
@@ -129,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 모달 닫기
     function closeModal() {
-        modal.style.display = 'none';
+        smodal.style.display = 'none';
 
         // 폼 초기화
         document.getElementById('title').value = '';
@@ -146,15 +148,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         selectedCategory = '';
-        sId = '';
         if(document.querySelector('.error-message')) {
             document.querySelector('.error-message').remove(); // 에러 메시지 삭제
         }
+        location.reload();
     }
 
     // 모달 밖을 클릭하면 모달 닫기
     window.addEventListener("click", (event) => {
-        if (event.target === modal) {
+        if (event.target === smodal) {
             closeModal();
         }
     });
