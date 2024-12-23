@@ -144,7 +144,7 @@ public class StudentSignupController extends HttpServlet implements Controller {
         }
 
         if (result) {
-            return "redirect:/ezmd/login/form?signupSuccess=true";
+            return "redirect:/login/form?signupSuccess=true";
         } else {
             request.setAttribute("errorMessage", "학생 회원가입 중 문제가 발생했습니다.");
             return "/register/form/stud"; // 실패 시 회원가입 페이지로 이동
