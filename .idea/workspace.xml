@@ -10,19 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="069a7ec1-773b-414c-9edd-b9cbe4669acb" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/interviewResult/InterviewResultController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Interview/InterviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Interview/InterviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ChangePasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ChangePasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/CheckEmailServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/CheckEmailServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/MyPageUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/MyPageUpdateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/ProfessorSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/user/StudentSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ProfessorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/manager/user/StudentSignupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/manager/user/StudentSignupManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/loginForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/studentRegisterForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/user/studentRegisterForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/interview/InterviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/interview/InterviewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +92,7 @@
     "Tomcat 서버.ezmd.executor": "Run",
     "Tomcat 서버.interview.executor": "Run",
     "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "master 병합 중",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/agor/Documents/eclipse/ezmd/src/main/resources",
     "list.type.of.created.stylesheet": "CSS",
@@ -250,7 +238,7 @@
       <workItem from="1734706777668" duration="34036000" />
       <workItem from="1734760004145" duration="2924000" />
       <workItem from="1734868805694" duration="6892000" />
-      <workItem from="1734941697894" duration="642000" />
+      <workItem from="1734941697894" duration="949000" />
     </task>
     <servers />
   </component>
