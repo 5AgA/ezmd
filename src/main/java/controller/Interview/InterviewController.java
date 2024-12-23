@@ -21,9 +21,9 @@ import java.util.List;
 
 @WebServlet("/api/interview")
 public class InterviewController extends HttpServlet implements Controller{
-	
+
     private final InterviewManager interviewManager = new InterviewManager();
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -45,7 +45,7 @@ public class InterviewController extends HttpServlet implements Controller{
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "면담 조회 중 오류 발생");
         }
     }
-    
+
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String action = request.getParameter("action");
 
@@ -57,7 +57,7 @@ public class InterviewController extends HttpServlet implements Controller{
             case "getByProfessorId":
                 return getInterviewListByProfessorId(request, response);
             case "getByProfessorIdAndStatus":
-            	return getInterviewListByProfessorIdAndStatus(request, response);
+                return getInterviewListByProfessorIdAndStatus(request, response);
             case "getById":
                 return getInterviewById(request, response);
             case "update":
@@ -83,7 +83,7 @@ public class InterviewController extends HttpServlet implements Controller{
             String interviewCategory = request.getParameter("interviewCategory");
             String interviewNote = request.getParameter("interviewNote");
             int studentId;
-         // 세션에서 사용자 정보 가져오기
+            // 세션에서 사용자 정보 가져오기
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
                 response.sendRedirect("/login/form");
@@ -104,9 +104,9 @@ public class InterviewController extends HttpServlet implements Controller{
             System.out.println("Student ID: " + studentId);
             System.out.println("Interview Category: " + interviewCategory);
             System.out.println("Interview Note: " + interviewNote);
-           
+
             LocalDateTime requestedDate = LocalDateTime.parse(requestedDateStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            
+
             // Interview 객체 생성 후 필요한 필드 set
             Interview interview = new Interview();
             interview.setRequestedDate(requestedDate);
@@ -128,7 +128,7 @@ public class InterviewController extends HttpServlet implements Controller{
         }
         return "/interview";
     }
-    
+
     private String getInterviewListByStudentId(HttpServletRequest request, HttpServletResponse response) {
         try {
             int studentId = Integer.parseInt(request.getParameter("studentId"));
@@ -141,7 +141,7 @@ public class InterviewController extends HttpServlet implements Controller{
             return "/interview";
         }
     }
-    
+
     private String getInterviewListByProfessorId(HttpServletRequest request, HttpServletResponse response) {
         try {
             int professorId = Integer.parseInt(request.getParameter("professorId"));
@@ -154,40 +154,40 @@ public class InterviewController extends HttpServlet implements Controller{
             return "/interview";
         }
     }
-    
+
     private String getInterviewListByProfessorIdAndStatus(HttpServletRequest request, HttpServletResponse response) {
-        try {            
-        	String professorIdParam = request.getParameter("professorId");
+        try {
+            String professorIdParam = request.getParameter("professorId");
             System.out.println(professorIdParam);
             //int professorId = Integer.parseInt(request.getParameter("professorId"));
             int professorId;
             // 세션에서 사용자 정보 가져오기
-               HttpSession session = request.getSession(false);
-               if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
-                   response.sendRedirect("/login/form");
-                   return "/login/form";
-               }
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
+                response.sendRedirect("/login/form");
+                return "/login/form";
+            }
 
-               String userType = (String) session.getAttribute("userType");
-               if ("Professor".equalsIgnoreCase(userType)) {
-            	   professorId = ((model.domain.Professor) session.getAttribute("user")).getProfessorId();
-               } else {
-                   response.sendRedirect("/login/form");
-                   return "/login/form";
-               }
+            String userType = (String) session.getAttribute("userType");
+            if ("Professor".equalsIgnoreCase(userType)) {
+                professorId = ((model.domain.Professor) session.getAttribute("user")).getProfessorId();
+            } else {
+                response.sendRedirect("/login/form");
+                return "/login/form";
+            }
 
 
             List<InterviewDTO> interviews = interviewManager.getInterviewListByProfessorIdAndStatus(professorId);
             request.setAttribute("interviews", interviews);
             return "/interview-check";
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "교수의 비승인 면담 목록 조회 중 오류 발생: " + e.getMessage());
             return "/interview-check";
         }
     }
-    
+
     private String getInterviewById(HttpServletRequest request, HttpServletResponse response) {
         try {
             int interviewId = Integer.parseInt(request.getParameter("interviewId"));
@@ -251,7 +251,7 @@ public class InterviewController extends HttpServlet implements Controller{
             return "/interview";
         }
     }
-    
+
     private String approveInterview(HttpServletRequest request, HttpServletResponse response) {
         try {
             int interviewId = Integer.parseInt(request.getParameter("interviewId"));
@@ -269,7 +269,7 @@ public class InterviewController extends HttpServlet implements Controller{
             return "/interview";
         }
     }
-    
+
     private String rejectInterview(HttpServletRequest request, HttpServletResponse response) {
         try {
             int interviewId = Integer.parseInt(request.getParameter("interviewId"));
