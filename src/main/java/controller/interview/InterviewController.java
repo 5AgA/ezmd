@@ -1,4 +1,4 @@
-package controller.interview;
+package controller.Interview;
 
 import model.domain.Interview;
 import model.dto.InterviewDTO;

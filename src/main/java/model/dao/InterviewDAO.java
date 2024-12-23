@@ -266,8 +266,8 @@ public class InterviewDAO {
 				    interviews.add(new Interview(
 				        rs.getInt("interview_id"),
 				        rs.getTimestamp("requested_date").toLocalDateTime(),
-				        studentId,
 				        rs.getInt("professor_id"),
+				        studentId,
 				        rs.getString("professor_name")
 				    ));
 				}
@@ -280,6 +280,37 @@ public class InterviewDAO {
 		return interviews;
 	
 	}
+	
+	// 교수 계정용 면담 완료 리스트 조회
+	public List<Interview> getCompletedInterviewsByProfessorId(int professorId) {
+	    List<Interview> interviews = new ArrayList<>();
+	    String sql = "SELECT i.interview_id, i.requested_date, s.name AS student_name, s.student_id "
+	               + "FROM interview i "
+	               + "JOIN student s ON i.student_id = s.student_id "
+	               + "WHERE i.professor_id = ? AND TRIM(i.is_completed) = 'Y'";
+
+	    Object[] params = {professorId};
+
+	    jdbcUtil.setSqlAndParameters(sql, params);
+	    try {
+	        ResultSet rs = jdbcUtil.executeQuery();
+	        while (rs.next()) {
+	            interviews.add(new Interview(
+	                rs.getInt("interview_id"),
+	                rs.getTimestamp("requested_date").toLocalDateTime(),
+	                rs.getInt("student_id"),
+	                rs.getString("student_name"),
+	                professorId
+	            ));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        jdbcUtil.close();
+	    }
+	    return interviews;
+	}
+
 	//학과별 교수 리스트 조회
 	/*
 	public List<Professor> getAllProfessors() {

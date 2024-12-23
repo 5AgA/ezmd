@@ -17,7 +17,9 @@ public class AuthenticationFilter implements Filter {
     private static final List<Pattern> ALLOWED_PATTERNS = Arrays.asList(
             Pattern.compile("^/$"),
             Pattern.compile("^/login(/.*)?$"),
-            Pattern.compile("^/register(/.*)?$")
+            Pattern.compile("^/register(/.*)?$"),
+            Pattern.compile("^/checkEmail$"),
+            Pattern.compile("^/signup(/.*)?$")
     );
 
     @Override
@@ -60,4 +62,6 @@ public class AuthenticationFilter implements Filter {
     private boolean isAllowedUri(String requestPath) {
         return ALLOWED_PATTERNS.stream().anyMatch(pattern -> pattern.matcher(requestPath).matches());
     }
+    
+    
 }

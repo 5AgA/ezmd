@@ -1,4 +1,4 @@
-package controller.interview;
+package controller.Interview;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.dao.InterviewDAO;
 import model.dao.InterviewResultDAO;
@@ -24,14 +25,39 @@ public class InterviewClearListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	// 세션에서 사용자 정보 가져오기
+    	  HttpSession session = request.getSession(false);
+          if (session == null || session.getAttribute("user") == null || session.getAttribute("userType") == null) {
+              response.sendRedirect("/login/form");
+              return;
+          }
+          String userType = (String) session.getAttribute("userType");
+          int userId;
+          List<Interview> completedInterviews = null;
         // action 파라미터로 요청 구분
         String action = request.getParameter("action");
 
         if (action == null || action.isEmpty()) {
             // 첫 번째 화면: 면담 완료 리스트 가져오기
-            int studentId = 20210670; // 세션에서 studentId 가져오는 로직 대신 임시 값 사용
-            List<Interview> completedInterviews = interviewDAO.getCompletedInterviewsByStudentId(studentId);
+        	   // HttpSession session = request.getSession();
+            // int studentId = (int) session.getAttribute("studentId");
+         
+           // int studentId = 20210670; // 세션에서 studentId 가져오는 로직 대신 임시 값 사용
+            //List<Interview> completedInterviews = interviewDAO.getCompletedInterviewsByStudentId(studentId);
 
+        	 if ("Professor".equalsIgnoreCase(userType)) {
+                 userId = ((model.domain.Professor) session.getAttribute("user")).getProfessorId();
+                 // 교수 계정: 교수 ID로 면담 완료 리스트 조회
+                 completedInterviews = interviewDAO.getCompletedInterviewsByProfessorId(userId);
+                 request.setAttribute("viewType", "student"); // JSP에서 학생 이름 표시
+             } else if ("Student".equalsIgnoreCase(userType)) {
+                 userId = ((model.domain.Student) session.getAttribute("user")).getStudentId();
+                 // 학생 계정: 학생 ID로 면담 완료 리스트 조회
+                 completedInterviews = interviewDAO.getCompletedInterviewsByStudentId(userId);
+                 request.setAttribute("viewType", "professor"); // JSP에서 교수 이름 표시
+             } else {
+            	 System.out.println("교수도 아니고 학생도 아님");
+             }
             // 디버깅 로그 출력
             System.out.println("완료된 면담 개수: " + completedInterviews.size());
             if (completedInterviews.isEmpty()) {
@@ -39,6 +65,10 @@ public class InterviewClearListController extends HttpServlet {
             } else {
                 for (Interview interview : completedInterviews) {
                     System.out.println("교수 ID: " + interview.getProfessorId());
+                    System.out.println("교수 Name: " + interview.getProfessorName());
+                    System.out.println("학생 ID: " + interview.getStudentId());
+                    System.out.println("학생 Name: " + interview.getStudentName());
+                    
                     System.out.println("날짜: " + interview.getRequestedDate().toLocalDate());
                     System.out.println("시간: " + interview.getRequestedDate().toLocalTime());
                     System.out.println("-----------------------------");
@@ -57,9 +87,7 @@ public class InterviewClearListController extends HttpServlet {
             try {
                 int interviewId = Integer.parseInt(request.getParameter("interviewId"));
                 InterviewResult savedData = interviewResultDAO.getSavedData(interviewId);
-                // DB에서 interview_category 조회
-                //InterviewResult interviewSavedData = interviewResultDAO.getSavedData(interviewId);
-
+               
                 if (savedData != null) {
                     // 조회된 데이터를 JSON 형식으로 응답
                 	String jsonResponse = String.format(
@@ -99,45 +127,50 @@ public class InterviewClearListController extends HttpServlet {
 
     private void saveInterviewResult(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-        	 System.out.println("Received Data: ");
-             System.out.println("interviewId: " + request.getParameter("interviewId"));
-             System.out.println("title: " + request.getParameter("title"));
-             System.out.println("summary: " + request.getParameter("summary"));
-             System.out.println("rating: " + request.getParameter("rating"));
-             System.out.println("feedback: " + request.getParameter("feedback"));
+            // 클라이언트에서 받은 데이터
             int interviewId = Integer.parseInt(request.getParameter("interviewId"));
             String interviewTopic = request.getParameter("title");
             String summary = request.getParameter("summary");
             int rating = Integer.parseInt(request.getParameter("rating"));
             String feedback = request.getParameter("feedback");
 
-            int result = interviewResultDAO.createInterviewResult(interviewId, interviewTopic, summary, feedback, rating);
+    
+            // 데이터베이스에 데이터 존재 여부 확인
+            boolean isExisting = interviewResultDAO.isInterviewResultExists(interviewId);
+            System.out.println("isExisting: " + isExisting); // 디버깅 로그
 
-            if (result > 0) {
-                // 성공 메시지 세션에 저장
-                request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 저장되었습니다.");
-                response.sendRedirect(request.getContextPath() + "/interview/result");
+            int result;
+            if (isExisting) {
+                // 데이터가 존재하면 update 수행
+                result = interviewResultDAO.updateInterviewResult(interviewId, interviewTopic, summary, feedback, rating);
+                if (result > 0) {
+                    request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 수정되었습니다.");
+                } else {
+                    request.getSession().setAttribute("errorMessage", "면담 결과 수정에 실패했습니다.");
+                }
             } else {
-                // 실패 메시지 세션에 저장
-                request.getSession().setAttribute("errorMessage", "면담 결과 저장에 실패했습니다.");
-                response.sendRedirect(request.getContextPath() + "/interview/result");
+                // 데이터가 존재하지 않으면 insert 수행
+                result = interviewResultDAO.createInterviewResult(interviewId, interviewTopic, summary, feedback, rating);
+                if (result > 0) {
+                    request.getSession().setAttribute("successMessage", "면담 결과가 성공적으로 저장되었습니다.");
+                } else {
+                    request.getSession().setAttribute("errorMessage", "면담 결과 저장에 실패했습니다.");
+                }
             }
+
+            response.sendRedirect(request.getContextPath() + "/interview/result");
+
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{ \"error\": \"An error occurred while saving interview result\" }");
         }
     }
+
             
     private void updateInterviewResult(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-        	 System.out.println("Received Data: ");
-             System.out.println("interviewId: " + request.getParameter("interviewId"));
-             System.out.println("title: " + request.getParameter("title"));
-             System.out.println("summary: " + request.getParameter("summary"));
-             System.out.println("rating: " + request.getParameter("rating"));
-             System.out.println("feedback: " + request.getParameter("feedback"));
-            int interviewId = Integer.parseInt(request.getParameter("interviewId"));
+                  int interviewId = Integer.parseInt(request.getParameter("interviewId"));
             String interviewTopic = request.getParameter("title");
             String summary = request.getParameter("summary");
             int rating = Integer.parseInt(request.getParameter("rating"));
