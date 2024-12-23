@@ -51,6 +51,9 @@ public class RequestMapping {
         mappings.put("/schedule/delete", new DeleteScheduleController());
         mappings.put("/schedule/update", new UpdateScheduleController());
 
+        // 카테고리
+        mappings.put("/category/add", new AddCategoryController());
+
 		// 면담 신청 (학생)
         mappings.put("/interview", new ForwardController("/interview/selectProf.jsp"));
         mappings.put("/interview/reservation", new ForwardController("/interview/reservation.jsp"));

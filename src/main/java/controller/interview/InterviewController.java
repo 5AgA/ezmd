@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import controller.Controller;
 
 import java.io.IOException;
@@ -174,6 +175,7 @@ public class InterviewController extends HttpServlet implements Controller{
                    response.sendRedirect("/login/form");
                    return "/login/form";
                }
+
 
             List<InterviewDTO> interviews = interviewManager.getInterviewListByProfessorIdAndStatus(professorId);
             request.setAttribute("interviews", interviews);

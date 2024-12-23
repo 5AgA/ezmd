@@ -32,4 +32,13 @@ public class ScheduleCategoryService {
             return scheduleCategoryMapper.selectCategoriesByUserId(userId);
         }
     }
+
+    public int addScheduleCategory(ScheduleCategory category) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            ScheduleCategoryMapper scheduleCategoryMapper = sqlSession.getMapper(ScheduleCategoryMapper.class);
+            int result = scheduleCategoryMapper.insertScheduleCategory(category);
+            sqlSession.commit();
+            return result;
+        }
+    }
 }
