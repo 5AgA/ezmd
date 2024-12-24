@@ -3,5 +3,5 @@
 ID: 20210670@dongduk.ac.kr
 PW: 123123123
 [교수계정테스트]
-ID: suheePark@dongduk.ac.kr
-PW: suhee123
+ID: wanlee@dongduk.ac.kr
+PW: 123123123
